@@ -14,7 +14,18 @@
 <?php include('../partials/sidebar.php'); ?>
 
   <!-- End Sidebar-->
+  <script>
 
+  var x = document.getElementById('mod3')
+  x.className = "active";
+
+  var y = document.getElementById('pod')
+  y.className = "nav-link ";
+
+  var h = document.getElementById('components-nav')
+  h.className = "nav-content collapse show";
+
+  </script>
 
 <div class="preloader-wrapper">
     <!-- <img src="assets/img/bcp-olp-logo-mini2.png" alt="Preloader Logo"> -->

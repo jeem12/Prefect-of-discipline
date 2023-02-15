@@ -16,6 +16,9 @@ if (isset($_POST['addData'])) {
         $mname      = mysqli_real_escape_string($conn, $_POST['mname']) ;
         $lname      = mysqli_real_escape_string($conn, $_POST['lname']);
         $course     = mysqli_real_escape_string($conn, $_POST['course']);
+        $inci_desc      = mysqli_real_escape_string($conn, $_POST['inci_desc']) ;
+        $inci_date      = mysqli_real_escape_string($conn, $_POST['inci_date']);
+        $inci_time     = mysqli_real_escape_string($conn, $_POST['inci_time']);
         $status     = 1;
         // $violation  = mysqli_real_escape_string($conn, $_POST['viol']);
         
@@ -29,7 +32,7 @@ if (isset($_POST['addData'])) {
             return;
         }
 
-        $query = "INSERT INTO `podms_profiling` (`id_number`,`first_name`,`middle_name`,`last_name`,`course`,`status`) VALUES ('$idNum','$fname','$mname','$lname','$course','$status')";
+        $query = "INSERT INTO `podms_profiling` (`id_number`,`first_name`,`middle_name`,`last_name`,`course`,`inci_desc`,`inci_date`,`inci_time`,`status`) VALUES ('$idNum','$fname','$mname','$lname','$course','$inci_desc','$inci_date','$inci_time','$status')";
             $query_run = mysqli_query($conn, $query);
             if ($query_run){
                 $res = [
@@ -53,22 +56,31 @@ if (isset($_POST['addData'])) {
     }
 
 
-
-
-
 if (isset($_POST['sanctionData'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
-    $viol_level = mysqli_real_escape_string($conn, $_POST['offense']);
-    $violation = mysqli_real_escape_string($conn, $_POST['level']);
-    if ($violation =='otherMinor') {
-        $violation = mysqli_real_escape_string($conn, $_POST['specifiedMinor']);
-      }elseif ($violation =='otherMajor'){
-             $violation = mysqli_real_escape_string($conn, $_POST['specifiedMajor']);
-    }elseif ($violation =='otherGra'){
-            $violation = mysqli_real_escape_string($conn, $_POST['specifiedGra']);
-          }
+    $viol_level = mysqli_real_escape_string($conn, $_POST['level']);
+    $violation = mysqli_real_escape_string($conn, $_POST['viol']);
+    $duty = implode(', ', $_POST['duty']);
+    $file = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+
+    // CONVERT CHECKBOX ARRAY TO STRING
+    
 
 
+        // $fileName = $_FILES["image"]["name"];
+        // $fileSize = $_FILES["image"]["size"];
+        // $tmpName = $_FILES["image"]["tmp_name"];
+    
+        // $imageExtension = explode('.', $fileName);
+        // $imageExtension = strtolower(end($imageExtension));
+
+        // $newImageName = uniqid();
+        // $newImageName .= '.' . $imageExtension;
+    
+        // move_uploaded_file($tmpName, 'img/' . $newImageName);
+          
+            
+          
 
     if ($violation == NULL) {
         $res = [
@@ -79,11 +91,11 @@ if (isset($_POST['sanctionData'])) {
         return;
     }
 
-    $query = "UPDATE `podms_profiling` SET `violation_level` = '$viol_level' , `violation`='$violation' , `status` = '3' WHERE id='$id'";
+    $query = "UPDATE `podms_profiling` SET `violation_level` = '$viol_level' , `violation`='$violation' , `duty`='$duty' , `status` = '2', `image` = '$file' WHERE id='$id'";
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
-        $query2 = "INSERT INTO `podms_records` SELECT * FROM `podms_profiling` WHERE `id` = '$id'";
+        $query2 = "INSERT INTO `podms_duty` SELECT * FROM `podms_profiling` WHERE `id` = '$id'";
         $query_run2 = mysqli_query($conn, $query2);
         if ($query_run2) {
             $query3 = "DELETE FROM podms_profiling WHERE `id` = '$id'";
@@ -119,7 +131,7 @@ if (isset($_POST['sanctionData'])) {
 if (isset($_GET['id1'])) {
     $id = mysqli_real_escape_string($conn, $_GET['id1']);
 
-    $query = "SELECT * FROM podms_sp_appointment WHERE id='$id'";
+    $query = "SELECT * FROM podms_violation WHERE id='$id'";
     $query_run = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($query_run) == 1) {

@@ -1,9 +1,11 @@
 /**
-* Template Name: NiceAdmin - v2.4.1
+* Template Name: NiceAdmin - v2.5.0
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+
+
 
 
  /**
@@ -16,7 +18,8 @@
    preloeaderWrapper.classList.add('fade-out-animation');
  });
 
- 
+
+
 (function() {
   "use strict";
 
@@ -308,13 +311,6 @@
       }, false)
     })
 
-  /**
-   * Initiate Datatables
-   */
-  const datatables = select('.datatable', true)
-  datatables.forEach(datatable => {
-    new simpleDatatables.DataTable(datatable);
-  })
 
   /**
    * Autoresize echart charts
@@ -331,3 +327,4 @@
   }
 
 })();
+

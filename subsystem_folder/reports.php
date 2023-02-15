@@ -42,6 +42,17 @@
 
 	<!-- MAIN CONTENT -->
 
+    <div class="post-search-panel">
+    <input type="text" id="searchInput" placeholder="Type keywords..." />
+    <select id="sortBy">
+    <option disabled>Select filter</option>
+            <option value="bsba" >BSBA</option>
+            <option value="bsit" >BSIT</option>
+            <option value="BSTM" >BSTM</option>
+            <option value="BSCRIM" >BSCRIM</option>
+            <option value="BSOA" >BSOA</option>
+    </select>
+</div>
 
 <div class="container" id="table">
     <div class="row">
@@ -111,29 +122,33 @@
   <!-- End Footer -->
 
 
+
+
+
   <!-- DATATABLE SCRIPT -->
   <script>
-$(document).ready(function() {
-    $('#reportsTable').DataTable( {
-      dom: '<"top"l>rt<"bottom"ip><"clear">',
-      fixedHeader: true,
-      "ordering": false,
-      "orderFixed": [ 3, 'dsc' ],
-        responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.modal( {
-                    header: function ( row ) {
-                        var data = row.data();
-                        return 'Details for '+data[2];
-                    }
-                } ),
-                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-                    tableClass: 'table'
-                } )
-            }
-        }
-    } );
-} );
+   
+// $(document).ready(function() {
+//     $('#reportsTable').DataTable( {
+//       dom: '<"top"l>rt<"bottom"ip><"clear">',
+//       fixedHeader: true,
+//       "ordering": false,
+//       "orderFixed": [ 3, 'dsc' ],
+//         responsive: {
+//             details: {
+//                 display: $.fn.dataTable.Responsive.display.modal( {
+//                     header: function ( row ) {
+//                         var data = row.data();
+//                         return 'Details for '+data[2];
+//                     }
+//                 } ),
+//                 renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+//                     tableClass: 'table'
+//                 } )
+//             }
+//         }
+//     } );
+// } );
 
 
 
