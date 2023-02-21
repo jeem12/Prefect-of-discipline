@@ -15,3 +15,5 @@ SELECT DATE(date) as Month, COUNT(id) as Total FROM reports GROUP BY MONTH;
 INSERT INTO podms_appointment SELECT * FROM podms_profiling WHERE id = $id;
 
 DELETE FROM podms_profiling WHERE id = $id;
+
+DATABASE PASS: CwF*@JeLgg1Js8A8
