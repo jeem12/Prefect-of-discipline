@@ -83,14 +83,9 @@ h.className = "nav-content collapse show";
 <!-- TABLE -->
         <div class="container" id="table">
     <div class="row">
-        <table id="recordsTable" class="table table-striped nowrap" style="width:100%">
+        <table id="myTable" class="table table-striped nowrap" style="width:100%">
         <div class="col-lg-auto">
-                                        <?php
-                                            include "../assets/php/db_connect.php";
 
-                                            $query = "SELECT * FROM podms_records";
-                                            $query_run = mysqli_query($conn, $query);
-                                        ?>
                         <thead>
                             <tr>
                                 <th>DATE CREATED</th>
@@ -108,45 +103,7 @@ h.className = "nav-content collapse show";
                                 <th data-priority="2">STATUS</th>
                             </tr>
                         </thead>
-                        <tbody class="table-warning">
-                            <?php
-
-                            if(mysqli_num_rows($query_run) > 0)
-                            {
-                                foreach($query_run as $row)
-                                {
-                                    ?>
-                                    <tr>
-                                        <td><?= $row['date'] ?></td> 
-                                        <td><?= $row['id_number'] ?></td> 
-                                        <td><?= strtoupper($row['first_name']); ?></td> 
-                                        <td><?= strtoupper($row['last_name']); ?></td> 
-                                        <td><?= strtoupper($row['middle_name']); ?></td> 
-                                        <td><?= strtoupper($row['course']); ?></td> 
-                                        <td><?= strtoupper($row['inci_desc']); ?></td> 
-                                        <td><?= strtoupper($row['inci_date']); ?></td> 
-                                        <td><?= strtoupper($row['inci_time']); ?></td> 
-                                        <td><?= strtoupper($row['violation_level']);?></td> 
-                                        <td><?= strtoupper($row['violation']);?></td> 
-                                        <td><?= '<img src="data:image;base64,'.base64_encode($row['image']).'" alt="Image" style="width: 100%; height: 100%;" >';?></td> 
-                                        <td><?php if ($row['status']==1){
-                                                echo '<p class="badge text-bg-danger">PENDING</p>';
-                                            }elseif ($row['status']==2){
-                                                echo '<p class="badge text-bg-warning">SCHEDULED</p>';
-                                            }elseif ($row['status']==3){
-                                                echo '<p class="badge text-bg-success">CLEARED</p>';
-                                            }else{
-                                                echo '<p class="badge text-bg-warning">UNDEFINED STATUS!</p>';
-                                            }
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }
-                            ?>
-                            
-                        </tbody>
+                       
                     </div>
                     </table>
 
@@ -169,7 +126,169 @@ h.className = "nav-content collapse show";
 
 
 <!-- DATATABLE SCRIPT -->
+
+
+
 <script>
+ var myTable = '';
+$(function() {
+    // draw function [called if the database updates]
+    function draw_data() {
+        if ($.fn.dataTable.isDataTable('#myTable') && myTable != '') {
+            myTable.draw(true)
+        } else {
+            load_data();
+        }
+    }
+    
+
+    function load_data() {
+        myTable = $('#myTable').DataTable({
+            dom: '<"row"B>flr<"py-2 my-2"t>ip',
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "../assets/php/r_getData.php",
+                method: 'POST'
+            },
+            columns: [
+                {
+                    data: 'date',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+
+                },
+                {
+                    data: 'id_number',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'last_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'first_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'middle_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'course',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'inci_desc',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'inci_date',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'inci_time',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'violation_level',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'violation',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'image_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                // {
+                //     data: 'status',
+                //     className: 'text-center',
+                //     defaultValue: 'No data available'
+                // },
+                {
+                    data: 'status',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+            ],
+            responsive: {
+                    details: {
+                            display: $.fn.dataTable.Responsive.display.modal( {
+                                    header: function ( row ) {
+                                        var data = row.data();
+                                        return 'Details for '+data[0]+' '+data[3];
+                                    }
+                                } ),
+                    renderer: function ( api, rowIdx, columns ) {
+                        var data = $.map( columns, function ( col, i ) {
+                            return col.hidden ?
+                                '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                                    '<td>'+col.title+':'+'</td> '+
+                                    '<td>'+col.data+'</td>'+
+                                '</tr>' :
+                                '';
+                        } ).join('');
+        
+                        return data ?
+                            $('<table/>').append( data ) :
+                            false;
+                        }
+                }
+            },
+            columnDefs: [
+                        {
+                            targets: 12,
+                            render: function(data, type, row, meta) {
+                                if (data == 1) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';
+                                } else if (data == 2) {
+                                    return '<p class="badge text-bg-info text-wrap text-center">On duty</p>';
+                                } else if (data == 3) {
+                                    return '<p class="badge text-bg-success text-wrap text-center">Cleared</p>';
+                                } else {
+                                    return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
+                                }
+                            }
+                        },
+            ],
+            "order": [
+                [0, "asc"]
+            ],
+            initComplete: function(settings) {
+                $('.paginate_button').addClass('p-1')
+            }
+        });
+    }
+    //Load Data
+    load_data()
+
+ 
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- <script>
 
 $(document).ready(function() {
     var table = $('#recordsTable').DataTable( {
@@ -228,6 +347,6 @@ $(document).ready(function() {
 
 
 
-</script>
+</script> -->
 
 </html>

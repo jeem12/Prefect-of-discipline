@@ -101,19 +101,38 @@
       </div>
     </div>
   </div>
+
+      <!-- Delete Modal -->
+      <div class="modal fade" id="delete_modal" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form action="" id="delete-frm">
+                            <input type="hidden" name="id">
+                            <p>Are you sure to delete <b><span id="name"></span></b> from the list?</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger" form="delete-frm">Yes</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Delete Modal -->
   
   
   
   <div class="container" id="table">
   <div class="row">
-  <table id="appointTable" class="table table-striped nowrap" style="width:100%">
+  <table id="appointTable" class="table table-striped" style="width:100%">
   <div class="col-lg-auto">
-                                  <?php
-                                      include "../assets/php/db_connect.php";
-  
-                                      $query = "SELECT * FROM podms_sp_appointment";
-                                      $query_run = mysqli_query($conn, $query);
-                                  ?>
+
                   <thead class="has-text-light">
                       <tr>
                           <th data-priority="1">ID#</th>
@@ -122,33 +141,11 @@
                           <th >Last Name</th>
                           <th >Course</th>
                           <th>Description</th>
+                          <th>Status</th>
                           <th data-priority="2">ACTION</th>
                       </tr>
                   </thead>
-                  <tbody class="table-warning">
-                      <?php
-  
-                      if(mysqli_num_rows($query_run) > 0)
-                      {
-                          foreach($query_run as $row)
-                          {
-                              ?>
-                              <tr <?= $row['id'];?>>
-                                  <td><?= $row['complained_id_number'] ?>     </td> 
-                                  <td><?= strtoupper($row['complained_first_name']);?>     </td>
-                                  <td><?= strtoupper($row['complained_middle_name']);?>    </td> 
-                                  <td><?= strtoupper($row['complained_last_name']);?>      </td> 
-                                  <td><?= strtoupper($row['complained_course']);?>         </td>
-                                  <td><?= strtoupper($row['description']);?>               </td>
-                                  <td>
-                                  <button type="button" value="<?=$row['id'];?>" class="btn btn-secondary btn-sm" id="appointBtn">Set an appointment</button>
-                                  </td>
-                              </tr>
-                              <?php
-                          }
-                      }
-                      ?>
-                  </tbody>
+                 
               </div>
               </table>
   </div>
@@ -165,29 +162,250 @@
 <!-- End Footer -->
 
 <!-- DATATABLE SCRIPT -->
+
+
 <script>
-$(document).ready(function() {
-    $('#appointTable').DataTable( {
-        responsive: {
-            details: {
-                display: $.fn.dataTable.Responsive.display.modal( {
-                    header: function ( row ) {
-                        var data = row.data();
-                        return 'Details for '+ data[1] + ' ' + data[3];
+ var appointTable = '';
+$(function() {
+    // draw function [called if the database updates]
+    function draw_data() {
+        if ($.fn.dataTable.isDataTable('#appointTable') && appointTable != '') {
+          appointTable.draw(true)
+        } else {
+            load_data();
+        }
+    }
+
+    function load_data() {
+      appointTable = $('#appointTable').DataTable({
+            dom: '<"row"B>flr<"py-2 my-2"t>ip',
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "../assets/php/a_getData.php",
+                method: 'POST'
+            },
+            columns: [
+                {
+                    data: 'complained_id_number',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'complained_first_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'complained_middle_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'complained_last_name',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'complained_course',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'description',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'status',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: null,
+                    orderable: false,
+                    className: 'text-center',
+                    render: function(data, type, row, meta) {
+                        console.log()
+                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Set an appointment</a><a class="btn btn-sm rounded-0 mb-1 delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Delete</a>';
                     }
-                } ),
-                renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-                    tableClass: 'table'
-                } )
+                }
+            ],
+            columnDefs: [
+                        {
+                            targets: 6,
+                            render: function(data, type, row, meta) {
+                                if (data == 1) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center"> For Appointment</p>';
+                                } else if (data == 2) {
+                                    return '<p class="badge text-bg-info text-wrap text-center">On duty</p>';
+                                } else if (data == 3) {
+                                    return '<p class="badge text-bg-success text-wrap text-center">Cleared</p>';
+                                }else if (data == 4) {
+                                    return '<p class="badge text-bg-primary text-wrap text-center">For Appointment</p>';
+                                } else {
+                                    return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
+                                }
+                            }
+                        }
+            ],
+            drawCallback: function(settings) {
+                $('.edit_data').click(function() {
+                    $.ajax({
+                        url: '../assets/php/a_getSingle.php',
+                        data: { id: $(this).attr('data-id') },
+                        method: 'POST',
+                        dataType: 'json',
+                        error: err => {
+                            alert("An error occurred while fetching single data")
+                        },
+                        success: function(resp) {
+                            if (!!resp.status) {
+                                // Object.keys(resp.data).map(k => {
+
+                                // })
+                                $('#appointModal').find('input[name="id"]').val(resp.data['id'])
+
+                               
+
+                                $('#appointModal').modal('show')
+                            } else {
+                                alert("An error occurred while fetching single data")
+                            }
+                        }
+                    })
+                })
+                $('.delete_data').click(function() {
+                    $.ajax({
+                        url: '../assets/php/a_getSingle.php',
+                        data: { id: $(this).attr('data-id') },
+                        method: 'POST',
+                        dataType: 'json',
+                        error: err => {
+                            alert("An error occurred while fetching single data")
+                        },
+                        success: function(resp) {
+                            if (!!resp.status) {
+                                $('#delete_modal').find('input[name="id"]').val(resp.data['id'])
+                                $('#delete_modal').modal('show')
+                            } else {
+                                alert("An error occurred while fetching single data")
+                            }
+                        }
+                    })
+                })
+            },
+            "order": [
+                [1, "asc"]
+            ],
+            initComplete: function(settings) {
+                $('.paginate_button').addClass('p-1')
             }
-        },
-        columnDefs: [ {
-        className: 'dtr-control',
-        orderable: false,
-        targets:   -1
-    } ]
-    } );
-} );
+        });
+    }
+    //Load Data
+    load_data()
+
+    //UPDATE DATA
+
+    $('#appointData').submit(function (e) {
+e.preventDefault();
+
+            $('#appointModal button').attr('disabled', true)
+            $('#appointModal button[form="appointData"]').text("saving ...")
+var formData = new FormData(this);
+formData.append("appointData", true);
+
+$.ajax({
+    type: "POST",
+    url: "../assets/php/code.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+        
+        var res = jQuery.parseJSON(response);
+        if(res.status == 422) {
+            $('#errorMessageAppoint').removeClass('d-none');
+            $('#errorMessageAppoint').text(res.message);
+
+        }else if(res.status == 200){
+
+          $('#errorMessageAppoint').addClass('d-none');
+          
+          alertify.set('notifier','position', 'bottom-right');
+          alertify.success(res.message);
+          
+            $('#appointModal').modal('hide');
+            $('#appointData')[0].reset();
+
+            draw_data();
+
+
+
+        }else if(res.status == 500) {
+            alert(res.message);
+        }
+    }
+});
+
+});
+
+//Delete DATA
+        // DELETE Data
+        $('#delete-frm').submit(function(e) {
+        e.preventDefault()
+        $('#delete_modal button').attr('disabled', true)
+        $('#delete_modal button[form="delete-frm"]').text("deleting data ...")
+        $.ajax({
+            url: '../assets/php/a_deleteData.php',
+            data: $(this).serialize(),
+            method: 'POST',
+            dataType: "json",
+            error: err => {
+                alert("An error occurred. Please check the source code and try again")
+            },
+            success: function(resp) {
+                if (!!resp.status) {
+                    if (resp.status == 'success') {
+                        var _el = $('<div>')
+                        _el.hide()
+                        alertify.set('notifier','position', 'bottom-right');
+                        alertify.success(resp.msg);
+                        $('#delete-frm').get(0).reset()
+                        $('.modal').modal('hide')
+                        $('#msg').append(_el)
+                        _el.show('slow')
+                        draw_data();
+                        setTimeout(() => {
+                            _el.hide('slow')
+                                .remove()
+                        }, 2500)
+                    } else if (resp.status == 'failed' && !!resp.msg) {
+                        var _el = $('<div>')
+                        _el.hide()
+                        alertify.set('notifier','position', 'bottom-right');
+                        alertify.success(resp.msg);
+                        $('#delete-frm').append(_el)
+                        _el.show('slow')
+                    } else {
+                        alert("An error occurred. Please check the source code and try again")
+                    }
+                } else {
+                    alert("An error occurred. Please check the source code and try again")
+                }
+
+                $('#delete_modal button').attr('disabled', false)
+                $('#delete_modal button[form="delete-frm"]').text("Yes")
+            }
+        })
+    })
+    
+});
+</script>
+
+
+<!-- <script>
 
 
 $(document).on('click', '#appointBtn', function (e) {
@@ -263,7 +481,7 @@ $.ajax({
 
 });
 
-</script>
+</script> -->
 
 
 </html>

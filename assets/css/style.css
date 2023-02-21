@@ -1385,8 +1385,14 @@ input[type=file]::-webkit-file-upload-button{
 # DATATABLES.NET
 --------------------------------------------------------------*/
 
-button.btn.btn-secondary.btn-primary.py-0 {
+/* button.btn.btn-secondary.btn-primary.py-0 {
   background-color: #378ae8;
 }
+
+div#myTable_filter {
+  margin-left: -100px;
+  margin-bottom: 20px;
+} */
+
 
 

@@ -15,7 +15,8 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 
-  <script src="../assets/js/jquery-3.6.0.min.js"></script>
+  <!-- <script src="../assets/js/jquery-3.6.0.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
@@ -37,6 +38,10 @@
 
     <script src="../assets/vendor/DataTables/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
+    <script src="https://cdn.datatables.net/select/1.6.0/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/searchpanes/2.1.1/js/dataTables.searchPanes.min.js"></script>
 
 
 <!-- ALERTIFY -->

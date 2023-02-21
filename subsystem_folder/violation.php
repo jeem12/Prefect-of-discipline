@@ -227,6 +227,30 @@ $(function() {
                     }
                 }
             ],
+            responsive: {
+                    details: {
+                            display: $.fn.dataTable.Responsive.display.modal( {
+                                    header: function ( row ) {
+                                        var data = row.data();
+                                        return 'Details for '+data[0]+' '+data[3];
+                                    }
+                                } ),
+                    renderer: function ( api, rowIdx, columns ) {
+                        var data = $.map( columns, function ( col, i ) {
+                            return col.hidden ?
+                                '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                                    '<td>'+col.title+':'+'</td> '+
+                                    '<td>'+col.data+'</td>'+
+                                '</tr>' :
+                                '';
+                        } ).join('');
+        
+                        return data ?
+                            $('<table/>').append( data ) :
+                            false;
+                        }
+                }
+            },
             drawCallback: function(settings) {
                 $('.edit_data').click(function() {
                     $.ajax({
@@ -293,6 +317,8 @@ $(function() {
     }
     //Load Data
     load_data()
+
+    
         //Saving new Data
     $('#new-frm').submit(function(e) {
             e.preventDefault()
