@@ -12,12 +12,17 @@
 
             <li class="nav-item">
               <a id="pod" class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>Profiling</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-menu-button-wide"></i><span>Services</span><i class="bi bi-chevron-down ms-auto"></i>
               </a>
               <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
+                <li>
+                  <a id="mod5" href="confiscated.php" class="inactive">
+                    <i class="bi bi-circle"></i><span>Confiscated</span>
+                  </a>
+                </li>
                   <a id="mod1" href="profiling.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Create Profile   </span>
+                    <i class="bi bi-circle"></i><span>Profiling</span>
                   </a>
                 </li>
                 <li>
@@ -35,7 +40,14 @@
                     <i class="bi bi-circle"></i><span>Records</span>
                   </a>
                 </li>
-          </ul>
+                <li>
+                  <a id="mod6" href="claimed_items.php" class="inactive">
+                    <i class="bi bi-circle"></i><span>Claimed Items</span>
+                  </a>
+                </li>
+            </ul>
+            </li>
+            
           <!-- <li class="nav-heading">Notification</li> -->
 
 
@@ -55,6 +67,12 @@
         <a class="nav-link " href="schedule.php">
           <i class="bi bi-calendar-check"></i>
           <span>Schedule</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="accounts.php">
+          <i class="bi bi-person-badge"></i>
+          <span>Accounts</span>
         </a>
       </li>
       

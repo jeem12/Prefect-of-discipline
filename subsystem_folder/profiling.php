@@ -151,60 +151,74 @@ h.className = "nav-content collapse show";
 
                             <input type="hidden" name="id" id="id">
 
-                            <h1 class="fs-5 opacity-75">Violation Level</h1>
+                            <h1 class="fs-5 text-center">Violation Level</h1>
+
+                            <div class="col-md-12 mb-2">
  
-                            <div class="form-check">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="level" id="gridRadios1" value="minor" required>
                                 <label class="form-check-label" for="gridRadios1">
                                 Minor Offense
                                 </label>
                             </div>
-                            <div class="form-check">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="level" id="gridRadios2" value="major">
                                 <label class="form-check-label" for="gridRadios2">
                                 Major Offense
                                 </label>
                             </div>
-                            <div class="form-check disabled">
+                            <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="level" id="gridRadios" value="grave">
                                 <label class="form-check-label" for="gridRadios3">
                                 Grave Offense
                                 </label>
                             </div>
+                            </div>
 
                             <br>
-                            <div class="form-group">
-                                <label for="viol_name" class="control-label">Violation</label>
-                                <input type="text" class="form-control rounded-0" id="viol_name" name="viol" required>
+                            <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="text" name="viol" class="form-control" id="viol_name floatingName" placeholder="Your Violation" required>
+                            <label for="floatingName">Violation</label>
                             </div>
+                            </div>
+
                             <hr>
 
-                            <h1 class="fs-5 opacity-75">Duty</h1>
+                            <h1 class="fs-5 text-center">Duty</h1>
                             <br>
                             
-                            <div class="col-md-12 mb-2">
-                            <div class="form-floating mb-2 duty_timeS">
+                            <div class="container text-center mb-2">
+                            <div class="row align-items-center">
+
+                                <div class="col">
+                                <div class="form-floating duty_timeS">
                                 <input type="time" name="duty_timeS" class="form-control" id="floatingName dutyTimeS" placeholder="duty_timeS" required>
                                 <label for="floatingName">Duty Time Start</label>
-                            </div>
-                            <div class="form-floating duty_timeE">
+                                </div>  
+                                </div>
+
+                                <div class="col">
+                                <div class="form-floating duty_timeE">
                                 <input type="time" name="duty_timeE" class="form-control" id="floatingName dutyTimeE" placeholder="duty_timeE" required>
                                 <label for="floatingName">Duty Time End</label>
+                                </div>  
+                                </div>
 
                             </div>
                             </div>
 
-                            <div class="row mb-3">
-                            <div class="col-sm-10">
 
-                                <div class="form-check">
+                            <div class="col-md-12 mb-2">
+
+                                <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" name="duties[]" value="community service" id="gridCheck1">
                                 <label class="form-check-label" for="gridCheck1" required>
                                     Community Service
                                 </label>
                                 </div>
 
-                                <div class="form-check">
+                                <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" name="duties[]" value="duty" id="gridCheck2">
                                 <label class="form-check-label" for="gridCheck2" required>
                                     Duty 2
@@ -212,9 +226,9 @@ h.className = "nav-content collapse show";
                                 </div>
 
                             </div>
-                            </div>
 
                             <div class="col-md-12 mb-2">
+
                             <div class="form-floating">
                                 <input type="text" name="dutyLoc" class="form-control" id="floatingName" placeholder="location" required>
                                 <label for="floatingName">Specific Location</label>
@@ -222,7 +236,7 @@ h.className = "nav-content collapse show";
                             </div>
 
                             <hr>     
-                            <h1 class="fs-5 opacity-75">Evidence</h1>
+                            <h1 class="fs-5 text-center">Evidence</h1>
                                 <div class="mb-3">
                                     <div class="upload text-center">
                                             <img src="../assets/img/logo300.png" width = 100 height = 100 alt="" id="preImg">
@@ -486,47 +500,47 @@ $(function() {
 
 
     $('#addData').submit(function (e) {
-e.preventDefault();
-            $('#addModal button').attr('disabled', true)
-            $('#addModal button[form="addData"]').text("saving ...")
-var formData = new FormData(this);
-formData.append("addData", true);
+                e.preventDefault();
+                            $('#addModal button').attr('disabled', true)
+                            $('#addModal button[form="addData"]').text("saving ...")
+                var formData = new FormData(this);
+                formData.append("addData", true);
 
-$.ajax({
-type: "POST",
-url: "../assets/php/p_saveData.php",
-data: formData,
-processData: false,
-contentType: false,
-success: function (response) {
-  
-  var res = jQuery.parseJSON(response);
-  if(res.status == 422) {
-      $('#errorMessage').removeClass('d-none');
-      $('#errorMessage').text(res.message);
+                $.ajax({
+                type: "POST",
+                url: "../assets/php/p_saveData.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                
+                var res = jQuery.parseJSON(response);
+                if(res.status == 422) {
+                    $('#errorMessage').removeClass('d-none');
+                    $('#errorMessage').text(res.message);
 
-  }else if(res.status == 200){
+                }else if(res.status == 200){
 
-      $('#errorMessage').addClass('d-none');
-      $('#addModal').modal('hide');
-      $('#addData')[0].reset();
-      
-      
-      
-      alertify.set('notifier','position', 'bottom-right');
-      alertify.success(res.message);
-      
-      draw_data();
+                    $('#errorMessage').addClass('d-none');
+                    $('#addModal').modal('hide');
+                    $('#addData')[0].reset();
+                    
+                    
+                    
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.success(res.message);
+                    
+                    draw_data();
 
 
-  }
-  else if(res.status == 500) {
-      alert(res.message);
-  }
-}
-});
+                }
+                else if(res.status == 500) {
+                    alert(res.message);
+                }
+                }
+                });
 
-});
+                });
 
 
 $('#sanctionData').submit(function (e) {

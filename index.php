@@ -63,7 +63,7 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form method="POST" action="../assets/php/check_login.php" class="row g-3 needs-validation" novalidate>
+                  <form method="POST" action="assets/php/check_login.php" class="row g-3 needs-validation" novalidate>
 
                      <!-- ALERT -->
                 <?php if (isset($_GET['error'])) { ?>

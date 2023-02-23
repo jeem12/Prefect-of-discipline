@@ -39,6 +39,7 @@ $recordsFiltered= $recordsFilterCount;
 $data = array();
 $i= 1 + $start;
 while($row = $query->fetch_assoc()){
+    // $row['image_name'] = fetch $row['image_name'];
     $data[] = $row;
 }
 echo json_encode(array('draw'=>$draw,

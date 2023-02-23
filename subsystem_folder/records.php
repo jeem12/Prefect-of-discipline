@@ -209,12 +209,13 @@ $(function() {
                     defaultValue: 'No data available'
                 },
                 {
+
                     data: 'image_name',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
                 // {
-                //     data: 'status',
+                //     data: 'image',
                 //     className: 'text-center',
                 //     defaultValue: 'No data available'
                 // },
@@ -229,7 +230,7 @@ $(function() {
                             display: $.fn.dataTable.Responsive.display.modal( {
                                     header: function ( row ) {
                                         var data = row.data();
-                                        return 'Details for '+data[0]+' '+data[3];
+                                        return 'Details for '+data.first_name+' '+data.last_name;
                                     }
                                 } ),
                     renderer: function ( api, rowIdx, columns ) {

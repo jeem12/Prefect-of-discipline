@@ -4,7 +4,12 @@ include_once "../assets/php/db_connect.php";
 if ($_SESSION['user_name'] != true ){
   header("Location: ../index.php");
 }
-?>
+
+// $limitation = $_SESSION['position'];
+// if ($limitation = 'admin'){
+
+// }
+// ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +30,8 @@ if ($_SESSION['user_name'] != true ){
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" >
+  <!-- <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" > -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">

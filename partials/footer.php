@@ -23,16 +23,14 @@
   
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/fullcalendar/lib/main.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+  <!-- <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <script src="../assets/vendor/fullcalendar/sweetalert2.all.min.js"></script>
   <script src="../assets/vendor/chart.js/dist/chart.js"></script>
-  <script src="../assets/vendor/echarts/echarts.min.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
-  <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="../assets/vendor/php-email-form/validate.js"></script>
 
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  
   <!-- DATATABLE -->
 
 
@@ -51,7 +49,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.3.122/pdf.min.js" integrity="sha512-CGtesFWoCAxW8xV1S4wdev6uWmGhkEBtTGJsQLkT75ab0eVyx0RTOdGxHk9hFVV/OlF6ZyCoukfPdiZPpAiUtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 
-
+ 
 
 
     
