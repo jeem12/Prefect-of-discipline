@@ -7,15 +7,15 @@ if (isset($_POST['addData'])) {
     $fname      = mysqli_real_escape_string($conn, $_POST['fname']) ;
     $mname      = mysqli_real_escape_string($conn, $_POST['mname']) ;
     $lname      = mysqli_real_escape_string($conn, $_POST['lname']);
-    $section      = mysqli_real_escape_string($conn, $_POST['section']);
+    $section    = mysqli_real_escape_string($conn, $_POST['section']);
     $course     = mysqli_real_escape_string($conn, $_POST['course']);
-    $item_name      = mysqli_real_escape_string($conn, $_POST['item_name']) ;
-    $item_desc      = mysqli_real_escape_string($conn, $_POST['item_desc']);
-    $status = mysqli_real_escape_string($conn, $_POST['choice']);
+    $item_name  = mysqli_real_escape_string($conn, $_POST['item_name']) ;
+    $item_desc  = mysqli_real_escape_string($conn, $_POST['item_desc']);
+    $status     = mysqli_real_escape_string($conn, $_POST['choice']);
 
     // $violation  = mysqli_real_escape_string($conn, $_POST['viol']);
     
-    if ($idNum == NULL || $fname == NULL || $mname == NULL || $lname == NULL || $course == NULL || $item_name == NULL || $item_desc == NULL )
+    if ($idNum == NULL || $fname == NULL || $mname == NULL || $lname == NULL || $course == NULL || $item_name == NULL || $status == NULL)
     {
         $res = [
             'status' => 422,

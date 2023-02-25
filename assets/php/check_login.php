@@ -13,13 +13,13 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	}
 
 	$uname = validate($_POST['uname']);
-	$pass = validate($_POST['password']);
+	$pass = $_POST['password'];
 
 	$ciphering = "aes-128-ctr";
     $option = 0;
     $decryption_iv = '1234567890123456';
     $decryption_key = 'devanshu';
-    $decryption = openssl_decrypt($pass, $ciphering, $decryption_key, $option, $decryption_iv);
+    $decryption = openssl_encrypt($pass, $ciphering, $decryption_key, $option, $decryption_iv);
 
 
 	
@@ -40,6 +40,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             if ($row['username'] === $uname && $row['password'] === $decryption) {
             	$_SESSION['user_name'] = $row['username'];
             	$_SESSION['name'] = $row['name'];
+				$_SESSION['position'] = $row['position'];
             	$_SESSION['id'] = $row['id'];
             	header("Location: ../../subsystem_folder/index.php");
 		        exit();
