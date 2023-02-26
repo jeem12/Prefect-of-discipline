@@ -73,7 +73,7 @@ $(document).ready(function(){
         dataType:"json",
         success:function(data)
         {
-          $('.dropdown-menu').html(data.notification);
+          $('.notif-dropdown').html(data.notification);
           if(data.unseen_notification > 0)
           {
           $('.count').html(data.unseen_notification);

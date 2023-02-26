@@ -28,7 +28,7 @@
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number count"></span>
           </a><!-- End Notification Icon -->
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"></ul>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications notif-dropdown"></ul>
         </li> 
       
       <!-- End Notification Nav -->

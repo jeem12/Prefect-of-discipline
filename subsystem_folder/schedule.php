@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
       Swal.fire({
         title: info.event.title,
         icon: 'info',
-        html:'<p>'+info.event.extendedProps.time+'</p><p>'+info.event.extendedProps.description+'</p>',
+        html:'<p><?= date("g:i A", strtotime('+time+'))?></p><p>'+info.event.extendedProps.description+'</p>',
       });
     }
 

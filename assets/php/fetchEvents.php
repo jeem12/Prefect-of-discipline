@@ -11,10 +11,14 @@ if(!empty($_GET['start']) && !empty($_GET['end'])){
 // Fetch events from database 
 $sql = "SELECT * FROM podms_events $where_sql"; 
 $result = $conn->query($sql);  
- 
+
 $eventsArr = array(); 
+
 if($result->num_rows > 0){ 
-    while($row = $result->fetch_assoc()){ 
+
+
+    while($row = $result->fetch_assoc()){
+
         array_push($eventsArr, $row); 
     } 
 } 
