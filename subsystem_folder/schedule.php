@@ -40,6 +40,16 @@
 
 	<!-- MAIN CONTENT -->
 
+<!-- CALENDAR -->
+  <div class="container">
+  <div class="wrapper">
+  <div id="calendar"></div>
+  </div>
+</div>
+
+
+
+
   <script>
 
 
@@ -47,22 +57,37 @@
 document.addEventListener('DOMContentLoaded', function() {
   var calendarEl = document.getElementById('calendar');
 
+
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    
       headerToolbar: {
         left: 'today',
         center: 'title',
-        right: 'prev,next'
+        right: 'next'
       },
     initialView: 'dayGridMonth',
-      editable: true,
+      editable: false,
       selectMirror: true,
-      selectable: true,
+      selectable: false,
       nowIndicator: true,
-    height: 600,
+      handleWindowResize: true,
     events: '../assets/php/fetchEvents.php',
 
     eventClick: function(info) {
       info.jsEvent.preventDefault();
+      // let timeString = info.event.extendedProps.time;
+
+      function to12HourFormat(timeString) {
+        let timeParts = timeString.split(':');
+        let hours24 = parseInt(timeParts[0], 10);
+        let hours12 = hours24 % 12 || 12;
+        let minutes = timeParts[1];
+        let amPm = hours24 >= 12 ? 'PM' : 'AM';
+        return `${hours12}:${minutes} ${amPm}`;
+      }
+
+      let timeString24 = info.event.extendedProps.time;
+      let timeString12 = to12HourFormat(timeString24);
       
       // change the border color
       info.el.style.borderColor = '#7078f8';
@@ -71,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
       Swal.fire({
         title: info.event.title,
         icon: 'info',
-        html:'<p><?= date("g:i A", strtotime('+time+'))?></p><p>'+info.event.extendedProps.description+'</p>',
+        html:'<p>'+timeString12+'</p><p>'+info.event.extendedProps.description+'</p>'
       });
     }
 
@@ -81,11 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<div class="container">
-  <div class="wrapper">
-  <div id="calendar"></div>
-  </div>
-</div>
+
 
   </main><!-- End #main -->
 

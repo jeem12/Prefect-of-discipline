@@ -14,6 +14,7 @@ if (isset($_POST['appointData'])) {
     $time = mysqli_real_escape_string($conn, $_POST['time']);
     $desc = mysqli_real_escape_string($conn, $_POST['text']);
 
+
     
     
 

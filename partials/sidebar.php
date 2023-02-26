@@ -30,11 +30,11 @@
                     <i class="bi bi-circle"></i><span>Duty </span>
                   </a>
                 </li>
-                <li>
+                <!-- <li>
                   <a id="mod3" href="appointment.php" class="inactive">
                     <i class="bi bi-circle"></i><span>Appointment</span>
                   </a>
-                </li>
+                </li> -->
                 <li>
                   <a id="mod4" href="records.php" class="inactive">
                     <i class="bi bi-circle"></i><span>Records</span>
@@ -55,6 +55,12 @@
         <a class="nav-link " href="reports.php">
           <i class="bi bi-card-list"></i>
           <span>Reports</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="appointment.php">
+          <i class="bi bi-calendar2-check"></i>
+          <span>Appointment</span>
         </a>
       </li>
       <li class="nav-item">

@@ -13,14 +13,16 @@ $sql = "SELECT * FROM podms_events $where_sql";
 $result = $conn->query($sql);  
 
 $eventsArr = array(); 
+// $date = date("g:i A", strtotime($eventsArr('time')));
 
 if($result->num_rows > 0){ 
 
 
     while($row = $result->fetch_assoc()){
+        
 
         array_push($eventsArr, $row); 
-    } 
+    }
 } 
  
 // Render event data in JSON format 

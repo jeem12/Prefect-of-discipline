@@ -2,7 +2,7 @@
 session_start();
 include_once "../assets/php/db_connect.php";
 if ($_SESSION['user_name'] != true ){
-  header("Location: ../index.php");
+  header("Location: ../../index.php");
 }
 
 // $limitation = $_SESSION['position'];
