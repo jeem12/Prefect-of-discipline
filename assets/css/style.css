@@ -1382,17 +1382,12 @@ input[type=file]::-webkit-file-upload-button{
 }
 
 /*--------------------------------------------------------------
-# DATATABLES.NET
+# dropdown
 --------------------------------------------------------------*/
 
-/* button.btn.btn-secondary.btn-primary.py-0 {
-  background-color: #378ae8;
+.dropdown-toggle::after{
+  display: none !important;
 }
-
-div#myTable_filter {
-  margin-left: -100px;
-  margin-bottom: 20px;
-} */
 
 
 

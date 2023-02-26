@@ -61,7 +61,7 @@
                                         <?php
                                             include "../assets/php/db_connect.php";
 
-                                            $query = "SELECT * FROM podms_reports";
+                                            $query = "SELECT * FROM podms_reports ORDER BY `id` DESC";
                                             $query_run = mysqli_query($conn, $query);
                                         ?>
                         <thead class="has-text-light">
@@ -69,7 +69,8 @@
                                 <th data-priority="1">DATE</th>
                                 <th>FROM</th>
                                 <th>MESSAGE</th>
-                                <th data-priority="2">STATUS</th>
+                                <th>DATE</th>
+
                             </tr>
                         </thead>
                         <tbody class="table-warning">
@@ -85,16 +86,8 @@
                                         <td><?= $row['date'] ?></td>
                                         <td><?= $row['from'] ?></td>
                                         <td><?= $row['content'] ?></td>
-                                        <td>
-                                            <?php if ($row['status']==1){
-                                                echo '<p><a id="unreadNotif" class="badge text-bg-danger" href="../assets/php/data_status.php?id='.$row['id'].'&status=2">UNREAD</a></p>';
-                                            }elseif ($row['status']==2){
-                                                echo '<p class="badge text-bg-success">READ</p>';
-                                            }else{
-                                                echo '<p class="badge text-bg-warning">UNDEFINED STATUS!</p>';
-                                            }
-                                            ?>
-                                        </td>
+                                        <td>You discovered Livestamp.js <span data-livestamp="1677363130"></span>.</td>
+
 
                                     </tr>
                                     <?php
@@ -127,6 +120,7 @@
 
   <!-- DATATABLE SCRIPT -->
   <script>
+
    
 // $(document).ready(function() {
 //     $('#reportsTable').DataTable( {
