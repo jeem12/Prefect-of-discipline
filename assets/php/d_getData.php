@@ -2,7 +2,7 @@
 require_once("db_connect.php");
 extract($_POST);
 
-$totalCount = $conn->query("SELECT * FROM `podms_duty`")->num_rows;
+$totalCount = $conn->query("SELECT * FROM `podms_duty` ORDER BY `date` DESC")->num_rows;
 $search_where = "";
 if(!empty($search)){
     $search_where = " where ";

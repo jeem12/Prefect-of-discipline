@@ -305,7 +305,7 @@ h.className = "nav-content collapse show";
               <th>COURSE</th>
               <th>STATUS</th>
 
-              <th>ACTION</th>
+              <th data-priority="1" class="action">ACTION</th>
           </tr>
       </thead>
       
@@ -410,12 +410,10 @@ $(function() {
                             } ),
                             renderer: $.fn.dataTable.Responsive.renderer.tableAll()
                         }
+                                            
+
                     },
             columnDefs: [
-                        { 
-                            responsivePriority: 0, 
-                            targets: 7
-                        },
                         {
                             targets: 6,
                             render: function(data, type, row, meta) {
@@ -429,14 +427,7 @@ $(function() {
                                     return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
                                 }
                             }
-                        },
-                        // {                       
-                        // className: 'action',
-                        // orderable: false,
-                        // targets:   -1
-                        // }
-
-
+                        }
             ],
             drawCallback: function(settings) {
                 $('.edit_data').click(function() {

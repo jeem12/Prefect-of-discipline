@@ -208,7 +208,7 @@ $(function() {
 
                 },
             columnDefs: [
-                { responsivePriority: 1, targets: 9 },
+                // { responsivePriority: 1, targets: 9 },
                         {
                             targets: 8,
                             render: function(data, type, row, meta) {
@@ -275,6 +275,9 @@ $(function() {
             dataType: "json",
             error: err => {
                 alert("An error occurred. Please check the source code and try again")
+                $('#delete_modal button').attr('disabled', false)
+                $('#delete_modal button[form="delete-frm"]').text("Yes")
+                $('.modal').modal('hide')
             },
             success: function(resp) {
                 if (!!resp.status) {
@@ -301,9 +304,15 @@ $(function() {
                         _el.show('slow')
                     } else {
                         alert("An error occurred. Please check the source code and try again")
+                        $('#delete_modal button').attr('disabled', false)
+                        $('#delete_modal button[form="delete-frm"]').text("Yes")
+                        $('.modal').modal('hide')
                     }
                 } else {
                     alert("An error occurred. Please check the source code and try again")
+                    $('#delete_modal button').attr('disabled', false)
+                    $('#delete_modal button[form="delete-frm"]').text("Yes")
+                    $('.modal').modal('hide')
                 }
 
                 $('#delete_modal button').attr('disabled', false)

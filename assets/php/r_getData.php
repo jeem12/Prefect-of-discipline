@@ -1,8 +1,14 @@
 <?php 
 require_once("db_connect.php");
-extract($_POST);
 
-$totalCount = $conn->query("SELECT * FROM `podms_records` ")->num_rows;
+// Access POST data directly instead of using extract($_POST)
+$search = isset($_POST['search']) ? $_POST['search'] : null;
+$order = isset($_POST['order']) ? $_POST['order'] : null;
+$start = isset($_POST['start']) ? intval($_POST['start']) : 0;
+$length = isset($_POST['length']) ? intval($_POST['length']) : 10;
+$draw = isset($_POST['draw']) ? intval($_POST['draw']) : 1;
+
+$totalCount = $conn->query("SELECT * FROM `podms_records` ORDER BY `date` DESC")->num_rows;
 $search_where = "";
 if(!empty($search)){
     $search_where = " where ";
@@ -39,7 +45,21 @@ $recordsFiltered= $recordsFilterCount;
 $data = array();
 $i= 1 + $start;
 while($row = $query->fetch_assoc()){
-    // $row['image_name'] = fetch $row['image_name'];
+
+    $filename = $row['image_name'];
+    
+    // Use file_exists() to check if the image file exists in the image folder
+    $imagePath = '../../../../assets/uploads' . $filename;
+    if (file_exists($imagePath)) {
+        // Read the contents of the image file into a variable
+        $imageData = file_get_contents($imagePath);
+        $image = base64_encode($imageData);
+        $row['image'] = '<img src="data:image/png;base64,'.$image.'" />';
+    } else {
+        $row['image'] = 'Image not found';
+    }
+
+    $image = $row['image'];
     $data[] = $row;
 }
 echo json_encode(array('draw'=>$draw,
