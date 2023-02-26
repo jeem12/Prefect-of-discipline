@@ -82,6 +82,7 @@
               <!-- Bar Chart -->
               <div class="chartBox">
                 <canvas id="myChart"></canvas>
+                <span>Click to filter month</span>
                 <input id="month" type="month" onchange="filterChart(this)">
                 <button onclick="downloadPDF()" id="pdf">Extract Report</button>
               </div>
