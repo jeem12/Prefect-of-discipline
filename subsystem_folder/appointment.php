@@ -295,12 +295,6 @@ $(function() {
                     })
                 })
             },
-            "order": [
-                [1, "asc"]
-            ],
-            initComplete: function(settings) {
-                $('.paginate_button').addClass('p-1')
-            }
         });
     }
     //Load Data
@@ -404,84 +398,6 @@ $.ajax({
 });
 </script>
 
-
-<!-- <script>
-
-
-$(document).on('click', '#appointBtn', function (e) {
-
-
-var id = $(this).val();
-
-
-$.ajax({
-type: "GET",
-url: "../assets/php/code.php?id1=" + id,
-success: function (response) {
-
-
-    var res = jQuery.parseJSON(response);
-    if(res.status == 404) {
-
-        alert(res.message);
-    }else if(res.status == 200){
-
-        $('#id').val(res.data.id);
-        $('#id_num').val(res.data.complained_id_number);
-        $('#fname').val(res.data.complained_first_name);
-        $('#lname').val(res.data.complained_last_name);
-
-        $('#appointModal').modal('show');
-
-    }
-
-}
-});
-});
-
-$(document).on('submit', '#appointData', function (e) {
-e.preventDefault();
-
-var formData = new FormData(this);
-formData.append("appointData", true);
-
-$.ajax({
-    type: "POST",
-    url: "../assets/php/code.php",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (response) {
-        
-        var res = jQuery.parseJSON(response);
-        if(res.status == 422) {
-            $('#errorMessageAppoint').removeClass('d-none');
-            $('#errorMessageAppoint').text(res.message);
-
-        }else if(res.status == 200){
-
-          $('#errorMessageAppoint').addClass('d-none');
-          
-          // alertify.set('notifier','position', 'bottom-left');
-          // alertify.success(res.message);
-          
-            $('#appointModal').modal('hide');
-            $('#appointData')[0].reset();
-
-            // $('#head').load("appointment.php");
-            location.reload(true);
-
-
-
-        }else if(res.status == 500) {
-            alert(res.message);
-        }
-    }
-});
-
-});
-
-</script> -->
 
 
 </html>
