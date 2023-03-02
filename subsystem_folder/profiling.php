@@ -64,7 +64,7 @@ h.className = "nav-content collapse show";
               <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">Create Report</h5>
+                    <h5 class="modal-title">Create Complain Report</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div id="errorMessage" class="alert alert-warning d-none"></div>
@@ -74,32 +74,38 @@ h.className = "nav-content collapse show";
 
                   <div class="col-md-12 mb-2">
                 <div class="form-floating">
-                  <input type="number" name="idNum" class="form-control" id="floatingName" placeholder="Your Name" required>
-                  <label for="floatingName">ID Number</label>
+                  <input type="number" name="idNum" class="form-control" id="floatingName" placeholder="ID Number" required>
+                  <label for="floatingName">Complainant ID Number</label>
                 </div>
               </div>
               <div class="col-md-12 mb-2">
                 <div class="form-floating">
                   <input type="text" name="fname" class="form-control" id="floatingName" placeholder="Your First Name" required>
-                  <label for="floatingName">First Name</label>
+                  <label for="floatingName">Complainant First Name</label>
                 </div>
               </div>
               <div class="col-md-12 mb-2">
                 <div class="form-floating">
                   <input type="text" name="mname" class="form-control" id="floatingName" placeholder="Your Middle Name" required>
-                  <label for="floatingName">Middle Name</label>
+                  <label for="floatingName">Complainant Middle Name</label>
                 </div>
               </div>
               <div class="col-md-12 mb-2">
                 <div class="form-floating">
                   <input type="text" name="lname" class="form-control" id="floatingName" placeholder="Your Last Name" required>
-                  <label for="floatingName">Last Name</label>
+                  <label for="floatingName">Complainant Last Name</label>
+                </div>
+              </div>
+              <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                  <input type="text" name="section" class="form-control" id="floatingName" placeholder="Your Section" required>
+                  <label for="floatingName">Complainant Section</label>
                 </div>
               </div>
               <div class="col-md-12 mb-2">
                 <div class="form-floating">
                   <input type="text" name="course" class="form-control" id="floatingName" placeholder="Your Course" required>
-                  <label for="floatingName">Course</label>
+                  <label for="floatingName">Complainant Course</label>
                 </div>
               </div>
               <div class="col-md-12 mb-2">
@@ -151,24 +157,64 @@ h.className = "nav-content collapse show";
 
                             <input type="hidden" name="id" id="id">
 
+                            <h1 class="fs-5 text-center">Complained Profiling</h1>
+
+                            <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="number" name="idNum" class="form-control" id="floatingName" placeholder="ID Number" required>
+                            <label for="floatingName">Complained ID Number</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="text" name="fname" class="form-control" id="floatingName" placeholder="Your First Name" required>
+                            <label for="floatingName">Complained First Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="text" name="mname" class="form-control" id="floatingName" placeholder="Your Middle Name" required>
+                            <label for="floatingName">Complained Middle Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="text" name="lname" class="form-control" id="floatingName" placeholder="Your Last Name" required>
+                            <label for="floatingName">Complained Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="text" name="section" class="form-control" id="floatingName" placeholder="Your Section" required>
+                            <label for="floatingName">Complained Section</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                            <input type="text" name="course" class="form-control" id="floatingName" placeholder="Your Course" required>
+                            <label for="floatingName">Complained Course</label>
+                            </div>
+                        </div>
+                            
+
                             <h1 class="fs-5 text-center">Violation Level</h1>
 
                             <div class="col-md-12 mb-2">
  
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="gridRadios1" value="minor" required>
+                                <input class="form-check-input" type="radio" name="level" id="gridRadios1" value="minor" onclick="showDiv(2)" required>
                                 <label class="form-check-label" for="gridRadios1">
                                 Minor Offense
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="gridRadios2" value="major">
+                                <input class="form-check-input" type="radio" name="level" id="gridRadios2" value="major" onclick="showDiv(1)">
                                 <label class="form-check-label" for="gridRadios2">
                                 Major Offense
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="gridRadios" value="grave">
+                                <input class="form-check-input" type="radio" name="level" id="gridRadios" value="grave" onclick="showDiv(2)">
                                 <label class="form-check-label" for="gridRadios3">
                                 Grave Offense
                                 </label>
@@ -185,6 +231,7 @@ h.className = "nav-content collapse show";
 
                             <hr>
 
+                            <div id="duty">
                             <h1 class="fs-5 text-center">Duty</h1>
                             <br>
                             
@@ -234,8 +281,21 @@ h.className = "nav-content collapse show";
                                 <label for="floatingName">Specific Location</label>
                             </div>
                             </div>
+                            <hr>   
+                            </div>
 
-                            <hr>     
+                            <script>
+                                function showDiv(val){
+                                    if(val==1){
+                                        document.getElementById('duty').style.display='none';
+                                    }
+                                    if(val==2){
+                                        document.getElementById('duty').style.display='block';
+                                    }
+                                }
+                            </script>
+
+  
                             <h1 class="fs-5 text-center">Evidence</h1>
                                 <div class="mb-3">
                                     <div class="upload text-center">
@@ -262,6 +322,8 @@ h.className = "nav-content collapse show";
 
 <!-- SANCTION MODAL END -->
 
+
+
     <!-- Delete Modal -->
     <div class="modal fade" id="delete_modal" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
@@ -287,9 +349,6 @@ h.className = "nav-content collapse show";
     <!-- /Delete Modal -->
 
 
-    
-
-
 <div class="container" id="table">
   <div class="row">
       <table id="myTable" class="table table-striped nowrap" style="width:100%">
@@ -298,10 +357,11 @@ h.className = "nav-content collapse show";
       <thead id="thead">
           <tr class="has-text-light">
               <th>DATE</th>
-              <th>STUDENT NUMBER</th>
+              <th>ID NUMBER</th>
               <th>LAST NAME</th>
               <th>FIRST NAME</th>
               <th>MIDDLE NAME</th>
+              <th>SECTION</th>
               <th>COURSE</th>
               <th>STATUS</th>
 
@@ -329,6 +389,7 @@ h.className = "nav-content collapse show";
 <?php include ('../partials/footer.php'); ?>
 
 <!-- End Footer -->
+
 
 
 
@@ -362,27 +423,32 @@ $(function() {
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'id_number',
+                    data: 'complainant_id_number',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'first_name',
+                    data: 'complainant_first_name',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'middle_name',
+                    data: 'complainant_middle_name',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'last_name',
+                    data: 'complainant_last_name',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'course',
+                    data: 'complainant_section',
+                    className: 'text-center',
+                    defaultContent: 'No Data Available'
+                },
+                {
+                    data: 'complainant_course',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
@@ -415,7 +481,7 @@ $(function() {
                     },
             columnDefs: [
                         {
-                            targets: 6,
+                            targets: 7,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';

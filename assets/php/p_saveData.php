@@ -7,6 +7,7 @@ if (isset($_POST['addData'])) {
     $fname      = mysqli_real_escape_string($conn, $_POST['fname']) ;
     $mname      = mysqli_real_escape_string($conn, $_POST['mname']) ;
     $lname      = mysqli_real_escape_string($conn, $_POST['lname']);
+    $section      = mysqli_real_escape_string($conn, $_POST['section']);
     $course     = mysqli_real_escape_string($conn, $_POST['course']);
     $inci_desc      = mysqli_real_escape_string($conn, $_POST['inci_desc']) ;
     $inci_date      = mysqli_real_escape_string($conn, $_POST['inci_date']);
@@ -24,7 +25,7 @@ if (isset($_POST['addData'])) {
         return;
     }
 
-    $query = "INSERT INTO `podms_profiling` (`id_number`,`first_name`,`middle_name`,`last_name`,`course`,`inci_desc`,`inci_date`,`inci_time`,`status`) VALUES ('$idNum','$fname','$mname','$lname','$course','$inci_desc','$inci_date','$inci_time','$status')";
+    $query = "INSERT INTO `podms_profiling` (`complained_id_number`,`complained_first_name`,`complained_middle_name`,`complained_last_name`,`complained_section`,`complained_course`,`inci_desc`,`inci_date`,`inci_time`,`status`) VALUES ('$idNum','$fname','$mname','$lname','$section','$course','$inci_desc','$inci_date','$inci_time','$status')";
         $query_run = mysqli_query($conn, $query);
         if ($query_run){
             $res = [
