@@ -207,19 +207,19 @@ h.className = "nav-content collapse show";
                             <fieldset class="row mb-3">
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level1" value="minor">
+                                <input class="form-check-input" type="radio" name="level" id="level1" value="minor" onclick="showDiv(2)" checked>
                                 <label class="form-check-label" for="level1">
                                     Minor Offense
                                 </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level2" value="major">
+                                <input class="form-check-input" type="radio" name="level" id="level2" value="major" onclick="showDiv(1)">
                                 <label class="form-check-label" for="level2">
                                     Major Offense
                                 </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level" value="gravance" >
+                                <input class="form-check-input" type="radio" name="level" id="level" value="grievance" onclick="showDiv(2)">
                                 <label class="form-check-label" for="level3">
                                     Grave Offense
                                 </label>
@@ -317,17 +317,17 @@ h.className = "nav-content collapse show";
 
 
 <!-- SANCTION MODAL END -->
-<!-- 
+
                 <script>
-                      function showDiv(val){
+                   function showDiv(val){
                         if(val==1){
                           document.getElementById('dutyDiv').style.display='block';
                        }
                       if(val==2){
                          document.getElementById('dutyDiv').style.display='none';
                       }
-                   }
-                </script> -->
+                };
+                </script>
 
 
 
