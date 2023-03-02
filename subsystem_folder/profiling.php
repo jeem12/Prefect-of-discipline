@@ -197,28 +197,35 @@ h.className = "nav-content collapse show";
                         </div>
                             
 
-                            <h1 class="fs-5 text-center">Violation Level</h1>
+
 
                             <div class="col-md-12 mb-2">
+
+                            <h1 class="fs-5 text-center">Violation Level</h1>
+
  
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="gridRadios1" value="minor" onclick="showDiv(2)" required>
-                                <label class="form-check-label" for="gridRadios1">
-                                Minor Offense
+                            <fieldset class="row mb-3">
+                            <div class="col-sm-10">
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="level" id="level1" value="minor">
+                                <label class="form-check-label" for="level1">
+                                    Minor Offense
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="gridRadios2" value="major" onclick="showDiv(1)">
-                                <label class="form-check-label" for="gridRadios2">
-                                Major Offense
+                                </div>
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="level" id="level2" value="major">
+                                <label class="form-check-label" for="level2">
+                                    Major Offense
                                 </label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="gridRadios" value="grave" onclick="showDiv(2)">
-                                <label class="form-check-label" for="gridRadios3">
-                                Grave Offense
+                                </div>
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="level" id="level" value="gravance" >
+                                <label class="form-check-label" for="level3">
+                                    Grave Offense
                                 </label>
+                                </div>
                             </div>
+                            </fieldset>
                             </div>
 
                             <br>
@@ -231,7 +238,7 @@ h.className = "nav-content collapse show";
 
                             <hr>
 
-                            <div id="duty">
+                            <div id="dutyDiv">
                             <h1 class="fs-5 text-center">Duty</h1>
                             <br>
                             
@@ -284,17 +291,6 @@ h.className = "nav-content collapse show";
                             <hr>   
                             </div>
 
-                            <script>
-                                function showDiv(val){
-                                    if(val==1){
-                                        document.getElementById('duty').style.display='none';
-                                    }
-                                    if(val==2){
-                                        document.getElementById('duty').style.display='block';
-                                    }
-                                }
-                            </script>
-
   
                             <h1 class="fs-5 text-center">Evidence</h1>
                                 <div class="mb-3">
@@ -321,6 +317,17 @@ h.className = "nav-content collapse show";
 
 
 <!-- SANCTION MODAL END -->
+<!-- 
+                <script>
+                      function showDiv(val){
+                        if(val==1){
+                          document.getElementById('dutyDiv').style.display='block';
+                       }
+                      if(val==2){
+                         document.getElementById('dutyDiv').style.display='none';
+                      }
+                   }
+                </script> -->
 
 
 
@@ -389,6 +396,8 @@ h.className = "nav-content collapse show";
 <?php include ('../partials/footer.php'); ?>
 
 <!-- End Footer -->
+
+
 
 
 
