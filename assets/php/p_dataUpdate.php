@@ -123,7 +123,7 @@ if (isset($_POST['sanctionData'])) {
 
 				} else {
 					// process if any key does not exist or has an empty value
-					$query10 = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation' , `status` = '2',`image_name` = '$new_img_name' WHERE id='$id' ";
+					$query10 = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation' , `status` = '3',`image_name` = '$new_img_name' WHERE id='$id' ";
 					$query_run10 = mysqli_query($conn, $query10);
 					if ($query_run10){
 						$query11 = "INSERT INTO `podms_records` SELECT * FROM `podms_profiling` WHERE `id` = '$id' ";
@@ -140,7 +140,6 @@ if (isset($_POST['sanctionData'])) {
 						
 								];
 								echo json_encode($res);
-								// header("./profiling.php");
 								return;
 							}else{
 								$res = [

@@ -246,6 +246,7 @@ h.className = "nav-content collapse show";
                         <h4 class="fs-6">Duty Selection</h4>
                                 
                         <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="hidden" name="duties[]" value="NULL" id="gridCheck1">
                         <input class="form-check-input" type="checkbox" name="duties[]" value="community service" id="gridCheck1">
                         <label class="form-check-label" for="gridCheck1" >Community Service</label>
                         </div>
@@ -666,14 +667,12 @@ $.ajax({
 
       }else if(res.status == 200){
 
-          $('#errorMessageSanction').addClass('d-none');
-
           alertify.set('notifier','position', 'bottom-right');
           alertify.success(res.message);
           
           $('#sanctionModal').modal('hide');
-        //   $('#sanctionData')[0].reset();
-          $('#sanctionData').get(0).reset()
+          $('.modal')[0].reset();
+        //   $('#sanctionData').get(0).reset()
           $('#sanctionModal button').attr('disabled', false)
           $('#sanctionModal button[id="sancUp"]').text("Submit")
 

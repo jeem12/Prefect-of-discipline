@@ -13,11 +13,11 @@ $search_where = "";
 if(!empty($search)){
     $search_where = " where ";
     $search_where .= " date LIKE '%{$search['value']}%' ";
-    $search_where .= " OR id_number LIKE '%{$search['value']}%' ";
-    $search_where .= " OR first_name LIKE '%{$search['value']}%' ";
-    $search_where .= " OR middle_name LIKE '%{$search['value']}%' ";
-    $search_where .= " OR last_name LIKE '%{$search['value']}%' ";
-    $search_where .= " OR course LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_id_number LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_first_name LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_middle_name LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_last_name LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_course LIKE '%{$search['value']}%' ";
     $search_where .= " OR inci_desc LIKE '%{$search['value']}%' ";
     $search_where .= " OR inci_date LIKE '%{$search['value']}%' ";
     $search_where .= " OR inci_time LIKE '%{$search['value']}%' ";
@@ -26,11 +26,11 @@ if(!empty($search)){
 }
 $columns_arr = array(
                      "date",
-                     "id_number",
-                     "first_name",
-                     "middle_name",
-                     "last_name",
-                     "course",
+                     "complained_id_number",
+                     "complained_first_name",
+                     "complained_middle_name",
+                     "complained_last_name",
+                     "complained_course",
                      "inci_desc",
                      "inci_date",
                      "inci_time",

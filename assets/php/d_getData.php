@@ -6,20 +6,24 @@ $totalCount = $conn->query("SELECT * FROM `podms_duty` ORDER BY `date` DESC")->n
 $search_where = "";
 if(!empty($search)){
     $search_where = " where ";
-    $search_where .= " id_number LIKE '%{$search['value']}%' ";
-    $search_where .= " OR last_name LIKE '%{$search['value']}%' ";
-    $search_where .= " OR first_name LIKE '%{$search['value']}%' ";
-    $search_where .= " OR middle_name LIKE '%{$search['value']}%' ";
+    $search_where .= " complained_id_number LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_last_name LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_first_name LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_middle_name LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_section LIKE '%{$search['value']}%' ";
+    $search_where .= " OR complained_course LIKE '%{$search['value']}%' ";
     $search_where .= " OR duties LIKE '%{$search['value']}%' ";
     $search_where .= " OR duty_start LIKE '%{$search['value']}%' ";
     $search_where .= " OR duty_end LIKE '%{$search['value']}%' ";
     $search_where .= " OR duty_location LIKE '%{$search['value']}%' ";
 }
 $columns_arr = array(
-                    "id_number",
-                    "last_name",
-                    "first_name",
-                    "middle_name",
+                    "complained_id_number",
+                    "complained_last_name",
+                    "complained_first_name",
+                    "complained_middle_name",
+                    "complained_section",
+                    "complained_course",
                     "duties",
                     "duty_start",
                     "duty_end",

@@ -88,6 +88,8 @@ h.className = "nav-content collapse show";
                 <th>LAST NAME</th>
                 <th>FIRST NAME</th>
                 <th>MIDDLE NAME</th>
+                <th>COURSE</th>
+                <th>SECTION</th>
                 <th>DUTIES</th>
                 <th>DUTY START</th>
                 <th>DUTY END</th>
@@ -141,22 +143,32 @@ $(function() {
             },
             columns: [
                 {
-                    data: 'id_number',
+                    data: 'complained_id_number',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'last_name',
+                    data: 'complained_last_name',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'first_name',
+                    data: 'complained_first_name',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'middle_name',
+                    data: 'complained_middle_name',
+                    className: 'text-center',
+                    defaultContent: 'No Data Available'
+                },
+                {
+                    data: 'complained_section',
+                    className: 'text-center',
+                    defaultContent: 'No Data Available'
+                },
+                {
+                    data: 'complained_course',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
@@ -210,7 +222,7 @@ $(function() {
             columnDefs: [
                 // { responsivePriority: 1, targets: 9 },
                         {
-                            targets: 8,
+                            targets: 10,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';

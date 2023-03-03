@@ -164,27 +164,27 @@ $(function() {
 
                 },
                 {
-                    data: 'id_number',
+                    data: 'complained_id_number',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
                 {
-                    data: 'last_name',
+                    data: 'complained_last_name',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
                 {
-                    data: 'first_name',
+                    data: 'complained_first_name',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
                 {
-                    data: 'middle_name',
+                    data: 'complained_middle_name',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
                 {
-                    data: 'course',
+                    data: 'complained_course',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
