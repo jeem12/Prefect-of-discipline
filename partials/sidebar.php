@@ -61,7 +61,10 @@
         <a class="nav-link " href="appointment.php">
           <i class="bi bi-calendar2-check"></i>
           <span>Appointment</span>
+          <span id="badgeNotif" class="d-none position-absolute translate-middle p-2 bg-danger border border-light rounded-circle">
+        <span class="visually-hidden">New alerts</span>
         </a>
+
       </li>
       <li class="nav-item">
         <a class="nav-link " href="violation.php">
@@ -88,7 +91,7 @@
           
       <!-- End Components Nav -->
   </aside>
-
+<!-- 
   <script>
     var y = document.getElementById('sasValAct')
     y.className = "nav-link ";
@@ -96,4 +99,4 @@
     h.className = "nav-content collapse show";
     var x = document.getElementById('sasValIns2')
     x.className = "active";
-  </script>
+  </script> -->
