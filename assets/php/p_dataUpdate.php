@@ -94,7 +94,7 @@ if (isset($_POST['sanctionData'])) {
 										$query2 = "INSERT INTO `podms_duty` SELECT * FROM `podms_profiling` WHERE `id` = '$id'";
 										$query_run2 = mysqli_query($conn, $query2);
 										if ($query_run2) {
-											$query3 = "DELETE FROM podms_profiling WHERE `id` = '$id'";
+											$query3 = "DELETE FROM `podms_profiling` WHERE `id` = '$id'";
 											$query_run3 = mysqli_query($conn, $query3);
 								
 											if ($query_run3) {

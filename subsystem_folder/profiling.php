@@ -151,10 +151,10 @@ h.className = "nav-content collapse show";
                     <h5 class="modal-title">Sanction Form</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <form method="POST" id="sanctionData" enctype="multipart/form-data">
 
+                <div class="modal-body">                
+                    <form method="POST" id="sanctionData" enctype="multipart/form-data">
+                    <div class="container-fluid">
                             <input type="hidden" name="id" id="id">
 
                             <h1 class="fs-5 text-center">Complained Profiling</h1>
@@ -316,21 +316,14 @@ h.className = "nav-content collapse show";
                                     <!-- <input type="file" name="image" id = "image" accept=".jpg, .jpeg, .png" onchange="getImagePreview(event)"> -->
                                     <i class = "bi bi-camera-fill"></i>
                                     </div>
-
-                                    <div class="leftRound" id = "cancel" style = "display: none;">
-                                    <i class = "fa fa-times"></i>
-                                    </div>
-                                    <div class="rightRound" id = "confirm" style = "display: none;">
-                                    <input type="submit">
-                                    <i class = "bi bi-check"></i>
-                                    </div>
                                 </div>
                                 </div>
-
                     </div>
-                </div>
+                </div>                
+            
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="sancUp">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
                 </form>
             </div>
@@ -409,8 +402,10 @@ h.className = "nav-content collapse show";
 <!-- End Footer -->
 
 
+<!-- DATATABLE SCRIPTS -->
 <script>
-                   function showDiv(val){
+
+function showDiv(val){
                         if(val==1){
                           document.getElementById('dutyDiv').style.display='block';
                        }
@@ -418,11 +413,8 @@ h.className = "nav-content collapse show";
                          document.getElementById('dutyDiv').style.display='none';
                       }
                 };
-        </script>
 
-
-<script type="text/javascript">
-                                function getImagePreview(event)
+function getImagePreview(event)
                                 {
                                     var image=URL.createObjectURL(event.target.files[0]);
                                     var imagediv= document.getElementById('img-preview');
@@ -432,13 +424,7 @@ h.className = "nav-content collapse show";
                                     newimg.width="500";
                                     imagediv.appendChild(newimg);
                                 }
-                            </script>
 
-
-
-
-<!-- DATATABLE SCRIPT -->
-<script>
  var myTable = '';
 $(function() {
     // draw function [called if the database updates]
@@ -648,7 +634,8 @@ e.preventDefault();
 
             $('#sanctionModal button').attr('disabled', true)
             $('#sanctionModal button[id="sancUp"]').text("Updating ...")
-
+var imagediv= document.getElementById('img-preview');
+var newimg=document.getElementById('img-preview');
 var formData = new FormData(this);
 formData.append("sanctionData", true);
 
@@ -671,8 +658,9 @@ $.ajax({
           alertify.success(res.message);
           
           $('#sanctionModal').modal('hide');
-          $('.modal')[0].reset();
-        //   $('#sanctionData').get(0).reset()
+          $('#sanctionData')[0].reset()
+          var defaultImageURL = '../assets/img/logo300.png';
+          $('#img-div img').attr('src', defaultImageURL);
           $('#sanctionModal button').attr('disabled', false)
           $('#sanctionModal button[id="sancUp"]').text("Submit")
 
