@@ -22,7 +22,7 @@ if (isset($_POST['sanctionData'])) {
     $dutyS = mysqli_real_escape_string($conn, ($_POST['duty_timeS']));
     $dutyE = mysqli_real_escape_string($conn, $_POST['duty_timeE']);
     $duty_loc = mysqli_real_escape_string($conn, $_POST['dutyLoc']);
-    $duty = implode(', ', $_POST['duties']); 
+    $duty = implode(', ', $_POST['duties']);
 
     // CONVERT CHECKBOX ARRAY TO STRING
     
@@ -83,41 +83,79 @@ if (isset($_POST['sanctionData'])) {
 				# move uploaded image to 'uploads' folder
 				move_uploaded_file($tmp_name, $img_upload_path);
 
-				# inserting imge name into database
-                $query = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation' , `duty_start` = '$dutyS' , `duty_end` = '$dutyE' , `duties`='$duty', `duty_location`= '$duty_loc' , `status` = '2',`image_name` = '$new_img_name' WHERE id='$id'";
+				if(!empty($duty_loc) && !empty($dutyS) && !empty($dutyE)){
+					// process if all keys exist and have non-empty values
+									# inserting imge name into database
+									$query = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation' , `duty_start` = '$dutyS' , `duty_end` = '$dutyE' , `duties`='$duty', `duty_location`= '$duty_loc' , `status` = '2',`image_name` = '$new_img_name' WHERE id='$id'";
                 
-                $query_run = mysqli_query($conn, $query);
-                // , `image` = '$file'
-                if ($query_run) {
-                    $query2 = "INSERT INTO `podms_duty` SELECT * FROM `podms_profiling` WHERE `id` = '$id'";
-                    $query_run2 = mysqli_query($conn, $query2);
-                    if ($query_run2) {
-                        $query3 = "DELETE FROM podms_profiling WHERE `id` = '$id'";
-                        $query_run3 = mysqli_query($conn, $query3);
-            
-                        if ($query_run3) {
-                            $res = [
-                                'status' => 200,
-                    
-                                'message' => 'Data Update Successfully'
-                    
-                            ];
-                            echo json_encode($res);
-                            // header("./profiling.php");
-                            return;
-                        }else {
-                            $res = [
-                                'status' => 500,
-                    
-                                'message' => 'Data Not Updated',
-                            ];
-                            echo json_encode($res);
-                            return;
-                        } 
-            
-                    }
-                    
-                }
+									$query_run = mysqli_query($conn, $query);
+									// , `image` = '$file'
+									if ($query_run) {
+										$query2 = "INSERT INTO `podms_duty` SELECT * FROM `podms_profiling` WHERE `id` = '$id'";
+										$query_run2 = mysqli_query($conn, $query2);
+										if ($query_run2) {
+											$query3 = "DELETE FROM podms_profiling WHERE `id` = '$id'";
+											$query_run3 = mysqli_query($conn, $query3);
+								
+											if ($query_run3) {
+												$res = [
+													'status' => 200,
+										
+													'message' => 'Data Update Successfully'
+										
+												];
+												echo json_encode($res);
+												// header("./profiling.php");
+												return;
+											}else {
+												$res = [
+													'status' => 500,
+										
+													'message' => 'Data Not Updated',
+												];
+												echo json_encode($res);
+												return;
+											} 
+								
+										}
+										
+									}
+
+				} else {
+					// process if any key does not exist or has an empty value
+					$query10 = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation' , `status` = '2',`image_name` = '$new_img_name' WHERE id='$id' ";
+					$query_run10 = mysqli_query($conn, $query10);
+					if ($query_run10){
+						$query11 = "INSERT INTO `podms_records` SELECT * FROM `podms_profiling` WHERE `id` = '$id' ";
+						$query_run11 = mysqli_query($conn, $query11);
+
+						if($query_run11){
+							$query12 = "DELETE FROM podms_profiling WHERE `id` = '$id'";
+							$query_run12 = mysqli_query($conn, $query12);
+							if($query_run12){
+								$res = [
+									'status' => 200,
+						
+									'message' => 'Data Update Successfully'
+						
+								];
+								echo json_encode($res);
+								// header("./profiling.php");
+								return;
+							}else{
+								$res = [
+									'status' => 500,
+						
+									'message' => 'Data Not Updated',
+								];
+								echo json_encode($res);
+								return;
+							}
+						}
+					}
+				}
+
+
 
 			}else {
 				# error message

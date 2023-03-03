@@ -207,7 +207,7 @@ h.className = "nav-content collapse show";
                             <fieldset class="row mb-3">
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level1" value="minor" onclick="showDiv(2)" checked>
+                                <input class="form-check-input" type="radio" name="level" id="level1" value="minor" onclick="showDiv(1)" checked>
                                 <label class="form-check-label" for="level1">
                                     Minor Offense
                                 </label>
@@ -232,29 +232,48 @@ h.className = "nav-content collapse show";
                             <div class="col-md-12 mb-2">
                             <div class="form-floating">
                             <input type="text" name="viol" class="form-control" id="viol_name floatingName" placeholder="Your Violation" required>
-                            <label for="floatingName">Violation</label>
+                            <label for="floatingName">Specify Violation</label>
                             </div>
                             </div>
-
-                            <hr>
-
-                            <div id="dutyDiv">
-                            <h1 class="fs-5 text-center">Duty</h1>
-                            <br>
                             
+                            <hr>
+                            
+                            <div id="dutyDiv">
+                                <h1 class="fs-5 text-center">Duty</h1>
+                                <br>
+                                
+                         <div class="col-md-12 mb-2">
+                        <h4 class="fs-6">Duty Selection</h4>
+                                
+                        <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="duties[]" value="community service" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1" >Community Service</label>
+                        </div>
+                                
+                        <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="checkbox" name="duties[]" value="duty" id="gridCheck2">
+                                                                <label class="form-check-label" for="gridCheck2" >
+                                                                    Duty 2
+                                                                </label>
+                                                                </div>
+                                
+                                                            </div>
+                                                            <br>
+                            
+                            <h4 class="fs-6">Duty Time</h4>
                             <div class="container text-center mb-2">
                             <div class="row align-items-center">
 
                                 <div class="col">
                                 <div class="form-floating duty_timeS">
-                                <input type="time" name="duty_timeS" class="form-control" id="floatingName dutyTimeS" placeholder="duty_timeS" required>
+                                <input type="time" name="duty_timeS" class="form-control" id="floatingName dutyTimeS" placeholder="duty_timeS" >
                                 <label for="floatingName">Duty Time Start</label>
                                 </div>  
                                 </div>
 
                                 <div class="col">
                                 <div class="form-floating duty_timeE">
-                                <input type="time" name="duty_timeE" class="form-control" id="floatingName dutyTimeE" placeholder="duty_timeE" required>
+                                <input type="time" name="duty_timeE" class="form-control" id="floatingName dutyTimeE" placeholder="duty_timeE" >
                                 <label for="floatingName">Duty Time End</label>
                                 </div>  
                                 </div>
@@ -263,28 +282,13 @@ h.className = "nav-content collapse show";
                             </div>
 
 
-                            <div class="col-md-12 mb-2">
-
-                                <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="duties[]" value="community service" id="gridCheck1">
-                                <label class="form-check-label" for="gridCheck1" required>
-                                    Community Service
-                                </label>
-                                </div>
-
-                                <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="duties[]" value="duty" id="gridCheck2">
-                                <label class="form-check-label" for="gridCheck2" required>
-                                    Duty 2
-                                </label>
-                                </div>
-
-                            </div>
 
                             <div class="col-md-12 mb-2">
+
+                            <h4 class="fs-6">Duty Location</h4>
 
                             <div class="form-floating">
-                                <input type="text" name="dutyLoc" class="form-control" id="floatingName" placeholder="location" required>
+                                <input type="text" name="dutyLoc" class="form-control" id="floatingName" placeholder="location" >
                                 <label for="floatingName">Specific Location</label>
                             </div>
                             </div>
@@ -294,15 +298,33 @@ h.className = "nav-content collapse show";
   
                             <h1 class="fs-5 text-center">Evidence</h1>
                                 <div class="mb-3">
-                                    <div class="upload text-center">
+                                    <!-- <div class="upload text-center">
                                             <img src="../assets/img/logo300.png" width = 100 height = 100 alt="" id="preImg">
                                         <div class="round">
-                                            <input type="file" name="image" id="image" required>
+                                        input type="file" name="image" class="form-control" placeholder="Enter Name" id="upload_file" "
+                                            <input type="file" name="image" id="image" accept="image/*" required>
                                             <i class = "bi bi-camera-fill" style = "color: #fff;"></i>
                                         </div>
+                                    </div> -->
+                                    <div class="upload">
+                                    <div id="img-div">
+                                    <img src="../assets/img/logo300.png" id="img-preview" width = 100 height = 100 alt="">
+                                    </div>
+                                    <div class="rightRound" id = "upload">
+                                    <input type="file" name="image" class="form-control" id = "image" accept=".jpg, .jpeg, .png" placeholder="Enter Name" id="upload_file" onchange="getImagePreview(event)">
+                                    <!-- <input type="file" name="image" id = "image" accept=".jpg, .jpeg, .png" onchange="getImagePreview(event)"> -->
+                                    <i class = "bi bi-camera-fill"></i>
+                                    </div>
+
+                                    <div class="leftRound" id = "cancel" style = "display: none;">
+                                    <i class = "fa fa-times"></i>
+                                    </div>
+                                    <div class="rightRound" id = "confirm" style = "display: none;">
+                                    <input type="submit">
+                                    <i class = "bi bi-check"></i>
                                     </div>
                                 </div>
-
+                                </div>
 
                     </div>
                 </div>
@@ -317,18 +339,6 @@ h.className = "nav-content collapse show";
 
 
 <!-- SANCTION MODAL END -->
-
-                <script>
-                   function showDiv(val){
-                        if(val==1){
-                          document.getElementById('dutyDiv').style.display='block';
-                       }
-                      if(val==2){
-                         document.getElementById('dutyDiv').style.display='none';
-                      }
-                };
-                </script>
-
 
 
     <!-- Delete Modal -->
@@ -398,7 +408,30 @@ h.className = "nav-content collapse show";
 <!-- End Footer -->
 
 
+<script>
+                   function showDiv(val){
+                        if(val==1){
+                          document.getElementById('dutyDiv').style.display='block';
+                       }
+                      if(val==2){
+                         document.getElementById('dutyDiv').style.display='none';
+                      }
+                };
+        </script>
 
+
+<script type="text/javascript">
+                                function getImagePreview(event)
+                                {
+                                    var image=URL.createObjectURL(event.target.files[0]);
+                                    var imagediv= document.getElementById('img-preview');
+                                    var newimg=document.getElementById('img-preview');
+                                    imagediv.innerHTML='';
+                                    newimg.src=image;
+                                    newimg.width="500";
+                                    imagediv.appendChild(newimg);
+                                }
+                            </script>
 
 
 
