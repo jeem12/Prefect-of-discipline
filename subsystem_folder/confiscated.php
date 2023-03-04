@@ -181,8 +181,7 @@ h.className = "nav-content collapse show";
 
                       <thead>
                           <tr>
-                              <th>FIRST NAME</th>
-                              <th>LAST NAME</th>
+                              <th>FULLNAME</th>
                               <th>SECTION</th>
                               <th>COURSE / STRAND</th>
                               <th>ITEM NAME</th>
@@ -241,15 +240,10 @@ $(function() {
           },
           columns: [
               {
-                  data: 'first_name',
+                  data: 'fullname',
                   className: 'text-center',
                   defaultValue: 'No data available'
 
-              },
-              {
-                  data: 'last_name',
-                  className: 'text-center',
-                  defaultValue: 'No data available'
               },
               {
                   data: 'section',
@@ -279,7 +273,7 @@ $(function() {
               {
                     data: null,
                     orderable: false,
-                    className: 'text-center',
+                    className: 'text-center action',
                     render: function(data, type, row, meta) {
                         console.log()
                         if (data.status == 1){
@@ -293,32 +287,21 @@ $(function() {
             }
           ],
           responsive: {
-                  details: {
-                          display: $.fn.dataTable.Responsive.display.modal( {
-                                  header: function ( row ) {
-                                      var data = row.data();
-                                      return 'Details for '+data.first_name+' '+data.last_name;
-                                  }
-                              } ),
-                  renderer: function ( api, rowIdx, columns ) {
-                      var data = $.map( columns, function ( col, i ) {
-                          return col.hidden ?
-                              '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
-                                  '<td>'+col.title+':'+'</td> '+
-                                  '<td>'+col.data+'</td>'+
-                              '</tr>' :
-                              '';
-                      } ).join('');
-      
-                      return data ?
-                          $('<table/>').append( data ) :
-                          false;
-                      }
-              }
-          },
+                        details: {
+                                display: $.fn.dataTable.Responsive.display.modal( {
+                                        header: function ( row ) {
+                                            var data = row.data();
+                                            return 'Details for '+data.last_name+', '+data.first_name;
+                                        }
+                                    } ),
+    
+                                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
+
+                },
           columnDefs: [
                       {
-                          targets: 6,
+                          targets: 5,
                           render: function(data, type, row, meta) {
                               if (data == 1) {
                                   return '<p class="badge text-bg-success text-wrap text-center"> Claimable</p>';

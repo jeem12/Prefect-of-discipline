@@ -33,6 +33,7 @@ $recordsFiltered= $recordsFilterCount;
 $data = array();
 $i= 1 + $start;
 while($row = $query->fetch_assoc()){
+    $row['fullname'] = $row['complainant_last_name'] . ', ' . $row['complainant_first_name'] . ' ' . $row['complainant_middle_name'];
     $data[] = $row;
 }
 echo json_encode(array('draw'=>$draw,

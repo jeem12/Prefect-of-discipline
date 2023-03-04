@@ -15,7 +15,7 @@ if($_POST["view"] != '')
 
 $query = "SELECT * FROM `podms_reports` ORDER BY `id` DESC LIMIT 5";
 $result = mysqli_query($conn, $query);
-$output = '<li class="dropdown-header">You have '.mysqli_num_rows($result).' notifications</li>';
+$output = '';
 
 
 if(mysqli_num_rows($result) > 0)
@@ -23,7 +23,6 @@ if(mysqli_num_rows($result) > 0)
 while($row = mysqli_fetch_array($result))
 {
       $output .= '
-      <hr class="dropdown-divider">
           <li class="notification-item">
               <i class="bi bi-exclamation-circle text-danger"></i>
               <div>

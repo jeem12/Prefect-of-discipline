@@ -72,8 +72,7 @@ h.className = "nav-content collapse show";
                       <thead>
                           <tr>
                               <th>ID NUMBER</th>
-                              <th>FIRST NAME</th>
-                              <th>LAST NAME</th>
+                              <th>FULL NAME</th>
                               <th>SECTION</th>
                               <th>COURSE</th>
                               <th>ITEM NAME</th>
@@ -122,7 +121,7 @@ $(function() {
 
   function load_data() {
       myTable = $('#myTable').DataTable({
-          dom: '<"row"B>flr<"py-2 my-2"t>ip',
+          dom: 'flr<"py-2 my-2"t>ip',
           "processing": true,
           "serverSide": true,
           "ajax": {
@@ -137,15 +136,10 @@ $(function() {
 
               },
               {
-                  data: 'first_name',
+                  data: 'fullname',
                   className: 'text-center',
                   defaultValue: 'No data available'
 
-              },
-              {
-                  data: 'last_name',
-                  className: 'text-center',
-                  defaultValue: 'No data available'
               },
               {
                   data: 'section',
@@ -174,32 +168,21 @@ $(function() {
               },
           ],
           responsive: {
-                  details: {
-                          display: $.fn.dataTable.Responsive.display.modal( {
-                                  header: function ( row ) {
-                                      var data = row.data();
-                                      return 'Details for '+data.first_name+' '+data.last_name;
-                                  }
-                              } ),
-                  renderer: function ( api, rowIdx, columns ) {
-                      var data = $.map( columns, function ( col, i ) {
-                          return col.hidden ?
-                              '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
-                                  '<td>'+col.title+':'+'</td> '+
-                                  '<td>'+col.data+'</td>'+
-                              '</tr>' :
-                              '';
-                      } ).join('');
-      
-                      return data ?
-                          $('<table/>').append( data ) :
-                          false;
-                      }
-              }
-          },
+                        details: {
+                                display: $.fn.dataTable.Responsive.display.modal( {
+                                        header: function ( row ) {
+                                            var data = row.data();
+                                            return 'Details for '+data.last_name+', '+data.first_name;
+                                        }
+                                    } ),
+    
+                                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
+
+                },
           columnDefs: [
                       {
-                          targets: 7,
+                          targets: 6,
                           render: function(data, type, row, meta) {
                              if (data == 3) {
                                   return '<p class="badge text-bg-success text-wrap text-center">Claimed</p>';

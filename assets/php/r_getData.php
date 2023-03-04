@@ -37,6 +37,7 @@ $columns_arr = array(
                      "violation_level",
                      "violation",
                     );
+
 $query = $conn->query("SELECT * FROM `podms_records` {$search_where} ORDER BY {$columns_arr[$order[0]['column']]} {$order[0]['dir']} limit {$length} offset {$start} ");
 $recordsFilterCount = $conn->query("SELECT * FROM `podms_records` {$search_where} ")->num_rows;
 
@@ -45,22 +46,7 @@ $recordsFiltered= $recordsFilterCount;
 $data = array();
 $i= 1 + $start;
 while($row = $query->fetch_assoc()){
-
-    $filename = $row['image_name'];
-    // $imagePath = '../uploads' . $filename;
-
-    // Check if image exists in local folder
-if (file_exists("../uploads/$filename")) {
-    // Display image
-    $image = base64_encode($filename);
-    $row['image'] = "<img src='data:../uploads;base64,$image'>";
-  } else {
-    $row['image'] = "Image not found";
-  }
-
-
-
-    // $image = $row['image'];
+  $row['fullname'] = $row['complainant_last_name'] . ', ' . $row['complainant_first_name'] . ' ' . $row['complainant_middle_name'];
     $data[] = $row;
 }
 echo json_encode(array('draw'=>$draw,

@@ -85,16 +85,14 @@ h.className = "nav-content collapse show";
       <thead id="thead">
           <tr class="has-text-light">
                 <th data-priority="1">ID NUMBER</th>
-                <th>LAST NAME</th>
-                <th>FIRST NAME</th>
-                <th>MIDDLE NAME</th>
-                <th>COURSE</th>
+                <th>FULLNAME</th>
                 <th>SECTION</th>
+                <th>COURSE</th>
                 <th>DUTIES</th>
                 <th>DUTY START</th>
                 <th>DUTY END</th>
                 <th>DUTY LOCATION</th>
-                <th>STATUS</th>
+                <th data-priority="3">STATUS</th>
 
               <th data-priority="2">ACTION</th>
           </tr>
@@ -134,7 +132,7 @@ $(function() {
 
     function load_data() {
         myTable = $('#myTable').DataTable({
-            dom: '<"row"B>flr<"py-2 my-2"t>ip',
+            dom: 'flr<"py-2 my-2"t>ip',
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -148,17 +146,7 @@ $(function() {
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'complained_last_name',
-                    className: 'text-center',
-                    defaultContent: 'No Data Available'
-                },
-                {
-                    data: 'complained_first_name',
-                    className: 'text-center',
-                    defaultContent: 'No Data Available'
-                },
-                {
-                    data: 'complained_middle_name',
+                    data: 'fullname',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
@@ -211,7 +199,7 @@ $(function() {
                                 display: $.fn.dataTable.Responsive.display.modal( {
                                         header: function ( row ) {
                                             var data = row.data();
-                                            return 'Details for '+data.last_name+' '+data.first_name;
+                                            return 'Details for '+data.complained_last_name+', '+data.complained_first_name;
                                         }
                                     } ),
     
@@ -222,7 +210,7 @@ $(function() {
             columnDefs: [
                 // { responsivePriority: 1, targets: 9 },
                         {
-                            targets: 10,
+                            targets: 8,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';

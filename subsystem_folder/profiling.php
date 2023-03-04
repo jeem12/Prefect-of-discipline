@@ -111,7 +111,7 @@ h.className = "nav-content collapse show";
               <div class="col-md-12 mb-2">
                 <div class="form-floating">
                   <input type="text" name="inci_desc" class="form-control" id="floatingName" placeholder="Your Incident Description" required>
-                  <label for="floatingName">Incident Description</label>
+                  <label for="floatingName">Incident Description</label >
                 </div>
               </div>
               <div class="col-md-12 mb-2">
@@ -369,9 +369,9 @@ h.className = "nav-content collapse show";
           <tr class="has-text-light">
               <th>DATE</th>
               <th>ID NUMBER</th>
-              <th>LAST NAME</th>
-              <th>FIRST NAME</th>
-              <th>MIDDLE NAME</th>
+              <th>FULL NAME</th>
+              <!-- <th>FIRST NAME</th>
+              <th>MIDDLE NAME</th> -->
               <th>SECTION</th>
               <th>COURSE</th>
               <th>STATUS</th>
@@ -457,20 +457,20 @@ $(function() {
                     defaultContent: 'No Data Available'
                 },
                 {
-                    data: 'complainant_first_name',
+                    data: 'fullname',
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
-                {
-                    data: 'complainant_middle_name',
-                    className: 'text-center',
-                    defaultContent: 'No Data Available'
-                },
-                {
-                    data: 'complainant_last_name',
-                    className: 'text-center',
-                    defaultContent: 'No Data Available'
-                },
+                // {
+                //     data: 'complainant_middle_name',
+                //     className: 'text-center',
+                //     defaultContent: 'No Data Available'
+                // },
+                // {
+                //     data: 'complainant_last_name',
+                //     className: 'text-center',
+                //     defaultContent: 'No Data Available'
+                // },
                 {
                     data: 'complainant_section',
                     className: 'text-center',
@@ -497,20 +497,20 @@ $(function() {
             ],
             responsive: {
                         details: {
-                            display: $.fn.dataTable.Responsive.display.modal( {
-                                header: function ( row ) {
-                                    var data = row.data();
-                                    return 'Details for '+data.last_name+' '+data.first_name;
-                                }
-                            } ),
-                            renderer: $.fn.dataTable.Responsive.renderer.tableAll()
-                        }
-                                            
+                                display: $.fn.dataTable.Responsive.display.modal( {
+                                        header: function ( row ) {
+                                            var data = row.data();
+                                            return 'Details for '+data.complained_last_name+', '+data.complained_first_name;
+                                        }
+                                    } ),
+    
+                                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
 
-                    },
+                },
             columnDefs: [
                         {
-                            targets: 7,
+                            targets: 5,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';

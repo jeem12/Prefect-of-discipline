@@ -1247,10 +1247,14 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  padding: 20px 0;
-  font-size: 14px;
+  display: grid;
+  padding: 0;
+  font-size: 11px;
   transition: all 0.3s;
   border-top: 1px solid #cddfff;
+  bottom: 0;
+  position: relative;
+  align-items: center;
 }
 
 .footer .copyright {
@@ -1260,8 +1264,9 @@ h6 {
 
 .footer .credits {
   padding-top: 5px;
+  padding-bottom: 3px;
   text-align: center;
-  font-size: 13px;
+  font-size: 10px;
   color: #012970;
 }
 
@@ -1275,6 +1280,11 @@ h6 {
 
 div#reportsTable_length {
   margin-bottom: 11px;
+}
+
+tr.text-center.action {
+  padding-top: -11px;
+  display: none;
 }
 
 /*--------------------------------------------------------------
@@ -1396,6 +1406,14 @@ div#reportsTable_length {
 .modal-body{
   overflow-y: auto;
 }
+
+
+/* MODAL */
+
+.modal-backdrop {
+  z-index: 25;
+}
+
 
 /*--------------------------------------------------------------
 # dropdown

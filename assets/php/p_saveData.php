@@ -12,7 +12,6 @@ if (isset($_POST['addData'])) {
     $inci_desc      = mysqli_real_escape_string($conn, $_POST['inci_desc']) ;
     $inci_date      = mysqli_real_escape_string($conn, $_POST['inci_date']);
     $inci_time     = mysqli_real_escape_string($conn, $_POST['inci_time']);
-    $status     = 1;
     // $violation  = mysqli_real_escape_string($conn, $_POST['viol']);
     
     if ($idNum == NULL || $fname == NULL || $mname == NULL || $lname == NULL || $course == NULL )
@@ -25,7 +24,7 @@ if (isset($_POST['addData'])) {
         return;
     }
 
-    $query = "INSERT INTO `podms_profiling` (`complainant_id_number`,`complainant_first_name`,`complainant_middle_name`,`complainant_last_name`,`complainant_section`,`complainant_course`,`inci_desc`,`inci_date`,`inci_time`,`status`) VALUES ('$idNum','$fname','$mname','$lname','$section','$course','$inci_desc','$inci_date','$inci_time','$status')";
+    $query = "INSERT INTO `podms_profiling` (`complainant_id_number`,`complainant_first_name`,`complainant_middle_name`,`complainant_last_name`,`complainant_section`,`complainant_course`,`inci_desc`,`inci_date`,`inci_time`,`status`) VALUES ('$idNum','$fname','$mname','$lname','$section','$course','$inci_desc','$inci_date','$inci_time','1')";
         $query_run = mysqli_query($conn, $query);
         if ($query_run){
             $res = [
