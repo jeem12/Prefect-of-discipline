@@ -58,11 +58,11 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="appointment.php">
+        <a class="nav-link appointment" href="appointment.php">
           <i class="bi bi-calendar2-check"></i>
           <span>Appointment</span>
-          <span id="badgeNotif" class="d-none position-absolute translate-middle p-2 bg-danger border border-light rounded-circle">
-        <span class="visually-hidden">New alerts</span>
+          <span class="badge bg-primary badge-number counts" id="badge_number"></span>
+        <!-- <span class="visually-hidden">New alerts</span> -->
         </a>
 
       </li>

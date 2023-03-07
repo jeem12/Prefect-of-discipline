@@ -73,6 +73,7 @@
     
 </body>
 
+<!-- FETCH NOTIFS -->
 <script>
 $(document).ready(function(){
 
@@ -99,32 +100,6 @@ $(document).ready(function(){
   load_unseen_notification();
 
 
-
- 
-
-
- 
- $('#comment_form').on('submit', function(event){
-  event.preventDefault();
-  if($('#subject').val() != '' && $('#comment').val() != '')
-  {
-   var form_data = $(this).serialize();
-   $.ajax({
-    url:"../assets/php/notifinsert.php",
-    method:"POST",
-    data:form_data,
-    success:function(data)
-    {
-     $('#comment_form')[0].reset();
-     load_unseen_notification();
-    }
-   });
-  }
-  else
-  {
-   alert("Both Fields are Required");
-  }
- });
  
  $(document).on('click', '.dropdown-toggle', function(){
   $('.count').html('');
@@ -136,6 +111,41 @@ $(document).ready(function(){
  }, 3000);
  
 });
+
+
+
+
+</script>
+
+
+<!-- FETCH APPOINTMENTS -->
+<script>
+$(document).ready(function() {
+  $('.counts').html(''); // Clear the badge count
+  load_unseen_notification();
+
+  function load_unseen_notification(view = '') {
+    $.ajax({
+      url: "../assets/php/fetchAppointment.php",
+      method: "POST",
+      data: {view:view},
+      dataType: "json",
+      success: function(data) {
+        $('.counts').html(data.unseen_notification);
+      }
+    });
+  } 
+
+  $(document).on('click', '.appointment', function() {
+    $('.counts').html('');
+    load_unseen_notification('yes');
+  });
+ 
+  setInterval(function() {
+    load_unseen_notification();
+  }, 3000);
+});
+
 
 
 

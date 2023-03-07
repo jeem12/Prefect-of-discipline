@@ -136,10 +136,8 @@
                   <thead class="has-text-light">
                       <tr>
                           <th data-priority="1">ID#</th>
-                          <th >First Name</th>
-                          <th >Middle Name</th>
-                          <th >Last Name</th>
-                          <th >Course</th>
+                          <th>Fullname</th>
+                          <th>Course</th>
                           <th>Description</th>
                           <th>Status</th>
                           <th data-priority="2">ACTION</th>
@@ -178,7 +176,7 @@ $(function() {
 
     function load_data() {
       appointTable = $('#appointTable').DataTable({
-            dom: '<"row"B>flr<"py-2 my-2"t>ip',
+            dom: 'flr<"py-2 my-2"t>ip',
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -192,17 +190,7 @@ $(function() {
                     defaultValue: 'No data available'
                 },
                 {
-                    data: 'complained_first_name',
-                    className: 'text-center',
-                    defaultValue: 'No data available'
-                },
-                {
-                    data: 'complained_middle_name',
-                    className: 'text-center',
-                    defaultValue: 'No data available'
-                },
-                {
-                    data: 'complained_last_name',
+                    data: 'fullname',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
@@ -227,13 +215,13 @@ $(function() {
                     className: 'text-center',
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Set an appointment</a><a class="btn btn-sm rounded-0 mb-1 delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Delete</a>';
+                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-secondary" href="javascript:void(0)" data-id="' + (row.id) + '">Set an appointment</a>';
                     }
                 }
             ],
             columnDefs: [
                         {
-                            targets: 6,
+                            targets: 4,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Appointment</p>';
@@ -269,25 +257,6 @@ $(function() {
                                
 
                                 $('#appointModal').modal('show')
-                            } else {
-                                alert("An error occurred while fetching single data")
-                            }
-                        }
-                    })
-                })
-                $('.delete_data').click(function() {
-                    $.ajax({
-                        url: '../assets/php/a_getSingle.php',
-                        data: { id: $(this).attr('data-id') },
-                        method: 'POST',
-                        dataType: 'json',
-                        error: err => {
-                            alert("An error occurred while fetching single data")
-                        },
-                        success: function(resp) {
-                            if (!!resp.status) {
-                                $('#delete_modal').find('input[name="id"]').val(resp.data['id'])
-                                $('#delete_modal').modal('show')
                             } else {
                                 alert("An error occurred while fetching single data")
                             }

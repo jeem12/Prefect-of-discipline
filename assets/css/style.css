@@ -1423,5 +1423,14 @@ tr.text-center.action {
   display: none !important;
 }
 
+/*--------------------------------------------------------------
+# appointment badge
+--------------------------------------------------------------*/
 
-
+#badge_number {
+  position: absolute;
+  left: 161px;
+}
+#badge_number .hidden {
+  display: none;
+}

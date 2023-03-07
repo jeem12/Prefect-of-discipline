@@ -38,7 +38,7 @@ $columns_arr = array(
                      "violation",
                     );
 
-$query = $conn->query("SELECT * FROM `podms_records` {$search_where} ORDER BY {$columns_arr[$order[0]['column']]} {$order[0]['dir']} limit {$length} offset {$start} ");
+$query = $conn->query("SELECT * , CONCAT('../assets/uploads/', image_name) AS `image_path` FROM `podms_records` {$search_where} ORDER BY {$columns_arr[$order[0]['column']]} {$order[0]['dir']} limit {$length} offset {$start} ");
 $recordsFilterCount = $conn->query("SELECT * FROM `podms_records` {$search_where} ")->num_rows;
 
 $recordsTotal= $totalCount;
@@ -46,9 +46,25 @@ $recordsFiltered= $recordsFilterCount;
 $data = array();
 $i= 1 + $start;
 while($row = $query->fetch_assoc()){
-  $row['fullname'] = $row['complainant_last_name'] . ', ' . $row['complainant_first_name'] . ' ' . $row['complainant_middle_name'];
+  $row['fullname'] = $row['complained_last_name'] . ', ' . $row['complained_first_name'] . ' ' . $row['complained_middle_name'];
+
+    $image_name = $row['image_name'];
+
+    // Get the path of the uploads folder on the local server
+    $upload_folder = "../assets/uploads/";
+
+
+// Check if the image file exists in the uploads folder and create HTML code to display the image
+if (file_exists($upload_folder . $image_name)) {
+    $row['image_data'] = 'Image not found';
+} else {
+
+    $row['image_data'] = '<img src="'. $upload_folder . $image_name .'" style="width: 200px; height: 200px;" alt="">';
+}
+
     $data[] = $row;
 }
+
 echo json_encode(array('draw'=>$draw,
                        'recordsTotal'=>$recordsTotal,
                        'recordsFiltered'=>$recordsFiltered,

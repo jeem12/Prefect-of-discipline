@@ -335,30 +335,6 @@ h.className = "nav-content collapse show";
 <!-- SANCTION MODAL END -->
 
 
-    <!-- Delete Modal -->
-    <div class="modal fade" id="delete_modal" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        <form action="" id="delete-frm">
-                            <input type="hidden" name="id">
-                            <p>Are you sure to delete <b><span id="name"></span></b> from the list?</p>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger" form="delete-frm">Yes</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /Delete Modal -->
-
 
 <div class="container" id="table">
   <div class="row">
@@ -491,7 +467,7 @@ $(function() {
                     className: 'text-center action',
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Edit</a><a class="btn btn-sm rounded-0 mb-1 delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Delete</a>';
+                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a>';
                     }
                 }
             ],
@@ -540,25 +516,6 @@ $(function() {
                                 $('#sanctionModal').find('input[name="id"]').val(resp.data['id'])
       
                                 $('#sanctionModal').modal('show')
-                            } else {
-                                alert("An error occurred while fetching single data")
-                            }
-                        }
-                    })
-                })
-                $('.delete_data').click(function() {
-                    $.ajax({
-                        url: '../assets/php/p_getSingle.php',
-                        data: { id: $(this).attr('data-id') },
-                        method: 'POST',
-                        dataType: 'json',
-                        error: err => {
-                            alert("An error occurred while fetching single data")
-                        },
-                        success: function(resp) {
-                            if (!!resp.status) {
-                                $('#delete_modal').find('input[name="id"]').val(resp.data['id'])
-                                $('#delete_modal').modal('show')
                             } else {
                                 alert("An error occurred while fetching single data")
                             }
@@ -675,54 +632,6 @@ $.ajax({
 
 });
 
- // DELETE Data
- $('#delete-frm').submit(function(e) {
-        e.preventDefault()
-        $('#delete_modal button').attr('disabled', true)
-        $('#delete_modal button[form="delete-frm"]').text("deleting data ...")
-        $.ajax({
-            url: '../assets/php/p_deleteData.php',
-            data: $(this).serialize(),
-            method: 'POST',
-            dataType: "json",
-            error: err => {
-                alert("An error occurred. Please check the source code and try again")
-            },
-            success: function(resp) {
-                if (!!resp.status) {
-                    if (resp.status == 'success') {
-                        var _el = $('<div>')
-                        _el.hide()
-                        alertify.set('notifier','position', 'bottom-right');
-                        alertify.success(resp.msg);
-                        $('#delete-frm').get(0).reset()
-                        $('.modal').modal('hide')
-                        $('#msg').append(_el)
-                        _el.show('slow')
-                        draw_data();
-                        setTimeout(() => {
-                            _el.hide('slow')
-                                .remove()
-                        }, 2500)
-                    } else if (resp.status == 'failed' && !!resp.msg) {
-                        var _el = $('<div>')
-                        _el.hide()
-                        alertify.set('notifier','position', 'bottom-right');
-                        alertify.success(resp.msg);
-                        $('#delete-frm').append(_el)
-                        _el.show('slow')
-                    } else {
-                        alert("An error occurred. Please check the source code and try again")
-                    }
-                } else {
-                    alert("An error occurred. Please check the source code and try again")
-                }
-
-                $('#delete_modal button').attr('disabled', false)
-                $('#delete_modal button[form="delete-frm"]').text("Yes")
-            }
-        })
-    })
 
 });//END TAG FOR DATA TABLES
 

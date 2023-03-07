@@ -98,8 +98,8 @@ h.className = "nav-content collapse show";
                                 <th>INCIDENT TIME</th>
                                 <th>VIOLATION <br>LEVEL</th>
                                 <th>VIOLATION</th>
-                                <th>EVIDENCE IMAGE</th>
-                                <!-- <th>IMAGE</th> -->
+                                <!-- <th>EVIDENCE IMAGE</th> -->
+                                <th>IMAGE</th>
                                 <th data-priority="2">STATUS</th>
                             </tr>
                         </thead>
@@ -204,12 +204,12 @@ $(function() {
                 },
                 {
                     data: 'violation',
-                    className: 'text-center',
+                    className: 'text-center mb-2',
                     defaultValue: 'No data available'
                 },
                 {
 
-                    data: 'image_name',
+                    data: 'image_data',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
@@ -321,22 +321,22 @@ $(function() {
 
              
         ],
-            columnDefs: [
-                        {
-                            targets: 11,
-                            render: function(data, type, row, meta) {
-                                if (data == 1) {
-                                    return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';
-                                } else if (data == 2) {
-                                    return '<p class="badge text-bg-info text-wrap text-center">On duty</p>';
-                                } else if (data == 3) {
-                                    return '<p class="badge text-bg-success text-wrap text-center">Cleared</p>';
-                                } else {
-                                    return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
-                                }
-                            }
-                        },
-            ],
+            // columnDefs: [
+            //             {
+            //                 targets: 11,
+            //                 render: function(data, type, row, meta) {
+            //                     if (data == 1) {
+            //                         return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';
+            //                     } else if (data == 2) {
+            //                         return '<p class="badge text-bg-info text-wrap text-center">On duty</p>';
+            //                     } else if (data == 3) {
+            //                         return '<p class="badge text-bg-success text-wrap text-center">Cleared</p>';
+            //                     } else {
+            //                         return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
+            //                     }
+            //                 }
+            //             },
+            // ],
             initComplete: function(settings) {
                 $('.paginate_button').addClass('p-1')
             }
