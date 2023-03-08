@@ -1,18 +1,11 @@
-<?php 
-include "db_connect.php";
-session_start(); 
+<?php
+include("db_connect.php");
+$error="";
+session_start();
 
-
-if (isset($_POST['uname']) && isset($_POST['password'])) {
-
-	function validate($data){
-       $data = trim($data);
-	   $data = stripslashes($data);
-	   $data = htmlspecialchars($data);
-	   return $data;
-	}
-
-	$uname = validate($_POST['uname']);
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+$uname = validate($_POST['uname']);
 	$pass = $_POST['password'];
 
 	$ciphering = "aes-128-ctr";
@@ -22,39 +15,25 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
     $decryption = openssl_encrypt($pass, $ciphering, $decryption_key, $option, $decryption_iv);
 
 
-	
+$sql="SELECT `id` FROM `podms_users` WHERE `username`='$uname' and password='$decryption' and `status`='enable' ";
 
-	if (empty($uname)) {
-		header("Location: ../../index.php?error=User Name is required");
-	    exit();
-	}else if(empty($pass)){
-        header("Location: ../../index.php?error=Password is required");
-	    exit();
-	}else{
-		$sql = "SELECT * FROM podms_users WHERE username='$uname' AND password='$decryption'";
-
-		$result = mysqli_query($conn, $sql);
-
-		if (mysqli_num_rows($result) === 1) {
-			$row = mysqli_fetch_assoc($result);
-            if ($row['username'] === $uname && $row['password'] === $decryption) {
-            	$_SESSION['user_name'] = $row['username'];
-            	$_SESSION['name'] = $row['name'];
-				$_SESSION['position'] = $row['position'];
-            	$_SESSION['id'] = $row['id'];
-            	header("Location: ../../subsystem_folder/index.php");
-		        exit();
-            }else{
-				header("Location: ../../index.php?error=Incorrect User name or password");
-		        exit();
-			}
-		}else{
-			header("Location: ../../index.php?error=Incorrect User name or password");
-	        exit();
-		}
-	}
-	
-}else{
-	header("Location: ../../index.php");
-	exit();
+$result=mysqli_query($con,$sql);
+$row=mysqli_fetch_array($result);
+$active=$row['active'];
+$user_id=$row['user_id'];
+$count=mysqli_num_rows($result);
+if($count==1)
+{
+$_SESSION['login_user']=$myusername;
+$_SESSION['login_user_time']=time();
+header("location: ../../subsystem_folder/index.php");
 }
+else 
+{
+$error="Your Login Name or Password is invalid";
+}
+}
+?>
+
+
+

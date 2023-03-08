@@ -524,7 +524,7 @@ $(function() {
                 })
             },
             buttons: [{
-                text: '<i class="bi bi-plus-lg me-2"></i>Add New',
+                text: '<i class="bi bi-plus-lg me-2"></i>Create Complain',
                 className: "btn btn-primary py-0 mb-2",
                 action: function(e, dt, node, config) {
                     $('#addModal').modal('show')

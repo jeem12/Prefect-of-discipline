@@ -25,13 +25,13 @@
   
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/fullcalendar/lib/main.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
-  <!-- <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  <!-- <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <script src="../assets/vendor/fullcalendar/sweetalert2.all.min.js"></script>
   <script src="../assets/vendor/chart.js/dist/chart.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
   
   <!-- DATATABLE -->
 
@@ -67,7 +67,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 
 
- 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 
     
@@ -153,3 +153,22 @@ $(document).ready(function() {
 </script>
 
 
+<script>
+  function checkUserTime() 
+  {
+    $.ajax({
+      url: "check_user_time.php"
+      method: "POST",
+      success: function(response)
+			{
+				if(response=='Logout')
+				{
+					window.location.href="logout.php";
+				}
+			}
+		});	
+	}
+	setInterval(function(){
+		checkUserTime();
+	},2000);
+</script>
