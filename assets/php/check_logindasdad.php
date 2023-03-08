@@ -2,6 +2,16 @@
 include "db_connect.php";
 session_start(); 
 
+// Check if the number of attempts is already set
+if (!isset($_SESSION['login_attempts'])) {
+    $_SESSION['login_attempts'] = 0;
+}
+
+// Check if the maximum number of attempts has been reached
+if ($_SESSION['login_attempts'] >= 3) {
+    header("Location: ../../index.php?error=You have exceeded the maximum number of login attempts");
+    exit();
+}
 
 if (isset($_POST['uname']) && isset($_POST['password'])) {
 
@@ -38,8 +48,11 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
             if ($row['username'] === $uname && $row['password'] === $decryption) {
-				$_SESSION['login_user']=$uname;
-				$_SESSION['login_user_time']=time();
+            	$_SESSION['user_name'] = $row['username'];
+            	$_SESSION['name'] = $row['name'];
+				$_SESSION['IS_LOGIN']='yes';
+				$_SESSION['position'] = $row['position'];
+            	$_SESSION['id'] = $row['id'];
             	header("Location: ../../subsystem_folder/index.php");
 		        exit();
             }else{

@@ -152,23 +152,22 @@ $(document).ready(function() {
 
 </script>
 
-
+<!-- INACTIVITY -->
 <script>
-  function checkUserTime() 
-  {
-    $.ajax({
-      url: "check_user_time.php"
-      method: "POST",
-      success: function(response)
-			{
-				if(response=='Logout')
-				{
-					window.location.href="logout.php";
-				}
+setInterval(function(){
+	check_user();
+},1000);
+function check_user(){
+	jQuery.ajax({
+		url:'../assets/php/user_auth.php',
+		type:'post',
+		data:'type=ajax',
+		success:function(result){
+			if(result=='logout'){
+				window.location.href='../assets/php/logout.php';
 			}
-		});	
-	}
-	setInterval(function(){
-		checkUserTime();
-	},2000);
+		}
+		
+	});
+}
 </script>

@@ -1,5 +1,8 @@
 <?php
-session_start();
+require("../assets/php/user_auth.php");
+?>
+
+<?php
 include_once "../assets/php/db_connect.php";
 if ($_SESSION['user_name'] != true ){
   header("Location: ../../index.php");
@@ -9,7 +12,7 @@ if ($_SESSION['user_name'] != true ){
 // if ($limitation = 'admin'){
 
 // }
-// ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +20,7 @@ if ($_SESSION['user_name'] != true ){
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="refresh" content="60;url=../assets/php/logout.php" />
 
   <meta content="" name="description">
   <meta content="" name="keywords">

@@ -66,11 +66,19 @@
                   <form method="POST" action="assets/php/check_login.php" class="row g-3 needs-validation" novalidate>
 
                      <!-- ALERT -->
-                <?php if (isset($_GET['error'])) { ?>
-      	      <div class="alert alert-danger" role="alert">
-				  <?=$_GET['error']?>
-			  </div>
-			  <?php } ?>
+<?php if (isset($_GET['error'])) { ?>
+    <?php if ($_GET['error'] === 'exceeded_attempts') {
+        $wait_time = $_GET['wait_time'];
+    ?>
+        <div class="alert alert-danger" role="alert">
+            You have exceeded the maximum number of login attempts. <br> <br> Please try again in <span id="countdown"><?=$wait_time?></span> seconds.
+        </div>
+    <?php } else { ?>
+        <div class="alert alert-danger" role="alert">
+            <?=$_GET['error']?>
+        </div>
+    <?php } ?>
+<?php } ?>
 
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
@@ -87,9 +95,14 @@
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
+                    <!-- An element to toggle between password visibility -->
+                    <div class="col-12">
+                    <input type="checkbox" id="show" onclick="myFunction()"> Show Password
+                    </div>
+                    
 
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                      <button class="btn btn-primary w-100" id="submit-button" type="submit">Login</button>
                     </div>
                   </form>
 
@@ -101,7 +114,7 @@
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <a>Created for <strong>Prefect of Discipline</strong>.</a>
               </div>
 
             </div>
@@ -119,6 +132,40 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var waitTime = urlParams.get('wait_time');
+    if (waitTime) {
+        var countdown = waitTime;
+        document.getElementById('submit-button').disabled = true;
+        document.getElementById('yourUsername').disabled = true;
+        document.getElementById('yourPassword').disabled = true;
+        document.getElementById('show').disabled = true;
+
+        var countdownInterval = setInterval(function() {
+            document.getElementById('countdown').innerHTML = countdown;
+            countdown--;
+
+            if (countdown < 0) {
+                clearInterval(countdownInterval);
+                window.location.href = '../../index.php'; // replace with your login page URL
+            }
+        }, 1000);
+        
+    }
+</script>
+
+  <script>
+    function myFunction() {
+  var x = document.getElementById("yourPassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+  </script>
 
 </body>
 
