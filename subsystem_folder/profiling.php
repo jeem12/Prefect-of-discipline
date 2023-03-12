@@ -238,7 +238,7 @@ h.className = "nav-content collapse show";
                             
                             <hr>
                             
-                            <div id="dutyDiv">
+                            <!-- <div id="dutyDiv">
                                 <h1 class="fs-5 text-center">Duty</h1>
                                 <br>
                                 
@@ -294,7 +294,7 @@ h.className = "nav-content collapse show";
                             </div>
                             </div>
                             <hr>   
-                            </div>
+                            </div> -->
 
   
                             <h1 class="fs-5 text-center">Evidence</h1>

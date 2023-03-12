@@ -19,10 +19,10 @@ if (isset($_POST['sanctionData'])) {
     $course = mysqli_real_escape_string($conn, $_POST['course']); 
     $viol_level = mysqli_real_escape_string($conn, $_POST['level']);
     $violation = mysqli_real_escape_string($conn, $_POST['viol']);
-    $dutyS = mysqli_real_escape_string($conn, ($_POST['duty_timeS']));
-    $dutyE = mysqli_real_escape_string($conn, $_POST['duty_timeE']);
-    $duty_loc = mysqli_real_escape_string($conn, $_POST['dutyLoc']);
-	$duty = implode(', ', $_POST['duties']); // get the selected option value
+    // $dutyS = mysqli_real_escape_string($conn, ($_POST['duty_timeS']));
+    // $dutyE = mysqli_real_escape_string($conn, $_POST['duty_timeE']);
+    // $duty_loc = mysqli_real_escape_string($conn, $_POST['dutyLoc']);
+	// $duty = implode(', ', $_POST['duties']); // get the selected option value
 
     
 
@@ -88,7 +88,7 @@ if (isset($_POST['sanctionData'])) {
 				if(!empty($duty_loc) && !empty($dutyS) && !empty($dutyE) && !empty($duty)){
 					// process if all keys exist and have non-empty values
 									# inserting imge name into database
-									$query = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation' , `duty_start` = '$dutyS' , `duty_end` = '$dutyE' , `duties`='$duty', `duty_location`= '$duty_loc' , `status` = '2',`image_name` = '$new_img_name' WHERE id='$id'";
+									$query = "UPDATE `podms_profiling` SET `complained_id_number` = '$idNum' , `complained_first_name` = '$fname' , `complained_middle_name` = '$mname' , `complained_last_name` = '$lname' , `complained_section` = '$section' , `complained_course` = '$course' , `violation_level` = '$viol_level' , `violation`='$violation', `status` = '2',`image_name` = '$new_img_name' WHERE id='$id'";
                 
 									$query_run = mysqli_query($conn, $query);
 									// , `image` = '$file'
