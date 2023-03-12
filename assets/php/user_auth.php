@@ -6,7 +6,7 @@ if(isset($_POST['type']) && $_POST['type']=='ajax'){
 	}
 }else{
 	if(isset($_SESSION['LAST_ACTIVE_TIME'])){
-		if((time()-$_SESSION['LAST_ACTIVE_TIME']) > 60){
+		if((time()-$_SESSION['LAST_ACTIVE_TIME']) > 900){
 			header('location: ../assets/php/logout.php');
 			die();
 		}

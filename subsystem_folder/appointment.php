@@ -212,7 +212,8 @@ $(function() {
                 {
                     data: null,
                     orderable: false,
-                    className: 'text-center',
+                    className: 'text-center <?= $limitation?>',
+                    
                     render: function(data, type, row, meta) {
                         console.log()
                         return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-secondary" href="javascript:void(0)" data-id="' + (row.id) + '">Set an appointment</a>';
