@@ -137,8 +137,8 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 
 if (isset($_SESSION['last_login_attempt'])) {
     $time_elapsed = time() - $_SESSION['last_login_attempt'];
-    if ($time_elapsed < 70) {
-        $wait_time = 70 - $time_elapsed;
+    if ($time_elapsed < 10) {
+        $wait_time = 10 - $time_elapsed;
         header("Refresh: $wait_time");
     } else {
         unset($_SESSION['last_login_attempt']);

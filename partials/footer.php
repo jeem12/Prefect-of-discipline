@@ -1,12 +1,12 @@
 
-<footer id="footer" class="footer">
+<!-- <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
      Made for Prefect of discipline department (2023)</a>
     </div>
-  </footer>
+  </footer> -->
 
 
 
@@ -163,7 +163,9 @@ function check_user(){
 		type:'post',
 		data:'type=ajax',
 		success:function(result){
-			if(result=='logout'){
+      console.log(result);
+			if(result== 'logout'){
+        alert('Session expired');
 				window.location.href='../assets/php/logout.php';
 			}
 		}

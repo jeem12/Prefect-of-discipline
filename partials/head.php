@@ -25,7 +25,7 @@ if ($_SESSION['user_name'] != true ){
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta http-equiv="refresh" content="900;url=../assets/php/logout.php" />
+  <!-- <meta http-equiv="refresh" content="900;url=../assets/php/logout.php" /> -->
 
   <meta content="" name="description">
   <meta content="" name="keywords">
