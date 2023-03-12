@@ -1,3 +1,5 @@
+
+
 <?php
 require("../assets/php/user_auth.php");
 ?>
@@ -8,10 +10,14 @@ if ($_SESSION['user_name'] != true ){
   header("Location: ../../index.php");
 }
 
-// $limitation = $_SESSION['position'];
-// if ($limitation = 'admin'){
+?>
 
-// }
+<?php 
+  if($_SESSION["position"] == "admin"){
+    $limitation = "d-block";
+  }else if($_SESSION["position"] == "staff") {
+    $limitation = "d-none";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +33,7 @@ if ($_SESSION['user_name'] != true ){
   <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css"> -->
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/logo300.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

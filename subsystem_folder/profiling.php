@@ -351,7 +351,6 @@ h.className = "nav-content collapse show";
               <th>SECTION</th>
               <th>COURSE</th>
               <th>STATUS</th>
-
               <th data-priority="1" class="action">ACTION</th>
           </tr>
       </thead>
@@ -464,7 +463,7 @@ $(function() {
                 {
                     data: null,
                     orderable: false,
-                    className: 'text-center action',
+                    className: 'text-center action <?= $limitation?>',
                     render: function(data, type, row, meta) {
                         console.log()
                         return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a>';
@@ -525,7 +524,7 @@ $(function() {
             },
             buttons: [{
                 text: '<i class="bi bi-plus-lg me-2"></i>Create Complain',
-                className: "btn btn-primary py-0 mb-2",
+                className: "button is-dark py-0 mb-2",
                 action: function(e, dt, node, config) {
                     $('#addModal').modal('show')
                 }

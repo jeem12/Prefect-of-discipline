@@ -278,7 +278,7 @@ $(function() {
           },
           buttons: [{
                 text: '<i class="bi bi-plus-lg me-2"></i>Add Users',
-                className: "btn btn-primary py-0 mb-2",
+                className: "button is-dark py-0 mb-2",
                 action: function(e, dt, node, config) {
                     $('#addModal').modal('show')
                 }

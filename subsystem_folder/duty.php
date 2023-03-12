@@ -187,7 +187,7 @@ $(function() {
                 {
                     data: null,
                     orderable: false,
-                    className: 'text-center',
+                    className: 'text-center action <?=  $limitation?>',
                     render: function(data, type, row, meta) {
                         console.log()
                         return '<a class="btn btn-sm rounded-0 mb-1 delete_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Complete Duty</a>';

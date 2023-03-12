@@ -7,7 +7,7 @@
 
 
 <!-- ======= Header ======= -->
-<title>Confiscated - PODMS</title>
+<title>Confiscation - PODMS</title>
 <?php include('../partials/header.php'); ?>
 
 <!-- End Header -->
@@ -45,12 +45,12 @@ h.className = "nav-content collapse show";
 
 
 <div class="pagetitle">
-    <h1>Confiscated</h1>
+    <h1>Confiscation</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
         <li class="breadcrumb-item">Profiling</li>
-        <li class="breadcrumb-item active">Confiscated</li>
+        <li class="breadcrumb-item active">Confiscation</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -273,7 +273,7 @@ $(function() {
               {
                     data: null,
                     orderable: false,
-                    className: 'text-center action',
+                    className: 'text-center action <?= $limitation?>',
                     render: function(data, type, row, meta) {
                         console.log()
                         if (data.status == 1){
@@ -337,7 +337,7 @@ $(function() {
           },
           buttons: [{
                 text: '<i class="bi bi-plus-lg me-2"></i>Add Confiscated Item',
-                className: "btn btn-primary py-0 mb-2",
+                className: "button is-dark py-0 mb-2",
                 action: function(e, dt, node, config) {
                     $('#addModal').modal('show')
                 }

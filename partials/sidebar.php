@@ -18,7 +18,7 @@
                 <li>
                 <li>
                   <a id="mod5" href="confiscated.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Confiscated</span>
+                    <i class="bi bi-circle"></i><span>Confiscation</span>
                   </a>
                 </li>
                   <a id="mod1" href="profiling.php" class="inactive">
@@ -30,16 +30,15 @@
                     <i class="bi bi-circle"></i><span>Duty </span>
                   </a>
                 </li>
-                <!-- <li>
-                  <a id="mod3" href="appointment.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Appointment</span>
-                  </a>
-                </li> -->
+                <?php 
+                  $position = $_SESSION["position"];
+                  if($position != "staff"): ?>
                 <li>
                   <a id="mod4" href="records.php" class="inactive">
                     <i class="bi bi-circle"></i><span>Records</span>
                   </a>
                 </li>
+                <?php endif; ?>
                 <li>
                   <a id="mod6" href="claimed_items.php" class="inactive">
                     <i class="bi bi-circle"></i><span>Claimed Items</span>
@@ -47,16 +46,18 @@
                 </li>
             </ul>
             </li>
+            <?php?>
             
           <!-- <li class="nav-heading">Notification</li> -->
 
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link " href="reports.php">
           <i class="bi bi-card-list"></i>
           <span>Reports</span>
         </a>
-      </li>
+      </li> -->
+
       <li class="nav-item">
         <a class="nav-link appointment" href="appointment.php">
           <i class="bi bi-calendar2-check"></i>
@@ -78,26 +79,21 @@
           <span>Schedule</span>
         </a>
       </li>
+      <?php 
+       $position = $_SESSION["position"];
+       if($position != "staff"): ?>
       <li class="nav-item">
         <a class="nav-link " href="accounts.php">
           <i class="bi bi-person-badge"></i>
           <span>Accounts</span>
         </a>
       </li>
+      <?php endif; ?>
+
       
       
 
 
 </ul>
           
-      <!-- End Components Nav -->
   </aside>
-<!-- 
-  <script>
-    var y = document.getElementById('sasValAct')
-    y.className = "nav-link ";
-    var h = document.getElementById('evaluation-nav')
-    h.className = "nav-content collapse show";
-    var x = document.getElementById('sasValIns2')
-    x.className = "active";
-  </script> -->

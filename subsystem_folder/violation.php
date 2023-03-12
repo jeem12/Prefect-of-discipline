@@ -302,7 +302,7 @@ $(function() {
             },
             buttons: [{
                 text: '<i class="bi bi-plus-lg me-2"></i>Add New',
-                className: "btn btn-primary py-0 mb-2",
+                className: "button is-dark py-0 mb-2",
                 action: function(e, dt, node, config) {
                     $('#add_modal').modal('show')
                 }
