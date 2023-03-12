@@ -220,37 +220,26 @@ $(function() {
                 {
                     data: null,
                     orderable: false,
-                    className: 'text-center',
+                    className: 'text-center action',
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Edit</a><a class="btn btn-sm rounded-0 mb-1 delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Delete</a>';
+                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Edit</a><a class="btn btn-sm rounded-2 mb-1 delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Delete</a>';
                     }
                 }
             ],
             responsive: {
-                    details: {
-                            display: $.fn.dataTable.Responsive.display.modal( {
-                                    header: function ( row ) {
-                                        var data = row.data();
-                                        return 'Details for '+data[0]+' '+data[3];
-                                    }
-                                } ),
-                    renderer: function ( api, rowIdx, columns ) {
-                        var data = $.map( columns, function ( col, i ) {
-                            return col.hidden ?
-                                '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
-                                    '<td>'+col.title+':'+'</td> '+
-                                    '<td>'+col.data+'</td>'+
-                                '</tr>' :
-                                '';
-                        } ).join('');
-        
-                        return data ?
-                            $('<table/>').append( data ) :
-                            false;
-                        }
-                }
-            },
+                        details: {
+                                display: $.fn.dataTable.Responsive.display.modal( {
+                                        header: function ( row ) {
+                                            var data = row.data();
+                                            return 'Details for '+data.complained_last_name+', '+data.complained_first_name;
+                                        }
+                                    } ),
+    
+                                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
+
+                },
             drawCallback: function(settings) {
                 $('.edit_data').click(function() {
                     $.ajax({
@@ -302,7 +291,7 @@ $(function() {
             },
             buttons: [{
                 text: '<i class="bi bi-plus-lg me-2"></i>Add New',
-                className: "button is-dark py-0 mb-2",
+                className: "button is-dark py-0 mb-2 <?=  $limitation?>",
                 action: function(e, dt, node, config) {
                     $('#add_modal').modal('show')
                 }
@@ -428,26 +417,17 @@ $(function() {
             success: function(resp) {
                 if (!!resp.status) {
                     if (resp.status == 'success') {
-                        var _el = $('<div>')
-                        _el.hide()
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(resp.msg);
                         $('#delete-frm').get(0).reset()
                         $('.modal').modal('hide')
-                        $('#msg').append(_el)
-                        _el.show('slow')
                         draw_data();
-                        setTimeout(() => {
-                            _el.hide('slow')
-                                .remove()
-                        }, 2500)
+
                     } else if (resp.status == 'failed' && !!resp.msg) {
-                        var _el = $('<div>')
-                        _el.hide()
+
                         alertify.set('notifier','position', 'bottom-right');
-                        alertify.success(resp.msg);
+                        alertify.error(resp.msg);
                         $('#delete-frm').append(_el)
-                        _el.show('slow')
                     } else {
                         alert("An error occurred. Please check the source code and try again")
                     }

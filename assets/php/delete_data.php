@@ -5,6 +5,7 @@ extract($_POST);
 $delete = $conn->query("DELETE FROM `podms_violation` where id = '{$id}'");
 if($delete){
     $resp['status'] = 'success';
+    $resp['msg'] = 'Successfully deleted';
 }else{
     $resp['status'] = 'failed';
     $resp['msg'] = 'An error occured while saving the data. Error: '.$conn->error;

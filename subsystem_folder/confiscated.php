@@ -277,7 +277,7 @@ $(function() {
                     render: function(data, type, row, meta) {
                         console.log()
                         if (data.status == 1){
-                        return '<a class="btn btn-sm rounded mb-1 delete_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Claimed</a>';
+                        return '<a class="btn btn-sm rounded-2 mb-1 delete_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Claimed</a>';
                             
                          }else{
                             return '<p></p> '
@@ -417,26 +417,14 @@ $(function() {
             success: function(resp) {
                 if (!!resp.status) {
                     if (resp.status == 'success') {
-                        var _el = $('<div>')
-                        _el.hide()
                         alertify.set('notifier','position', 'bottom-right');
                         alertify.success(resp.msg);
                         $('#delete-frm').get(0).reset()
                         $('.modal').modal('hide')
-                        $('#msg').append(_el)
-                        _el.show('slow')
                         draw_data();
-                        setTimeout(() => {
-                            _el.hide('slow')
-                                .remove()
-                        }, 2500)
                     } else if (resp.status == 'failed' && !!resp.msg) {
-                        var _el = $('<div>')
-                        _el.hide()
                         alertify.set('notifier','position', 'bottom-right');
-                        alertify.success(resp.msg);
-                        $('#delete-frm').append(_el)
-                        _el.show('slow')
+                        alertify.error(resp.msg);
                     } else {
                         alert("An error occurred. Please check the source code and try again")
                     }

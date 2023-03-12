@@ -246,7 +246,7 @@ h.className = "nav-content collapse show";
                         <h4 class="fs-6">Duty Selection</h4>
                                 
                         <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="hidden" name="duties[]" value="NULL" id="gridCheck1">
+                        <input class="form-check-input" type="hidden" name="duties[]" value="" id="gridCheck1">
                         <input class="form-check-input" type="checkbox" name="duties[]" value="community service" id="gridCheck1">
                         <label class="form-check-label" for="gridCheck1" >Community Service</label>
                         </div>
@@ -466,7 +466,7 @@ $(function() {
                     className: 'text-center action <?= $limitation?>',
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a>';
+                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a>';
                     }
                 }
             ],

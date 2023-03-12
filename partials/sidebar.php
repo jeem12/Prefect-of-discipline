@@ -57,7 +57,9 @@
           <span>Reports</span>
         </a>
       </li> -->
-
+      <?php 
+       $position = $_SESSION["position"];
+       if($position != "staff"): ?>
       <li class="nav-item">
         <a class="nav-link appointment" href="appointment.php">
           <i class="bi bi-calendar2-check"></i>
@@ -65,14 +67,16 @@
           <span class="badge bg-primary badge-number counts" id="badge_number"></span>
         <!-- <span class="visually-hidden">New alerts</span> -->
         </a>
-
       </li>
+
       <li class="nav-item">
         <a class="nav-link " href="violation.php">
           <i class="bi bi-journal"></i>
           <span>Violation</span>
         </a>
       </li>
+      <?php endif; ?>
+      
       <li class="nav-item">
         <a class="nav-link " href="schedule.php">
           <i class="bi bi-calendar-check"></i>

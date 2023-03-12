@@ -15,7 +15,7 @@ if ($query_run){
             $query_run3 = mysqli_query($conn, $update3);
                 if($query_run3){
                     $resp['status'] = 'success';
-                    $resp['msg'] = 'Successfully updated';
+                    $resp['msg'] = 'Claimed the items successfully';
                 }else{
                     $resp['status'] = 'failed';
                     $resp['msg'] = 'An error occurred while saving the data. Error: '.$conn->error;

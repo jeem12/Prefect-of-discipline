@@ -1436,5 +1436,11 @@ tr.text-center.action {
 }
 
 /*--------------------------------------------------------------
-# Show pass and hide
+# TABLE
 --------------------------------------------------------------*/
+/* .table-striped>tbody>tr:nth-of-type(odd)>* {
+  height: 500px;
+}
+td.text-center.d-block {
+  height: 500px;
+} */

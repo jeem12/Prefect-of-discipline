@@ -14,18 +14,7 @@
 <?php include('../partials/sidebar.php'); ?>
 
   <!-- End Sidebar-->
-  <!-- <script>
 
-  var x = document.getElementById('mod3')
-  x.className = "active";
-
-  var y = document.getElementById('pod')
-  y.className = "nav-link ";
-
-  var h = document.getElementById('components-nav')
-  h.className = "nav-content collapse show";
-
-  </script> -->
 
 <div class="preloader-wrapper">
     <!-- <img src="assets/img/bcp-olp-logo-mini2.png" alt="Preloader Logo"> -->
@@ -130,16 +119,18 @@
   
   <div class="container" id="table">
   <div class="row">
-  <table id="appointTable" class="table table-striped" style="width:100%">
+  <table id="myTable" class="table table-striped" style="width:100%">
   <div class="col-lg-auto">
 
                   <thead class="has-text-light">
                       <tr>
+                          <th>Date</th>
                           <th data-priority="1">ID#</th>
                           <th>Fullname</th>
                           <th>Course</th>
                           <th>Description</th>
                           <th>Status</th>
+
                           <th data-priority="2">ACTION</th>
                       </tr>
                   </thead>
@@ -163,19 +154,19 @@
 
 
 <script>
- var appointTable = '';
+ var myTable = '';
 $(function() {
     // draw function [called if the database updates]
     function draw_data() {
-        if ($.fn.dataTable.isDataTable('#appointTable') && appointTable != '') {
-          appointTable.draw(true)
+        if ($.fn.dataTable.isDataTable('#myTable') && myTable != '') {
+          myTable.draw(true)
         } else {
             load_data();
         }
     }
 
     function load_data() {
-      appointTable = $('#appointTable').DataTable({
+      myTable = $('#myTable').DataTable({
             dom: 'flr<"py-2 my-2"t>ip',
             "processing": true,
             "serverSide": true,
@@ -185,7 +176,12 @@ $(function() {
             },
             columns: [
                 {
-                    data: 'complained_id_number',
+                    data: 'date',
+                    className: 'text-center',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'complainant_id_number',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
@@ -195,7 +191,7 @@ $(function() {
                     defaultValue: 'No data available'
                 },
                 {
-                    data: 'complained_course',
+                    data: 'complainant_course',
                     className: 'text-center',
                     defaultValue: 'No data available'
                 },
@@ -212,17 +208,30 @@ $(function() {
                 {
                     data: null,
                     orderable: false,
-                    className: 'text-center <?= $limitation?>',
+                    className: 'text-center action',
                     
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-0 mb-1 edit_data btn-secondary" href="javascript:void(0)" data-id="' + (row.id) + '">Set an appointment</a>';
+                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-secondary" href="javascript:void(0)" data-id="' + (row.id) + '">Set an appointment</a>';
                     }
                 }
             ],
+            responsive: {
+                        details: {
+                                display: $.fn.dataTable.Responsive.display.modal( {
+                                        header: function ( row ) {
+                                            var data = row.data();
+                                            return 'Details for '+data.complained_last_name+', '+data.complained_first_name;
+                                        }
+                                    } ),
+    
+                                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
+
+                },
             columnDefs: [
                         {
-                            targets: 4,
+                            targets: 5,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Appointment</p>';
