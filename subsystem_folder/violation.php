@@ -116,7 +116,7 @@ investigation.<br />
           </tr>
           <tr class="row15">
             <td class="column0 style3 s">4.1.1.13</td>
-            <td class="column1 style3 s">Refusal to submit one's self and belongings for lawful inspection and/or search.</td>
+            <td class="column1 style3 s">Using the dirty finger sign or very lewd gestures to provoke another person.</td>
           </tr>
           <tr class="row16">
             <td class="column0 style3 s">4.1.1.14</td>
