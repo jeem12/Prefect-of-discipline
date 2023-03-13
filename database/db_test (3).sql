@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2023 at 11:02 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Mar 13, 2023 at 01:36 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `podms_calendar` (
   `event_id_num` varchar(255) NOT NULL,
   `event_date` varchar(255) DEFAULT NULL,
   `event_time` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE `podms_claimed_items` (
   `item_name` varchar(255) NOT NULL,
   `item_desc` varchar(255) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_claimed_items`
@@ -85,7 +85,7 @@ CREATE TABLE `podms_confiscated` (
   `item_name` varchar(255) NOT NULL,
   `item_desc` varchar(255) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_confiscated`
@@ -129,7 +129,7 @@ CREATE TABLE `podms_duty` (
   `status` int(6) NOT NULL,
   `image_name` varchar(255) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_duty`
@@ -166,7 +166,7 @@ CREATE TABLE `podms_events` (
   `start` date NOT NULL,
   `end` date NOT NULL,
   `time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_events`
@@ -216,7 +216,7 @@ CREATE TABLE `podms_profiling` (
   `status` int(6) NOT NULL,
   `image_name` mediumblob NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_profiling`
@@ -344,7 +344,7 @@ CREATE TABLE `podms_records` (
   `status` int(6) NOT NULL,
   `image_name` varchar(255) NOT NULL,
   `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_records`
@@ -1377,7 +1377,7 @@ CREATE TABLE `podms_reports` (
   `description` varchar(255) NOT NULL,
   `content` varchar(255) NOT NULL,
   `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_reports`
@@ -1417,7 +1417,7 @@ CREATE TABLE `podms_sp_appointment` (
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL,
   `time` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `podms_sp_appointment`
@@ -1534,7 +1534,7 @@ CREATE TABLE `podms_users` (
   `password` varchar(255) NOT NULL,
   `position` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_users`
@@ -1557,7 +1557,7 @@ CREATE TABLE `podms_violation` (
   `viol_name` varchar(255) NOT NULL,
   `viol_sanction` varchar(255) NOT NULL,
   `viol_category` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `podms_violation`
@@ -1577,7 +1577,26 @@ INSERT INTO `podms_violation` (`id`, `viol_num`, `viol_name`, `viol_sanction`, `
 (20, '4.1.1.11', 'Bringing in of pointed objects.', '1. Verbal or written reprimand by the Prefect of Discipline after\r\ninvestigation.\r\n\r\n2. Disciplinary probation for new students or transferees', 'MINOR'),
 (21, '4.1.1.12', 'Refusal to submit one\'s self and belongings for lawful inspection and/or search.', '1. Verbal or written reprimand by the Prefect of Discipline after\r\ninvestigation.\r\n\r\n2. Disciplinary probation for new students or transferees', 'MINOR'),
 (22, '4.1.1.13', 'Using the dirty finger sign or very lewd gestures to provoke another person.', '1. Verbal or written reprimand by the Prefect of Discipline after\r\ninvestigation.\r\n\r\n2. Disciplinary probation for new students or transferees', 'MINOR'),
-(23, '4.1.1.14', 'Charging of cellphones, laptops and other gadgets inside the classrooms and hall ways.', '1. Verbal or written reprimand by the Prefect of Discipline after\r\ninvestigation.\r\n\r\n2. Disciplinary probation for new students or transferees', 'MINOR');
+(23, '4.1.1.14', 'Charging of cellphones, laptops and other gadgets inside the classrooms and hall ways.', '1. Verbal or written reprimand by the Prefect of Discipline after\r\ninvestigation.\r\n\r\n2. Disciplinary probation for new students or transferees', 'MINOR'),
+(24, '4.1.2.1', 'Unauthorized bringing out of chairs, tables, books, and other school facilities/equipment.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(25, '4.1.2.2', 'Smoking within the campus.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(26, '4.1.2.3', 'Excessive public display of affectione.g. kissing, hugging, necking, petting and the like.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(27, '4.1.2.4', 'Possession, and distribution or perusal of pornographic magazines, pictures. films, cartridges, cards, key chains, figurines, and the like.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(28, '4.1.2.5', 'Vandalism or destruction of school property belonging to any member of faculty, administration or non-teaching staff.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(29, '4.1.2.6', 'Entering or being in the school premises under the influence of liquor or prohibited drugs.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(30, '4.1.2.7', 'Unauthorized operation of the school equipment including electrical switches', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(31, '4.1.2.8', 'Acts of disrespect in words or in deed committed against any administrator, faculty member, co-academic guard, personnel, security maintenance personnel, student and visitor.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(32, '4.1.2.9', 'Illegal intrusion in the classroom and/or offices', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(33, '4.1.2.10', 'Committing act of bullying.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(34, '4.1.2.11', 'Creating malicious information (e.g.. Bomb gossiping. misrepresentation, threats, slanderous and ibelous utterances)', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(35, '4.1.2.12', 'Unauthorized use of funds of organization/clubs for his/her personal interest.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(36, '4.1.2.13', 'Acts of cheatings', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(37, '4.1.2.13.1', 'Actual use of cheating paraphernalia during the quizzes and periodic examinations.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(38, '4.1.2.13.2', 'Having someone else take the prelims. midterm and final examination for another.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(39, '4.1.2.13.3', 'Exchanging examination notebooks, booklets, or passing one\'s notebook to another to enable the latter to copy it.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(40, '4.1.2.13.4', 'Reading or looking deliberately at another student\'s examination paper or showing one\'s Paper/notebook/ booklet to another.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(41, '4.1.2.13.5', 'Dictating examinations.', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR'),
+(42, '4.1.2.14', 'Creating or joining unauthorized group through', '1. Probation with automatic suspension for the rest of the semester. 2. Suspension for a minimum period of three (3) days and a maximum of fifteen (15) days. 3. Suspension for one (1) semester. 4. Suspension for one (1) school year.', 'MAJOR');
 
 --
 -- Indexes for dumped tables
@@ -1717,7 +1736,7 @@ ALTER TABLE `podms_users`
 -- AUTO_INCREMENT for table `podms_violation`
 --
 ALTER TABLE `podms_violation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
