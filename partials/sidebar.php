@@ -25,11 +25,6 @@
                     <i class="bi bi-circle"></i><span>Profiling</span>
                   </a>
                 </li>
-                <li>
-                  <a id="mod2" href="duty.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Duty </span>
-                  </a>
-                </li>
                 <?php 
                   $position = $_SESSION["position"];
                   if($position != "staff"): ?>

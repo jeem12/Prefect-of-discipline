@@ -36,6 +36,7 @@ $columns_arr = array(
                      "inci_time",
                      "violation_level",
                      "violation",
+                     "sanction"
                     );
 
 $query = $conn->query("SELECT * , CONCAT('../assets/uploads/', image_name) AS `image_path` FROM `podms_records` {$search_where} ORDER BY {$columns_arr[$order[0]['column']]} {$order[0]['dir']} limit {$length} offset {$start} ");

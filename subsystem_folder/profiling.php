@@ -198,29 +198,30 @@ h.className = "nav-content collapse show";
                             
 
 
+                        
 
                             <div class="col-md-12 mb-2">
 
-                            <h1 class="fs-5 text-center">Violation Level</h1>
+                            <h1 class="fs-5 text-center">Violation</h1>
 
  
                             <fieldset class="row mb-3">
                             <div class="col-sm-10">
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level1" value="minor" onclick="showDiv(1)" checked>
-                                <label class="form-check-label" for="level1">
+                                <input class="form-check-input" type="radio" name="level" id="level" value="MINOR">
+                                <label class="form-check-label" for="level">
                                     Minor Offense
                                 </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level2" value="major" onclick="showDiv(1)">
-                                <label class="form-check-label" for="level2">
+                                <input class="form-check-input" type="radio" name="level" id="level" value="MAJOR">
+                                <label class="form-check-label" for="level">
                                     Major Offense
                                 </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="level" id="level" value="grievance" onclick="showDiv(2)">
-                                <label class="form-check-label" for="level3">
+                                <input class="form-check-input" type="radio" name="level" id="level" value="GRAVE">
+                                <label class="form-check-label" for="level">
                                     Grave Offense
                                 </label>
                                 </div>
@@ -229,91 +230,36 @@ h.className = "nav-content collapse show";
                             </div>
 
                             <br>
+
+                            <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Violation: </label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="viol" id="viol" aria-label="Default select example">
+                                <option selected disabled>Open this select menu</option>
+                                </select>
+                            </div>
+                            </div>
+
+                            <br>
+
                             <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="viol" class="form-control" id="viol_name floatingName" placeholder="Your Violation" required>
-                            <label for="floatingName">Specify Violation</label>
+                            <input type="text" name="sanction" class="form-control" id="floatingName" placeholder="Your Course" required>
+                            <label for="floatingName">Sanction</label>
                             </div>
-                            </div>
+                        </div>
                             
                             <hr>
                             
-                            <!-- <div id="dutyDiv">
-                                <h1 class="fs-5 text-center">Duty</h1>
-                                <br>
-                                
-                         <div class="col-md-12 mb-2">
-                        <h4 class="fs-6">Duty Selection</h4>
-                                
-                        <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="hidden" name="duties[]" value="" id="gridCheck1">
-                        <input class="form-check-input" type="checkbox" name="duties[]" value="community service" id="gridCheck1">
-                        <label class="form-check-label" for="gridCheck1" >Community Service</label>
-                        </div>
-                                
-                        <div class="form-check form-check-inline">
-                                                                <input class="form-check-input" type="checkbox" name="duties[]" value="duty" id="gridCheck2">
-                                                                <label class="form-check-label" for="gridCheck2" >
-                                                                    Duty 2
-                                                                </label>
-                                                                </div>
-                                
-                                                            </div>
-                                                            <br>
-                            
-                            <h4 class="fs-6">Duty Time</h4>
-                            <div class="container text-center mb-2">
-                            <div class="row align-items-center">
 
-                                <div class="col">
-                                <div class="form-floating duty_timeS">
-                                <input type="time" name="duty_timeS" class="form-control" id="floatingName dutyTimeS" placeholder="duty_timeS" >
-                                <label for="floatingName">Duty Time Start</label>
-                                </div>  
-                                </div>
-
-                                <div class="col">
-                                <div class="form-floating duty_timeE">
-                                <input type="time" name="duty_timeE" class="form-control" id="floatingName dutyTimeE" placeholder="duty_timeE" >
-                                <label for="floatingName">Duty Time End</label>
-                                </div>  
-                                </div>
-
-                            </div>
-                            </div>
-
-
-
-                            <div class="col-md-12 mb-2">
-
-                            <h4 class="fs-6">Duty Location</h4>
-
-                            <div class="form-floating">
-                                <input type="text" name="dutyLoc" class="form-control" id="floatingName" placeholder="location" >
-                                <label for="floatingName">Specific Location</label>
-                            </div>
-                            </div>
-                            <hr>   
-                            </div> -->
-
-  
                             <h1 class="fs-5 text-center">Evidence</h1>
                                 <div class="mb-3">
-                                    <!-- <div class="upload text-center">
-                                            <img src="../assets/img/logo300.png" width = 100 height = 100 alt="" id="preImg">
-                                        <div class="round">
-                                        input type="file" name="image" class="form-control" placeholder="Enter Name" id="upload_file" "
-                                            <input type="file" name="image" id="image" accept="image/*" required>
-                                            <i class = "bi bi-camera-fill" style = "color: #fff;"></i>
-                                        </div>
-                                    </div> -->
                                     <div class="upload">
                                     <div id="img-div">
                                     <img src="../assets/img/logo300.png" id="img-preview" width = 100 height = 100 alt="">
                                     </div>
                                     <div class="rightRound" id = "upload">
                                     <input type="file" name="image" class="form-control" id = "image" accept=".jpg, .jpeg, .png" placeholder="Enter Name" id="upload_file" onchange="getImagePreview(event)">
-                                    <!-- <input type="file" name="image" id = "image" accept=".jpg, .jpeg, .png" onchange="getImagePreview(event)"> -->
                                     <i class = "bi bi-camera-fill"></i>
                                     </div>
                                 </div>
@@ -378,6 +324,25 @@ h.className = "nav-content collapse show";
 
 
 <!-- DATATABLE SCRIPTS -->
+<script>
+		$(document).ready(function() {
+			// Bind change event to radio buttons
+			$('input[type=radio][name=level]').change(function() {
+				// Get selected category
+				var category = $(this).val();
+				// Fetch violin names for selected category
+				$.ajax({
+					url: '../assets/php/fetch_viol_names.php',
+					type: 'POST',
+					data: { category: category },
+					success: function(response) {
+						// Update select options with fetched violin names
+						$('#viol').html(response);
+					}
+				});
+			});
+		});
+	</script>
 <script>
 
 function showDiv(val){

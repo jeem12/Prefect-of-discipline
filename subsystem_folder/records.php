@@ -98,6 +98,7 @@ h.className = "nav-content collapse show";
                                 <th>INCIDENT TIME</th>
                                 <th>VIOLATION <br>LEVEL</th>
                                 <th>VIOLATION</th>
+                                <th>SANCTION</th>
                                 <th>IMAGE</th>
                                 <th data-priority="2">STATUS</th>
                             </tr>
@@ -203,6 +204,11 @@ $(function() {
                 },
                 {
                     data: 'violation',
+                    className: 'text-center mb-2',
+                    defaultValue: 'No data available'
+                },
+                {
+                    data: 'sanction',
                     className: 'text-center mb-2',
                     defaultValue: 'No data available'
                 },
@@ -322,7 +328,7 @@ $(function() {
         ],
             columnDefs: [
                         {
-                            targets: 11,
+                            targets: 12,
                             render: function(data, type, row, meta) {
                                 if (data == 1) {
                                     return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';
