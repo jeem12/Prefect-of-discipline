@@ -172,13 +172,17 @@ function updateDateTime() {
   setInterval(function() {
     load_unseen_appointment();
     load_unseen_notification();
-    load_unseen_schedule();
     check_user();
     updateDateTime();
   }, 1000);
 
 
 });
+
+setInterval(function() {
+  load_unseen_schedule();
+}, 86400000);
+
 
 </script>
 
