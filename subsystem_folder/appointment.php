@@ -291,7 +291,7 @@ formData.append("appointData", true);
 
 $.ajax({
     type: "POST",
-    url: "../assets/php/code.php",
+    url: "../assets/php/a_dataUpdate.php",
     data: formData,
     processData: false,
     contentType: false,

@@ -16,9 +16,21 @@ INSERT INTO podms_appointment SELECT * FROM podms_profiling WHERE id = $id;
 
 DELETE FROM podms_profiling WHERE id = $id;
 
-DATABASE PASS: CwF*@JeLgg1Js8A8
 
 
+<!-- =========================== -->
 
+<?php
 
- , `duty_start` = '$dutyS' , `duty_end` = '$dutyE' , `duties`='$duty', `duty_location`= '$duty_loc' 
+$sname= "localhost";
+$unmae= "bcps_Username";
+$password = "bcps_Password";
+
+$db_name = "bcps_database";
+
+$conn = mysqli_connect($sname, $unmae, $password, $db_name);
+
+if (!$conn) {
+	echo "Connection failed!";
+}
+?>
