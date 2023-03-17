@@ -59,7 +59,6 @@
         <a class="nav-link appointment" href="appointment.php">
           <i class="bi bi-calendar2-check"></i>
           <span>Appointment</span>
-          <span class="badge bg-primary badge-number counts" id="badge_number"></span>
         <!-- <span class="visually-hidden">New alerts</span> -->
         </a>
       </li>

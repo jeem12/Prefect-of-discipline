@@ -73,12 +73,21 @@
     
 </body>
 
+
+
 <!-- FETCH NOTIFS -->
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
 
+  $(document).on('click', '.dropdown-toggle', function(){
+  $('.count').html('');
+  load_unseen_notification('yes');
+  });
 
+  $('.counts').html(''); // Clear the badge count
+  load_unseen_notification();
 
+  
   function load_unseen_notification(view = '')
       {
         $.ajax({
@@ -97,67 +106,35 @@ $(document).ready(function(){
         }
         });
       } 
-  load_unseen_notification();
+
 
 
  
- $(document).on('click', '.dropdown-toggle', function(){
-  $('.count').html('');
-  load_unseen_notification('yes');
- });
- 
- setInterval(function(){ 
-  load_unseen_notification();; 
- }, 3000);
- 
-});
+
+  function load_unseen_schedule(view = '')
+      {
+        $.ajax({
+        url:"../assets/php/fetchSched.php",
+        method:"POST",
+        data:{view:view},
+        dataType:"json",
+        });
+      } 
 
 
 
 
-</script>
-
-
-<!-- FETCH APPOINTMENTS -->
-<script>
-$(document).ready(function() {
-  $('.counts').html(''); // Clear the badge count
-  load_unseen_notification();
-
-  function load_unseen_notification(view = '') {
+  function load_unseen_appointment(view = '') {
     $.ajax({
       url: "../assets/php/fetchAppointment.php",
       method: "POST",
       data: {view:view},
       dataType: "json",
-      success: function(data) {
-        $('.counts').html(data.unseen_notification);
-      }
     });
   } 
 
-  $(document).on('click', '.appointment', function() {
-    $('.counts').html('');
-    load_unseen_notification('yes');
-  });
- 
-  setInterval(function() {
-    load_unseen_notification();
-  }, 3000);
-});
 
-
-
-
-
-</script>
-
-<!-- INACTIVITY -->
-<script>
-setInterval(function(){
-	check_user();
-},1000);
-function check_user(){
+  function check_user(){
 	jQuery.ajax({
 		url:'../assets/php/user_auth.php',
 		type:'post',
@@ -172,9 +149,7 @@ function check_user(){
 		
 	});
 }
-</script>
 
-<script>
 function updateDateTime() {
   var now = new Date();
   var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
@@ -193,7 +168,17 @@ function updateDateTime() {
   var datetime = hour + ':' + minute + ':' + second + ' ' + meridiem + ' | '+ month + ' ' + date + ', ' + year;
   document.getElementById('datetime').innerHTML = datetime;
 }
+ 
+  setInterval(function() {
+    load_unseen_appointment();
+    load_unseen_notification();
+    load_unseen_schedule();
+    check_user();
+    updateDateTime();
+  }, 1000);
 
-// Update the datetime every second
-setInterval(updateDateTime, 1000);
+
+});
+
 </script>
+

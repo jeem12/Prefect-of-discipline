@@ -8,12 +8,13 @@ if(isset($_POST['view'])){
 // If user click notif icon the badge number will disappear
 if($_POST["view"] != '')
 {
-   $update_query = "UPDATE `podms_reports` SET `status` = 1 WHERE `status`= 0";
-   mysqli_query($conn, $update_query);
+   $update_query = "UPDATE `podms_notif` SET `notif_status` = 0 WHERE `notif_status`= 1";
+   $updated = mysqli_query($conn, $update_query);
+
 }
 
 
-$query = "SELECT * FROM `podms_reports` ORDER BY `id` DESC LIMIT 5";
+$query = "SELECT * FROM `podms_notif` ORDER BY `id` DESC LIMIT 5";
 $result = mysqli_query($conn, $query);
 $output = '';
 
@@ -21,23 +22,21 @@ $output = '';
 if(mysqli_num_rows($result) > 0)
 {
 while($row = mysqli_fetch_array($result))
-{
+    {
       $output .= '
           <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-danger"></i>
-              <div>
-              <a href="../../../subsystem_folder/reports.php">
-                <h4>'.$row["from"].'</h4>
-                <p>'.$row["description"].'</p>
-                <p>'.$row["date"].'</p>
-                <a/>
+              <i class="bi bi-exclamation-circle text-primary"></i>
+              <div class="w-75 p-3">
+                <h4>'.$row["name"].'</h4>
+                <p>'.$row["message"].'</p>
+                <p>'.date('g:i a',strtotime($row['date'])).'</p>
               </div>
               </li>
               <hr class="dropdown-divider">
             ';
          }
 
-    $output .='<li class="dropdown-footer"><a href="reports.php">Show all notifications</a></li>';
+    // $output .='<li class="dropdown-footer"><a href="reports.php">Show all notifications</a></li>';
 
             
 }else {
@@ -48,7 +47,7 @@ while($row = mysqli_fetch_array($result))
                 </div>
                 </li>';
 }
-$status_query = "SELECT * FROM `podms_reports` WHERE `status` = 0";
+$status_query = "SELECT * FROM `podms_notif` WHERE `notif_status` = 1";
 $result_query = mysqli_query($conn, $status_query);
 $count = mysqli_num_rows($result_query);
 $data = array(
