@@ -155,8 +155,10 @@ function updateDateTime() {
   var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
     "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
   ];
+  var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   var month = monthNames[now.getMonth()];
   var date = ('0' + now.getDate()).slice(-2);
+  var day = dayNames[now.getDay()];
   var year = now.getFullYear();
   var hour = ('0' + now.getHours()).slice(-2);
   var minute = ('0' + now.getMinutes()).slice(-2);
@@ -165,7 +167,7 @@ function updateDateTime() {
   hour = hour % 12;
   hour = hour ? hour : 12;
 
-  var datetime = hour + ':' + minute + ':' + second + ' ' + meridiem + ' | '+ month + ' ' + date + ', ' + year;
+  var datetime = hour + ':' + minute + ':' + second + ' ' + meridiem + ' | ' + day + ', ' + month + ' ' + date + ', ' + year;
   document.getElementById('datetime').innerHTML = datetime;
 }
  
