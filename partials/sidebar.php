@@ -89,6 +89,13 @@
       </li>
       <?php endif; ?>
 
+      <hr>
+      <li class="nav-item">
+        <a class="nav-link " href="sp_input.php">
+          <i class="bi bi-gear"></i>
+          <span>SAMPLE DATA</span>
+        </a>
+      </li>
       
       
 

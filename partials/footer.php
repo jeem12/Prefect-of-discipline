@@ -173,3 +173,27 @@ function check_user(){
 	});
 }
 </script>
+
+<script>
+function updateDateTime() {
+  var now = new Date();
+  var monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+    "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+  ];
+  var month = monthNames[now.getMonth()];
+  var date = ('0' + now.getDate()).slice(-2);
+  var year = now.getFullYear();
+  var hour = ('0' + now.getHours()).slice(-2);
+  var minute = ('0' + now.getMinutes()).slice(-2);
+  var second = ('0' + now.getSeconds()).slice(-2);
+  var meridiem = hour < 12 ? 'AM' : 'PM';
+  hour = hour % 12;
+  hour = hour ? hour : 12;
+
+  var datetime = hour + ':' + minute + ':' + second + ' ' + meridiem + ' | '+ month + ' ' + date + ', ' + year;
+  document.getElementById('datetime').innerHTML = datetime;
+}
+
+// Update the datetime every second
+setInterval(updateDateTime, 1000);
+</script>

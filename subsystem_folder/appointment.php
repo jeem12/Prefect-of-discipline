@@ -60,7 +60,7 @@
             <div class="row mb-3">
                     <label for="inputTex"  class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                      <input type="text" value="Meeting" name="title" id="text" class="form-control" required>
+                      <input type="text" value="Appointment" name="title" id="text" class="form-control" required>
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -126,7 +126,7 @@
                       <tr>
                           <th>Date</th>
                           <th data-priority="1">ID#</th>
-                          <th>Fullname</th>
+                          <th>Complainant Fullname</th>
                           <th>Course</th>
                           <th>Description</th>
                           <th>Status</th>
