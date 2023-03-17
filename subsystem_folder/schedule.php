@@ -41,7 +41,7 @@
 	<!-- MAIN CONTENT -->
 
 <!-- CALENDAR -->
-  <div class="container">
+  <div class="container" id="calendar">
   <div class="wrapper">
   <div id="calendar"></div>
   </div>

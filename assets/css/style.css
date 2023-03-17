@@ -1437,6 +1437,15 @@ tr.text-center.action {
 }
 
 /*--------------------------------------------------------------
+# calendar
+--------------------------------------------------------------*/
+
+div#calendar{
+  height: 80vh;
+  width: 100vw;
+  align-content: center;
+}
+/*--------------------------------------------------------------
 # VIOLATION TABLE
 --------------------------------------------------------------*/
 td.style2 { vertical-align:middle; text-align:center; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
