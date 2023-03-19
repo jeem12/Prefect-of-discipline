@@ -30,6 +30,7 @@
   <script src="../assets/vendor/fullcalendar/sweetalert2.all.min.js"></script>
   <script src="../assets/vendor/chart.js/dist/chart.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
+  <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
 
 
   
