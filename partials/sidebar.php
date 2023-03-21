@@ -34,11 +34,6 @@
                   </a>
                 </li>
                 <?php endif; ?>
-                <li>
-                  <a id="mod6" href="claimed_items.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Claimed Items</span>
-                  </a>
-                </li>
             </ul>
             </li>
             

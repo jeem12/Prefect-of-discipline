@@ -42,8 +42,6 @@ h.className = "nav-content collapse show";
 
   <main id="main" class="main" >
 
-  
-
   <div class="pagetitle">
       <h1>Records</h1>
       <nav>
@@ -58,7 +56,7 @@ h.className = "nav-content collapse show";
 
 
 	<!-- MAIN CONTENT -->
-
+    <br><br><br>
 <!-- VIEW MODAL -->
 
 <div class="modal fade" id="viewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -83,7 +81,10 @@ h.className = "nav-content collapse show";
 <!-- TABLE -->
         <div class="container" id="table">
     <div class="row">
-        <table id="myTable" class="table table-striped nowrap" style="width:100%">
+    <div class="pagetitle">
+    <h1 >Profiled Record</h1>
+</div>
+        <table id="myTable1" class="table table-striped nowrap" style="width:100%">
         <div class="col-lg-auto">
 
                         <thead>
@@ -110,6 +111,38 @@ h.className = "nav-content collapse show";
     </div>
 </div>
 
+<br>
+<hr>
+<br>
+
+
+<!-- Claimed TABLE -->
+<div class="container" id="table">
+  <div class="row">
+  <div class="pagetitle">
+    <h1 >Claimed Items</h1>
+</div>
+      <table id="myTable2" class="table table-striped nowrap" style="width:100%">
+      <div class="col-lg-auto">
+
+                      <thead>
+                          <tr>
+                              <th>ID NUMBER</th>
+                              <th>FULL NAME</th>
+                              <th>SECTION</th>
+                              <th>COURSE</th>
+                              <th>ITEM NAME</th>
+                              <th>ITEM DESCRIPTION</th>
+                              <th data-priority="1">STATUS</th>
+                          </tr>
+                      </thead>
+                     
+                  </div>
+                  </table>
+
+  </div>
+</div>
+
   </main><!-- End #main -->
 
 
@@ -134,12 +167,12 @@ h.className = "nav-content collapse show";
 
 
 <script>
- var myTable = '';
+ var myTable1 = '';
 $(function() {
     // draw function [called if the database updates]
     function draw_data() {
-        if ($.fn.dataTable.isDataTable('#myTable') && myTable != '') {
-            myTable.draw(true)
+        if ($.fn.dataTable.isDataTable('#myTable1') && myTable1 != '') {
+            myTable1.draw(true)
         } else {
             load_data();
         }
@@ -147,7 +180,7 @@ $(function() {
     
 
     function load_data() {
-        myTable = $('#myTable').DataTable({
+        myTable1 = $('#myTable1').DataTable({
             dom: '<"row"B>flr<"py-2 my-2"t>ip',
             "processing": true,
             "serverSide": true,
@@ -352,6 +385,110 @@ $(function() {
 
  
 });
+</script>
+
+
+<script>
+var myTable2 = '';
+$(function() {
+  // draw function [called if the database updates]
+  function draw_data() {
+      if ($.fn.dataTable.isDataTable('#myTable2') && myTable2 != '') {
+          myTable2.draw(true)
+      } else {
+          load_data();
+      }
+  }
+  
+
+  function load_data() {
+      myTable2 = $('#myTable2').DataTable({
+          dom: '<"row"B>flr<"py-2 my-2"t>ip',
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              url: "../assets/php/c_r_getData.php",
+              method: 'POST'
+          },
+          columns: [
+            {
+                  data: 'id_number',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+
+              },
+              {
+                  data: 'fullname',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+
+              },
+              {
+                  data: 'section',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+              },
+              {
+                  data: 'course',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+              },
+              {
+                  data: 'item_name',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+              },
+              {
+                  data: 'item_desc',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+              },
+              {
+                  data: 'status',
+                  className: 'text-center',
+                  defaultValue: 'No data available'
+              },
+          ],
+          responsive: {
+                        details: {
+                                display: $.fn.dataTable.Responsive.display.modal( {
+                                        header: function ( row ) {
+                                            var data = row.data();
+                                            return 'Details for '+data.last_name+', '+data.first_name;
+                                        }
+                                    } ),
+    
+                                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                    }
+
+                },
+          columnDefs: [
+                      {
+                          targets: 6,
+                          render: function(data, type, row, meta) {
+                             if (data == 3) {
+                                  return '<p class="badge text-bg-success text-wrap text-center">Claimed</p>';
+                              } else {
+                                  return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
+                              }
+                          }
+                      },
+          ],
+          "order": [
+              [0, "asc"]
+          ],
+          initComplete: function(settings) {
+              $('.paginate_button').addClass('p-1')
+          }
+      });
+  }
+  //Load Data
+  load_data()
+
+
+});
+
+
 </script>
 
 
