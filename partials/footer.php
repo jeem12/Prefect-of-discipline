@@ -179,12 +179,13 @@ function updateDateTime() {
     updateDateTime();
   }, 1000);
 
+setInterval(function() {
+  load_unseen_schedule();
+}, 1000);
 
 });
 
-setInterval(function() {
-  load_unseen_schedule();
-}, 86400000);
+
 
 
 </script>

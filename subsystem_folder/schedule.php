@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
       Swal.fire({
         title: info.event.title,
         icon: 'info',
-        html:'<p>'+timeString12+'</p><p>'+info.event.extendedProps.description+'</p>'
+        html:'<br><p class="text-center">Complainant Fullname: <strong style="text-transform: uppercase;">'+info.event.extendedProps.complainant_last_name+', '+info.event.extendedProps.complainant_first_name+' '+info.event.extendedProps.complainant_middle_name+'</strong></p><br><p class="text-center">Time: <strong>'+timeString12+'</strong></p>'
       });
     }
 

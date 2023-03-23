@@ -154,18 +154,6 @@
             <div class="col-12">
               <div class="card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
 
                 <?php
                   include_once "../assets/php/db_connect.php";
@@ -191,6 +179,130 @@
                   <script>
                     document.addEventListener("DOMContentLoaded", () => {
                       new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Profiled',
+                          data: <?php echo json_encode($data); ?>
+                        }],
+                          chart: {
+                          height: 350,
+                          type: 'bar',
+                        },
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 10,
+                            dataLabels: {
+                              position: 'top', // top, center, bottom
+                            },
+                          }
+                        },
+                        dataLabels: {
+                          enabled: true,
+                          formatter: function (val) {
+                            return val;
+                          },
+                          offsetY: -20,
+                          style: {
+                            fontSize: '12px',
+                            colors: ["#304758"]
+                          }
+                        },
+                        
+                        xaxis: {
+                          categories: <?php echo json_encode($categories); ?>,
+                          labels: {
+                            datetimeFormatter: {
+                              year: 'yyyy',
+                              month: 'MMM \'yy',
+                              day: 'dd MMM',
+                              hour: 'HH:mm'
+                            }
+                          },
+                          position: 'top',
+                          axisBorder: {
+                            show: false
+                          },
+                          axisTicks: {
+                            show: false
+                          },
+                          crosshairs: {
+                            fill: {
+                              type: 'gradient',
+                              gradient: {
+                                colorFrom: '#D8E3F0',
+                                colorTo: '#BED1E6',
+                                stops: [0, 100],
+                                opacityFrom: 0.4,
+                                opacityTo: 0.5,
+                              }
+                            }
+                          },
+                          tooltip: {
+                            enabled: true,
+                          }
+                        },
+                        yaxis: {
+                          axisBorder: {
+                            show: false
+                          },
+                          axisTicks: {
+                            show: false,
+                          },
+                          labels: {
+                            show: false,
+                            formatter: function (val) {
+                              return val;
+                            }
+                          }
+                        
+                        },
+                        title: {
+                          text: 'Total profiled this year',
+                          floating: true,
+                          offsetY: 330,
+                          align: 'center',
+                          style: {
+                            color: '#444'
+                          }
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
+                        <!-- Reports -->
+                        <div class="col-12">
+              <div class="card">
+
+
+                <?php
+                  include_once "../assets/php/db_connect.php";
+                  $query = "SELECT DATE_FORMAT(date, '%M') as month, COUNT(id) as total FROM podms_claimed_items WHERE YEAR(date) = YEAR(NOW()) GROUP BY month ORDER BY MONTH(date)";
+                  $query_run = mysqli_query($conn, $query);
+
+                  $categories = array();
+                  $data = array();
+                  if(mysqli_num_rows($query_run) > 0) {
+                      while($row = mysqli_fetch_assoc($query_run)) {
+                          array_push($categories, $row['month']);
+                          array_push($data, $row['total']);
+                      }
+                  }                
+                  ?>
+
+                <div class="card-body">
+                  <h5 class="card-title">Claimed Items <span>/ by month</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="claimedChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#claimedChart"), {
                         series: [{
                           name: 'Profiled',
                           data: <?php echo json_encode($data); ?>

@@ -250,6 +250,20 @@ h.className = "nav-content collapse show";
                         </div>
                             
                             <hr>
+
+                            <!-- <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Investigation Attempt </label>
+                            <div class="col-sm-10">
+                                <select title="Leave blank if you want to end investigation" class="form-select" name="attempt" id="attempt" aria-label="Default select example">
+                                <option value="" selected disabled>Open this select menu</option>
+                                <option value="1">1st Investigation</option>
+                                <option value="2">2nd Investigation</option>
+                                <option value="3">3rd Investigation</option>
+                                </select>
+                            </div>
+                            </div> -->
+
+                            <hr>
                             
 
                             <h1 class="fs-5 text-center">Evidence</h1>

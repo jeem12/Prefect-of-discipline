@@ -26,10 +26,11 @@ while($row = mysqli_fetch_array($result))
       $output .= '
           <li class="notification-item">
               <i class="bi bi-exclamation-circle text-primary"></i>
-              <div class="w-75 p-3">
+              <div class="w-75 p-3"><a href='.$row["link"].'>
                 <h4>'.$row["name"].'</h4>
                 <p>'.$row["message"].'</p>
-                <p>'.date('g:i a',strtotime($row['date'])).'</p>
+                
+                <p>'.date('g:i a',strtotime($row['date'])).'</p></a>
               </div>
               </li>
               <hr class="dropdown-divider">

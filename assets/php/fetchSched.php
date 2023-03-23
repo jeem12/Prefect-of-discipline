@@ -3,7 +3,7 @@
 include ("db_connect.php");
 
 if(isset($_POST['view'])){
-    $query = "SELECT * FROM `podms_events` WHERE `start` = CURDATE()";
+    $query = "SELECT * FROM `podms_events` WHERE `start` = CURDATE() AND `notif_status` = 1";
     $result = mysqli_query($conn, $query);
     
     if(mysqli_num_rows($result) > 0)
@@ -14,7 +14,7 @@ if(isset($_POST['view'])){
         mysqli_query($conn, $query_update);
 
         if($query_update){
-            $query_insert = "INSERT INTO `podms_notif` (`name`, `message`, `notif_status`) VALUES ('You have a pending schedule today!', 'Please check your schedule', 1)";
+            $query_insert = "INSERT INTO `podms_notif` (`name`, `message`, `notif_status`,`link`) VALUES ('You have a pending schedule today!', 'Please check your schedule', 1,'../../../subsystem_folder/schedule.php')";
             mysqli_query($conn, $query_insert);
         }
     }
