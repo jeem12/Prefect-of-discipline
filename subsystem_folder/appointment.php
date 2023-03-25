@@ -207,7 +207,7 @@ $(function() {
                 {
                     data: null,
                     orderable: false,
-                    className: 'text-center action',
+                    className: 'text-center action <?= $limitation?>',
                     
                     render: function(data, type, row, meta) {
                         console.log()

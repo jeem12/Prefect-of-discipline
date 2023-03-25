@@ -45,11 +45,28 @@
         <div class="col-lg-8">
           <div class="row">
 
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
 
-                <?php
+                      <!-- Profiled Card -->
+                      <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" id="filterPro">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">Month</a></li>
+                <li><a class="dropdown-item" href="#">Year</a></li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Profiled <span id="procat"></span></h5>
+
+              <div class="d-flex align-items-center procard" id="Today">
+              <?php
                     include_once "../assets/php/db_connect.php";
 
                     $query = "SELECT COUNT(id) AS total FROM `podms_records` WHERE `date` = CURDATE()";
@@ -59,217 +76,333 @@
                     {
                         $row = mysqli_fetch_assoc($query_run);
                     ?>
-                <div class="card-body">
-                  <h5 class="card-title">Profiled <span>| Today</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6><?= $row['total'];?></h6>
-
-                    </div>
-                  </div>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total'];?></h6>
                 </div>
                 <?php
                   }
                   ?>
-
               </div>
-            </div><!-- End Sales Card -->
 
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <?php
+              <div class="d-flex align-items-center procard d-none" id="Month">
+              <?php
                 include_once "../assets/php/db_connect.php";
 
-                $currentMonth = date('m');
-                $currentYear = date('Y');
-
-                $query = "SELECT COUNT(id) AS total FROM `podms_records` WHERE YEAR(`date`) = '$currentYear' AND MONTH(`date`) = '$currentMonth'";
+                $query = "SELECT COUNT(id) AS total FROM podms_records WHERE YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())";
                 $query_run = mysqli_query($conn, $query);
 
                 if(mysqli_num_rows($query_run) > 0) {
                     $row = mysqli_fetch_assoc($query_run);
                 ?>
-
-                <div class="card-body">
-                  <h5 class="card-title">Profiled <span>| This Month</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6><?= $row['total'];?></h6>
-
-                    </div>
-                  </div>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
                 </div>
-                <?php } ?>
-
-              </div>
-            </div>
-            <!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card customers-card">
-
+                <div class="ps-3">
+                  <h6><?= $row['total']?></h6>
+                </div>
                 <?php
+                  }
+                  ?>
+              </div>
+
+              <div class="d-flex align-items-center procard d-none" id="Year">
+              <?php
                 include_once "../assets/php/db_connect.php";
 
-                $currentYear = date('Y');
-
-                $query = "SELECT COUNT(id) AS total FROM `podms_records` WHERE YEAR(`date`) = '$currentYear'";
+                $query = "SELECT COUNT(id) AS total FROM `podms_records` WHERE YEAR(`date`) = YEAR(NOW())";
                 $query_run = mysqli_query($conn, $query);
 
                 if(mysqli_num_rows($query_run) > 0) {
                     $row = mysqli_fetch_assoc($query_run);
                 ?>
-
-                <div class="card-body">
-                  <h5 class="card-title">Profiled <span>| This Year</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6><?= $row['total'];?></h6>
-
-                    </div>
-                  </div>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
                 </div>
-                <?php } ?>
-
+                <div class="ps-3">
+                  <h6><?= $row['total']?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
               </div>
+
             </div>
-            <!-- End Customers Card -->
+
+          </div>
+        </div>
+        <!-- End Profiled Card -->
+
+
+            <!-- Confiscated Card -->
+            <div class="col-xxl-4 col-md-6">
+          <div class="card info-card revenue-card">
+
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" id="filterConf">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">Month</a></li>
+                <li><a class="dropdown-item" href="#">Year</a></li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Cnnfiscated <span id="confcat"></span></h5>
+
+              <div class="d-flex align-items-center confcard" id="Today">
+              <?php
+                    include_once "../assets/php/db_connect.php";
+
+                    $query = "SELECT COUNT(id) AS total FROM `podms_confiscated` WHERE `date` = CURDATE()";
+                    $query_run = mysqli_query($conn, $query);
+
+                    if(mysqli_num_rows($query_run) > 0)
+                    {
+                        $row = mysqli_fetch_assoc($query_run);
+                    ?>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total'];?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
+              </div>
+
+              <div class="d-flex align-items-center confcard d-none" id="Month">
+              <?php
+                include_once "../assets/php/db_connect.php";
+
+                $query = "SELECT COUNT(id) AS total FROM podms_confiscated WHERE YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())";
+                $query_run = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($query_run) > 0) {
+                    $row = mysqli_fetch_assoc($query_run);
+                ?>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total']?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
+              </div>
+
+              <div class="d-flex align-items-center confcard d-none" id="Year">
+              <?php
+                include_once "../assets/php/db_connect.php";
+
+
+                $query = "SELECT COUNT(id) AS total FROM `podms_confiscated` WHERE YEAR(`date`) = YEAR(NOW());";
+                $query_run = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($query_run) > 0) {
+                    $row = mysqli_fetch_assoc($query_run);
+                ?>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total']?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- End Confiscated Card -->
+
+            <!-- Claimed Card -->
+            <div class="col-xxl-4 col-md-6">
+          <div class="card info-card customers-card">
+
+            <div class="filter">
+              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" id="filterClam">
+                <li class="dropdown-header text-start">
+                  <h6>Filter</h6>
+                </li>
+                <li><a class="dropdown-item" href="#">Today</a></li>
+                <li><a class="dropdown-item" href="#">Month</a></li>
+                <li><a class="dropdown-item" href="#">Year</a></li>
+              </ul>
+            </div>
+
+            <div class="card-body">
+              <h5 class="card-title">Claimed Items <span id="clamcat"></span></h5>
+
+              <div class="d-flex align-items-center clamcard" id="Today">
+              <?php
+                    include_once "../assets/php/db_connect.php";
+
+                    $query = "SELECT COUNT(id) AS total FROM `podms_claimed_items` WHERE `date` = CURDATE()";
+                    $query_run = mysqli_query($conn, $query);
+
+                    if(mysqli_num_rows($query_run) > 0)
+                    {
+                        $row = mysqli_fetch_assoc($query_run);
+                    ?>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total'];?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
+              </div>
+
+              <div class="d-flex align-items-center clamcard d-none" id="Month">
+              <?php
+                include_once "../assets/php/db_connect.php";
+
+                $query = "SELECT COUNT(id) AS total FROM podms_claimed_items WHERE YEAR(date) = YEAR(NOW()) AND MONTH(date) = MONTH(NOW())";
+                $query_run = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($query_run) > 0) {
+                    $row = mysqli_fetch_assoc($query_run);
+                ?>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total']?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
+              </div>
+
+              <div class="d-flex align-items-center clamcard d-none" id="Year">
+              <?php
+                include_once "../assets/php/db_connect.php";
+
+
+                $query = "SELECT COUNT(id) AS total FROM `podms_claimed_items` WHERE YEAR(`date`) = YEAR(NOW());";
+                $query_run = mysqli_query($conn, $query);
+
+                if(mysqli_num_rows($query_run) > 0) {
+                    $row = mysqli_fetch_assoc($query_run);
+                ?>
+                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6><?= $row['total']?></h6>
+                </div>
+                <?php
+                  }
+                  ?>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- End Claimed Card -->
+
+
 
             <!-- Reports -->
             <div class="col-12">
               <div class="card">
 
 
-                <?php
-                  include_once "../assets/php/db_connect.php";
-                  $query = "SELECT DATE_FORMAT(date, '%M') as month, COUNT(id) as total FROM podms_records WHERE YEAR(date) = YEAR(NOW()) GROUP BY month ORDER BY MONTH(date)";
-                  $query_run = mysqli_query($conn, $query);
+              <?php 
+              //Attempt select query execution
+              include "../assets/php/db_connect.php";
+  
+              $query = "
+              SELECT 
+              date as date, 
+              COUNT(id) as total
+              FROM podms_records
+              GROUP BY date";
+              $query_run = mysqli_query($conn, $query);
+              $dateArray = [];
+              $total = [];
+              if(mysqli_num_rows($query_run) > 0)
+              {
+                  foreach($query_run as $row)
+                  {
+                    $dateArray[] = $row['date'];
+                    $total[] = $row['total'];
+                    
+                  }
+              }
+              ?>
 
-                  $categories = array();
-                  $data = array();
-                  if(mysqli_num_rows($query_run) > 0) {
-                      while($row = mysqli_fetch_assoc($query_run)) {
-                          array_push($categories, $row['month']);
-                          array_push($data, $row['total']);
-                      }
-                  }                
-                  ?>
 
                 <div class="card-body">
-                  <h5 class="card-title">Profiled <span>/ by month</span></h5>
+                  <h5 class="card-title">Profiled <span>| By month</span></h5>
 
-                  <!-- Line Chart -->
-                  <div id="reportsChart"></div>
+                  <div class="chart-container">
+                    <canvas id="myChart"></canvas>
+                  </div>
+
+                  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
                   <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Profiled',
-                          data: <?php echo json_encode($data); ?>
+
+                                // setup 
+                const dateArrayJs = <?= json_encode($dateArray) ?>;
+                const total = <?= json_encode($total) ?>;
+                const dateChartJs = dateArrayJs.map((day, index) => {
+                  let dayjs = new Date(day);
+                  return dayjs;
+                })
+                console.log(dateChartJs);
+
+                    // console.log (dateArrayJS);
+                    const ctx = document.getElementById('myChart');
+
+                    new Chart(ctx, {
+                      type: 'bar',
+                      data: {
+                        labels: dateArrayJs,
+                        datasets: [{
+                          label: 'Profiled',
+                          data: total,
+                          borderWidth: 1
                         }],
-                          chart: {
-                          height: 350,
-                          type: 'bar',
-                        },
-                        plotOptions: {
-                          bar: {
-                            borderRadius: 10,
-                            dataLabels: {
-                              position: 'top', // top, center, bottom
-                            },
-                          }
-                        },
-                        dataLabels: {
-                          enabled: true,
-                          formatter: function (val) {
-                            return val;
-                          },
-                          offsetY: -20,
-                          style: {
-                            fontSize: '12px',
-                            colors: ["#304758"]
-                          }
-                        },
-                        
-                        xaxis: {
-                          categories: <?php echo json_encode($categories); ?>,
-                          labels: {
-                            datetimeFormatter: {
-                              year: 'yyyy',
-                              month: 'MMM \'yy',
-                              day: 'dd MMM',
-                              hour: 'HH:mm'
+                      },
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                          x: {
+                            type: 'time',
+                            time: {
+                              unit: 'day'
                             }
                           },
-                          position: 'top',
-                          axisBorder: {
-                            show: false
-                          },
-                          axisTicks: {
-                            show: false
-                          },
-                          crosshairs: {
-                            fill: {
-                              type: 'gradient',
-                              gradient: {
-                                colorFrom: '#D8E3F0',
-                                colorTo: '#BED1E6',
-                                stops: [0, 100],
-                                opacityFrom: 0.4,
-                                opacityTo: 0.5,
-                              }
-                            }
-                          },
-                          tooltip: {
-                            enabled: true,
+                          y: {
+                            beginAtZero: true
                           }
-                        },
-                        yaxis: {
-                          axisBorder: {
-                            show: false
-                          },
-                          axisTicks: {
-                            show: false,
-                          },
-                          labels: {
-                            show: false,
-                            formatter: function (val) {
-                              return val;
-                            }
-                          }
-                        
-                        },
-                        title: {
-                          text: 'Total profiled this year',
-                          floating: true,
-                          offsetY: 330,
-                          align: 'center',
-                          style: {
-                            color: '#444'
-                          }
-                        }
-                      }).render();
+                        }  
+                      }
                     });
                   </script>
-                  <!-- End Line Chart -->
 
                 </div>
+
+                
 
               </div>
             </div><!-- End Reports -->
@@ -295,7 +428,7 @@
                   ?>
 
                 <div class="card-body">
-                  <h5 class="card-title">Claimed Items <span>/ by month</span></h5>
+                  <h5 class="card-title">Claimed Items <span>| By month</span></h5>
 
                   <!-- Line Chart -->
                   <div id="claimedChart"></div>
@@ -390,153 +523,211 @@
               </div>
             </div><!-- End Reports -->
 
+                        <!-- Reports -->
+                        <div class="col-12">
+              <div class="card">
+
+
+                <?php
+                  include_once "../assets/php/db_connect.php";
+                  $query = "SELECT DATE_FORMAT(date, '%M') as month, COUNT(id) as total FROM podms_confiscated WHERE YEAR(date) = YEAR(NOW()) GROUP BY month ORDER BY MONTH(date)";
+                  $query_run = mysqli_query($conn, $query);
+
+                  $categories = array();
+                  $data = array();
+                  if(mysqli_num_rows($query_run) > 0) {
+                      while($row = mysqli_fetch_assoc($query_run)) {
+                          array_push($categories, $row['month']);
+                          array_push($data, $row['total']);
+                      }
+                  }                
+                  ?>
+
+                <div class="card-body">
+                  <h5 class="card-title">Confiscated Items <span>| By month</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="confiscatedChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#confiscatedChart"), {
+                        series: [{
+                          name: 'Profiled',
+                          data: <?php echo json_encode($data); ?>
+                        }],
+                          chart: {
+                          height: 350,
+                          type: 'bar',
+                        },
+                        plotOptions: {
+                          bar: {
+                            borderRadius: 10,
+                            dataLabels: {
+                              position: 'top', // top, center, bottom
+                            },
+                          }
+                        },
+                        dataLabels: {
+                          enabled: true,
+                          formatter: function (val) {
+                            return val;
+                          },
+                          offsetY: -20,
+                          style: {
+                            fontSize: '12px',
+                            colors: ["#304758"]
+                          }
+                        },
+                        
+                        xaxis: {
+                          categories: <?php echo json_encode($categories); ?>,
+                          position: 'top',
+                          axisBorder: {
+                            show: false
+                          },
+                          axisTicks: {
+                            show: false
+                          },
+                          crosshairs: {
+                            fill: {
+                              type: 'gradient',
+                              gradient: {
+                                colorFrom: '#D8E3F0',
+                                colorTo: '#BED1E6',
+                                stops: [0, 100],
+                                opacityFrom: 0.4,
+                                opacityTo: 0.5,
+                              }
+                            }
+                          },
+                          tooltip: {
+                            enabled: true,
+                          }
+                        },
+                        yaxis: {
+                          axisBorder: {
+                            show: false
+                          },
+                          axisTicks: {
+                            show: false,
+                          },
+                          labels: {
+                            show: false,
+                            formatter: function (val) {
+                              return val;
+                            }
+                          }
+                        
+                        },
+                        title: {
+                          text: 'Total profiled this year',
+                          floating: true,
+                          offsetY: 330,
+                          align: 'center',
+                          style: {
+                            color: '#444'
+                          }
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
             <!-- Recent Sales -->
             <div class="col-12">
-              <div class="card recent-sales overflow-auto">
-
+              <div class="card top-selling overflow-auto">
                 <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" id="filterTable">
                     <li class="dropdown-header text-start">
                       <h6>Filter</h6>
                     </li>
 
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="showTable('bsit')">BSIT</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="showTable('bsed')">BSED</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="showTable('bsba')">BSBA</a></li>
+
                   </ul>
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                  <h5 class="card-title">Confiscated list <span id="span-cat"></span></h5>
+                <table class="table table-bordered">
+                  <thead>
+                  <tr>
+                    <th>ID Number</th>
+                    <th>Fullname</th>
+                    <th>Section</th>
+                    <th>Course</th>
+                    <th>Item name</th>
+                    <th>Item Description</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody  class="datatable" id="bsit">
+                <?php
+                      include "../assets/php/db_connect.php";
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                      $query = "SELECT * FROM `podms_confiscated` WHERE `course` = 'BSIT'";
+                      $query_run = mysqli_query($conn, $query);
+
+                      if($query_run)
+                      {
+                        while($row = mysqli_fetch_array($query_run))
+                        {
+                    ?>
+                    <tr>
+                      <td><?= $row['id_number']?></td>
+                      <td><?= $row['last_name'] . ', ' . $row['first_name'] . ' ' . $row['middle_name']?></td>
+                      <td><?= $row['section']?></td>
+                      <td><?= $row['course']?></td>
+                      <td><?= $row['item_name']?></td>
+                      <td><?= $row['item_desc']?></td>
+                      <td><?= $row['date']?></td>
+                    </tr>
+                    <?php
+                        }
+                      }
+                    ?>
+                </tbody>
+                <tbody class="datatable" id="bsed">
+                <?php
+                      include "../assets/php/db_connect.php";
+
+                      $query = "SELECT * FROM `podms_confiscated` WHERE `course` = 'BSED'";
+                      $query_run = mysqli_query($conn, $query);
+
+                      if($query_run)
+                      {
+                        while($row = mysqli_fetch_array($query_run))
+                        {
+                    ?>
+                    <tr>
+                      <td><?= $row['id_number']?></td>
+                      <td><?= $row['last_name'] . ', ' . $row['first_name'] . ' ' . $row['middle_name']?></td>
+                      <td><?= $row['section']?></td>
+                      <td><?= $row['course']?></td>
+                      <td><?= $row['item_name']?></td>
+                      <td><?= $row['item_desc']?></td>
+                      <td><?= $row['date']?></td>
+                    </tr>
+                    <?php
+                        }
+                      }
+                    ?>
+                </tbody>
+                </table>
 
                 </div>
 
               </div>
             </div><!-- End Recent Sales -->
-
-            <!-- Top Selling -->
-            <div class="col-12">
-              <div class="card top-selling overflow-auto">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body pb-0">
-                  <h5 class="card-title">Top Selling <span>| Today</span></h5>
-
-                  <table class="table table-borderless">
-                    <thead>
-                      <tr>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Sold</th>
-                        <th scope="col">Revenue</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../../assets/img/product-1.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                        <td>$64</td>
-                        <td class="fw-bold">124</td>
-                        <td>$5,828</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../../assets/img/product-2.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                        <td>$46</td>
-                        <td class="fw-bold">98</td>
-                        <td>$4,508</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-3.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                        <td>$59</td>
-                        <td class="fw-bold">74</td>
-                        <td>$4,366</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-4.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                        <td>$32</td>
-                        <td class="fw-bold">63</td>
-                        <td>$2,016</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="../assets/img/product-5.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                        <td>$79</td>
-                        <td class="fw-bold">41</td>
-                        <td>$3,239</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                </div>
-
-              </div>
-            </div><!-- End Top Selling -->
 
           </div>
         </div><!-- End Left side columns -->
@@ -636,7 +827,7 @@
               <h5 class="card-title">Budget Report <span>| This Month</span></h5>
 
               <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
+<!-- 
               <script>
                 document.addEventListener("DOMContentLoaded", () => {
                   var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
@@ -686,7 +877,7 @@
                     }]
                   });
                 });
-              </script>
+              </script> -->
 
             </div>
           </div><!-- End Budget Report -->
@@ -711,7 +902,7 @@
 
               <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
-              <script>
+              <!-- <script>
                 document.addEventListener("DOMContentLoaded", () => {
                   echarts.init(document.querySelector("#trafficChart")).setOption({
                     tooltip: {
@@ -764,7 +955,7 @@
                     }]
                   });
                 });
-              </script>
+              </script> -->
 
             </div>
           </div><!-- End Website Traffic -->
@@ -835,6 +1026,113 @@
 
 <!-- End Footer -->
 
+
+<script>
+const filterCards1 = document.querySelectorAll('#filterPro li');
+const filterCards2 = document.querySelectorAll('#filterConf li');
+const filterCards3 = document.querySelectorAll('#filterClam li');
+
+// set default value of category span to "Today"
+const span1 = document.getElementById('procat');
+span1.textContent = '| Today';
+
+// set default value of category span to "Today"
+const span2 = document.getElementById('confcat');
+span2.textContent = '| Today';
+
+// set default value of category span to "Today"
+const span3 = document.getElementById('clamcat');
+span3.textContent = '| Today';
+
+filterCards1.forEach(item => {
+  item.addEventListener('click', function(event) {
+    event.preventDefault();
+    const selectedCategory = this.textContent.trim();
+    showPro(selectedCategory);
+    span1.textContent = '| ' + selectedCategory;
+  });
+});
+
+filterCards2.forEach(item => {
+  item.addEventListener('click', function(event) {
+    event.preventDefault();
+    const selectedCategory = this.textContent.trim();
+    showConf(selectedCategory);
+    span2.textContent = '| ' + selectedCategory;
+  });
+});
+
+filterCards3.forEach(item => {
+  item.addEventListener('click', function(event) {
+    event.preventDefault();
+    const selectedCategory = this.textContent.trim();
+    showClam(selectedCategory);
+    span3.textContent = '| ' + selectedCategory;
+  });
+});
+
+function showPro(category) {
+  const proCards = document.querySelectorAll('.procard');
+  proCards.forEach(card => {
+    if (card.getAttribute('id') === category) {
+      card.classList.remove('d-none');
+    } else {
+      card.classList.add('d-none');
+    }
+  });
+}
+
+function showConf(category) {
+  const confCards = document.querySelectorAll('.confcard');
+  confCards.forEach(card => {
+    if (card.getAttribute('id') === category) {
+      card.classList.remove('d-none');
+    } else {
+      card.classList.add('d-none');
+    }
+  });
+}
+
+function showClam(category) {
+  const clamCards = document.querySelectorAll('.clamcard');
+  clamCards.forEach(card => {
+    if (card.getAttribute('id') === category) {
+      card.classList.remove('d-none');
+    } else {
+      card.classList.add('d-none');
+    }
+  });
+}
+
+
+</script>
+
+<script>
+
+const filterItems = document.querySelectorAll('#filterTable');
+
+filterItems.forEach(item => {
+  item.addEventListener('click', function(event) {
+    event.preventDefault();
+    const selectedCategory = this.getAttribute('href').substring(1);
+    showTable(selectedCategory);
+  });
+});
+
+function showTable(category) {
+  const tables = document.querySelectorAll('.datatable');
+  tables.forEach(table => {
+    if (table.getAttribute('id') === category) {
+      table.style.display = 'contents';
+    } else {
+      table.style.display = 'none';
+    }
+  });
+
+  const categorySpan = document.getElementById('span-cat');
+  categorySpan.textContent = '| ' + category.toUpperCase();
+}
+</script>
 
 
 </html>

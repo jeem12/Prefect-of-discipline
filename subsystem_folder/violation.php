@@ -37,13 +37,16 @@
       </nav>
     </div><!-- End Page Title -->
 
-
+    <?php 
+       $position = $_SESSION["position"];
+       if($position != "staff"): ?>
 
     <div class="text-end">
     <button class="btn btn-warning rounded-3 " id="addOff">Add Offense</button>
     <button class="btn btn-warning rounded-3 " id="editName">Edit Offense</button>
     <button class="btn btn-warning rounded-3 " id="editSanc">Edit Sanction</button>
     </div>
+    <?php endif; ?>
     <br>
     <br>
 

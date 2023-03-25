@@ -34,3 +34,38 @@ if (!$conn) {
 	echo "Connection failed!";
 }
 ?>
+
+
+
+
+
+                  <!-- <table class="table table-borderless datatable" id="bsit">
+                    
+                    <thead>
+                      <tr>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">Fullname</th>
+                        <th scope="col">Section</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Item Name</th>
+                        <th scope="col">Item Description</th>
+                        <th scope="col">Date Confiscated</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr>
+                        <td><?= $row['id_number']?></td>
+                        <td><?= $row['last_name'] . ', ' . $row['first_name'] . ' ' . $row['middle_name']?></td>
+                        <td><?= $row['section']?></td>
+                        <td><?= $row['course']?></td>
+                        <td><?= $row['item_name']?></td>
+                        <td><?= $row['item_desc']?></td>
+                        <td><?= $row['date']?></td>
+                      </tr>
+                      <?php
+                                }
+                              }
+                                ?>
+                    </tbody>
+                  </table> -->

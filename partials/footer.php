@@ -14,29 +14,22 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 
-  <!-- <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
-   <!-- timeago plugin -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js" integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js" integrity="sha512-C3RIeaJCWeK5MLPSSrVssDBvSwamZW7Ugygc4r21guVqkeroy9wRBDaugQssAQ+m3HZsMWVvEigcNMr7juGXKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/fullcalendar/lib/main.js"></script>
-  <!-- <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
-  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
   <script src="../assets/vendor/fullcalendar/sweetalert2.all.min.js"></script>
-  <script src="../assets/vendor/chart.js/dist/chart.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
-  <script src="../assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
   
   <!-- DATATABLE -->
 
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
   <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bulma.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
@@ -48,14 +41,10 @@
   <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.print.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.colVis.min.js"></script>
 
-    <!-- <script src="../assets/vendor/DataTables/datatables.min.js"></script> -->
-    <!-- <script src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap5.min.js"></script> -->
-    <!-- <script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script> -->
+
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bulma.min.js"></script>
 
-    <!-- <script src="https://cdn.datatables.net/select/1.6.0/js/dataTables.select.min.js"></script> -->
-    <!-- <script src="https://cdn.datatables.net/searchpanes/2.1.1/js/dataTables.searchPanes.min.js"></script> -->
 
 
 

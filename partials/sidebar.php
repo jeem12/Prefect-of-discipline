@@ -47,9 +47,7 @@
           <span>Reports</span>
         </a>
       </li> -->
-      <?php 
-       $position = $_SESSION["position"];
-       if($position != "staff"): ?>
+
       <li class="nav-item">
         <a class="nav-link appointment" href="appointment.php">
           <i class="bi bi-calendar2-check"></i>
@@ -64,7 +62,7 @@
           <span>Violation</span>
         </a>
       </li>
-      <?php endif; ?>
+
       
       <li class="nav-item">
         <a class="nav-link " href="schedule.php">
