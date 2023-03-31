@@ -23,7 +23,10 @@
   <script src="../assets/vendor/fullcalendar/lib/main.js"></script>
   <script src="../assets/vendor/fullcalendar/sweetalert2.all.min.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
+  
 
 
   
@@ -46,6 +49,7 @@
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bulma.min.js"></script>
 
 
+    
 
 
 
@@ -78,25 +82,29 @@ $(document).ready(function() {
   load_unseen_notification();
 
   
-  function load_unseen_notification(view = '')
-      {
-        $.ajax({
+  function load_unseen_notification(view = '') {
+    $.ajax({
         url:"../assets/php/fetchNotif.php",
         method:"POST",
         data:{view:view},
         dataType:"json",
-        success:function(data)
-        {
-          $('.notif-dropdown').html(data.notification);
-          if(data.unseen_notification > 0)
-          {
-          $('.count').html(data.unseen_notification);
-          }
+        success:function(data) {
+            $('.notif-dropdown').html(data.notification);
+            if(data.unseen_notification > 0) {
+                $('.count').html(data.unseen_notification);
+            }
+
+            // Update notification time
+            $('.notification-item a').each(function() {
+                var formattedDate = $(this).data('date');
+                var momentTime = moment(formattedDate, 'YYYY-MM-DD HH:mm:ss');
+                var elapsedTime = momentTime.fromNow();
+                $(this).find('.elapsed-time').text(elapsedTime);
+            });
 
         }
-        });
-      } 
-
+    });
+}
 
 
  
@@ -124,21 +132,49 @@ $(document).ready(function() {
   } 
 
 
-  function check_user(){
-	jQuery.ajax({
-		url:'../assets/php/user_auth.php',
-		type:'post',
-		data:'type=ajax',
-		success:function(result){
-      console.log(result);
-			if(result== 'logout'){
-        alert('Session expired');
-				window.location.href='../assets/php/logout.php';
-			}
-		}
-		
-	});
-}
+  var intervalId = setInterval(function() {
+    jQuery.ajax({
+    url: '../assets/php/user_auth.php',
+    type: 'post',
+    data: 'type=ajax',
+    success: function(result) {
+      if (result == 'logout') {
+        clearInterval(intervalId);
+        Swal.fire({
+          icon: 'warning',
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          title: 'Session Expired',
+          showCancelButton: false,
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '../assets/php/logout.php';
+          }
+        });
+      }
+    }
+  });
+
+  }, 1000);
+
+
+    //   function check_user() {
+    //   jQuery.ajax({
+    //     url: '../assets/php/user_auth.php',
+    //     type: 'post',
+    //     data: 'type=ajax',
+    //     success: function(result) {
+    //       if (result == 'logout') {
+    //         alert('Session Expired');
+          
+    //         window.location.href = '../assets/php/logout.php';
+    //       }
+    //     }
+    //   });
+    // }
+
+
 
 function updateDateTime() {
   var now = new Date();
@@ -164,13 +200,12 @@ function updateDateTime() {
   setInterval(function() {
     load_unseen_appointment();
     load_unseen_notification();
-    check_user();
     updateDateTime();
   }, 1000);
 
 setInterval(function() {
   load_unseen_schedule();
-}, 1000);
+}, 86400);
 
 });
 

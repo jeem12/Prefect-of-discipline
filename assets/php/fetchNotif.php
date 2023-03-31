@@ -14,7 +14,8 @@ if($_POST["view"] != '')
 }
 
 
-$query = "SELECT * FROM `podms_notif` ORDER BY `id` DESC LIMIT 5";
+$query = "SELECT *, DATE_FORMAT(`date`, '%Y-%m-%d %H:%i:%s') as `formatted_date` FROM `podms_notif` ORDER BY `id` DESC LIMIT 5";
+
 $result = mysqli_query($conn, $query);
 $output = '';
 
@@ -24,17 +25,20 @@ if(mysqli_num_rows($result) > 0)
 while($row = mysqli_fetch_array($result))
     {
       $output .= '
-          <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-primary"></i>
-              <div class="w-75 p-3"><a href='.$row["link"].'>
-                <h4>'.$row["name"].'</h4>
-                <p>'.$row["message"].'</p>
-                
-                <p>'.date('g:i a',strtotime($row['date'])).'</p></a>
-              </div>
-              </li>
-              <hr class="dropdown-divider">
-            ';
+                <li class="notification-item">
+                    <i class="bi bi-exclamation-circle text-primary"></i>
+                    <div class="w-75 p-3">
+                        <a href='.$row["link"].' data-date="'.$row['formatted_date'].'">
+                            <h4>'.$row["name"].'</h4>
+                            <p>'.$row["message"].'</p>
+                            <p class="elapsed-time"></p>
+                        </a>
+                    </div>
+                </li>
+                <hr class="dropdown-divider">
+                ';
+
+
          }
 
     // $output .='<li class="dropdown-footer"><a href="reports.php">Show all notifications</a></li>';

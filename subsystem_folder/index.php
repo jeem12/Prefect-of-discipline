@@ -42,7 +42,7 @@
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="col-lg-15">
           <div class="row">
 
 
@@ -153,7 +153,7 @@
             </div>
 
             <div class="card-body">
-              <h5 class="card-title">Cnnfiscated <span id="confcat"></span></h5>
+              <h5 class="card-title">Confiscated <span id="confcat"></span></h5>
 
               <div class="d-flex align-items-center confcard" id="Today">
               <?php
@@ -315,8 +315,12 @@
           </div>
         </div>
         <!-- End Claimed Card -->
+          </div>
+        </div>
 
 
+        <div class="col-lg-8">
+          <div class="row">
 
             <!-- Reports -->
             <div class="col-12">
@@ -327,314 +331,122 @@
               //Attempt select query execution
               include "../assets/php/db_connect.php";
   
-              $query = "
-              SELECT 
-              date as date, 
-              COUNT(id) as total
-              FROM podms_records
-              GROUP BY date";
-              $query_run = mysqli_query($conn, $query);
-              $dateArray = [];
-              $total = [];
-              if(mysqli_num_rows($query_run) > 0)
+              $query1 = "SELECT MONTHNAME(date) as date, COUNT(id) as total  FROM podms_records WHERE YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date) ORDER BY MONTH(date) ASC;";
+              $query_run1 = mysqli_query($conn, $query1);
+              
+              $total1 = [];
+
+              if(mysqli_num_rows($query_run1) > 0)
               {
-                  foreach($query_run as $row)
-                  {
-                    $dateArray[] = $row['date'];
-                    $total[] = $row['total'];
-                    
-                  }
+                
+                while ($row = mysqli_fetch_assoc($query_run1)) {
+                  $total[] = $row['total'];
+                  
+                }
+              
+                
+              } else {
+                echo "No records found!";
+              }
+
+              // 2nd chart
+
+              $query2 = "SELECT MONTHNAME(date) as date, COUNT(id) as total  FROM podms_claimed_items WHERE YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date) ORDER BY MONTH(date) ASC;";
+              $query_run2 = mysqli_query($conn, $query2);
+              
+              $total2 = [];
+
+              if(mysqli_num_rows($query_run2) > 0)
+              {
+                
+                while ($row = mysqli_fetch_assoc($query_run2)) {
+                  $total2[] = $row['total'];
+                  
+                }
+              
+                
+              } else {
+                echo "No records found!";
+              }
+
+              // 3rd chart
+
+              $query3 = "SELECT MONTHNAME(date) as date, COUNT(id) as total  FROM podms_confiscated WHERE YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date) ORDER BY MONTH(date) ASC;";
+              $query_run3 = mysqli_query($conn, $query3);
+              
+              $total3 = [];
+
+              if(mysqli_num_rows($query_run3) > 0)
+              {
+                
+                while ($row = mysqli_fetch_assoc($query_run3)) {
+                  $total3[] = $row['total'];
+                  
+                }
+              
+                
+              } else {
+                echo "No records found!";
               }
               ?>
 
 
                 <div class="card-body">
-                  <h5 class="card-title">Profiled <span>| By month</span></h5>
+                  <h5 class="card-title">Chart <span>| by Months</span></h5>
 
                   <div class="chart-container">
                     <canvas id="myChart"></canvas>
                   </div>
 
-                  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+                  <script src="../assets/vendor/chart.js/chart.js"></script>
 
                   <script>
 
-                                // setup 
-                const dateArrayJs = <?= json_encode($dateArray) ?>;
-                const total = <?= json_encode($total) ?>;
-                const dateChartJs = dateArrayJs.map((day, index) => {
-                  let dayjs = new Date(day);
-                  return dayjs;
-                })
-                console.log(dateChartJs);
+                    const total = <?= json_encode($total)?>;
+                    const total2 = <?= json_encode($total2)?>;
+                    const total3 = <?= json_encode($total3)?>;
 
-                    // console.log (dateArrayJS);
-                    const ctx = document.getElementById('myChart');
+                        const ctx = document.getElementById('myChart');
+                        const labels = ['January', 'February', 'March','Apil', 'May', 'June','July','August','September','October','November','December'];
 
-                    new Chart(ctx, {
-                      type: 'bar',
-                      data: {
-                        labels: dateArrayJs,
-                        datasets: [{
-                          label: 'Profiled',
-                          data: total,
-                          borderWidth: 1
-                        }],
-                      },
-                      options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                          x: {
-                            type: 'time',
-                            time: {
-                              unit: 'day'
-                            }
+                        new Chart(ctx, {
+                          type: 'bar',
+                          data: {
+                            labels: labels,
+                            datasets: [{
+                              label: 'Profiled',
+                              data: total,
+                              borderWidth: 1
+                            },
+                            {
+                              label: 'Claimed Items',
+                              data: total2,
+                              borderWidth: 1
+                            },
+                            {
+                              label: 'Confiscated Items',
+                              data: total3,
+                              borderWidth: 1
+                            }]
                           },
-                          y: {
-                            beginAtZero: true
+                          options: {
+                            maintainAspectRatio: false,
+                            scales: {
+                              y: {
+                                beginAtZero: true,
+                                grace: '5%',
+                                ticks: {
+                                  stepSize: 1
+                                }
+                              }
+                            }
                           }
-                        }  
-                      }
-                    });
-                  </script>
+                        });
+                    </script>
 
                 </div>
 
                 
-
-              </div>
-            </div><!-- End Reports -->
-
-                        <!-- Reports -->
-                        <div class="col-12">
-              <div class="card">
-
-
-                <?php
-                  include_once "../assets/php/db_connect.php";
-                  $query = "SELECT DATE_FORMAT(date, '%M') as month, COUNT(id) as total FROM podms_claimed_items WHERE YEAR(date) = YEAR(NOW()) GROUP BY month ORDER BY MONTH(date)";
-                  $query_run = mysqli_query($conn, $query);
-
-                  $categories = array();
-                  $data = array();
-                  if(mysqli_num_rows($query_run) > 0) {
-                      while($row = mysqli_fetch_assoc($query_run)) {
-                          array_push($categories, $row['month']);
-                          array_push($data, $row['total']);
-                      }
-                  }                
-                  ?>
-
-                <div class="card-body">
-                  <h5 class="card-title">Claimed Items <span>| By month</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="claimedChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#claimedChart"), {
-                        series: [{
-                          name: 'Profiled',
-                          data: <?php echo json_encode($data); ?>
-                        }],
-                          chart: {
-                          height: 350,
-                          type: 'bar',
-                        },
-                        plotOptions: {
-                          bar: {
-                            borderRadius: 10,
-                            dataLabels: {
-                              position: 'top', // top, center, bottom
-                            },
-                          }
-                        },
-                        dataLabels: {
-                          enabled: true,
-                          formatter: function (val) {
-                            return val;
-                          },
-                          offsetY: -20,
-                          style: {
-                            fontSize: '12px',
-                            colors: ["#304758"]
-                          }
-                        },
-                        
-                        xaxis: {
-                          categories: <?php echo json_encode($categories); ?>,
-                          position: 'top',
-                          axisBorder: {
-                            show: false
-                          },
-                          axisTicks: {
-                            show: false
-                          },
-                          crosshairs: {
-                            fill: {
-                              type: 'gradient',
-                              gradient: {
-                                colorFrom: '#D8E3F0',
-                                colorTo: '#BED1E6',
-                                stops: [0, 100],
-                                opacityFrom: 0.4,
-                                opacityTo: 0.5,
-                              }
-                            }
-                          },
-                          tooltip: {
-                            enabled: true,
-                          }
-                        },
-                        yaxis: {
-                          axisBorder: {
-                            show: false
-                          },
-                          axisTicks: {
-                            show: false,
-                          },
-                          labels: {
-                            show: false,
-                            formatter: function (val) {
-                              return val;
-                            }
-                          }
-                        
-                        },
-                        title: {
-                          text: 'Total profiled this year',
-                          floating: true,
-                          offsetY: 330,
-                          align: 'center',
-                          style: {
-                            color: '#444'
-                          }
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
-                        <!-- Reports -->
-                        <div class="col-12">
-              <div class="card">
-
-
-                <?php
-                  include_once "../assets/php/db_connect.php";
-                  $query = "SELECT DATE_FORMAT(date, '%M') as month, COUNT(id) as total FROM podms_confiscated WHERE YEAR(date) = YEAR(NOW()) GROUP BY month ORDER BY MONTH(date)";
-                  $query_run = mysqli_query($conn, $query);
-
-                  $categories = array();
-                  $data = array();
-                  if(mysqli_num_rows($query_run) > 0) {
-                      while($row = mysqli_fetch_assoc($query_run)) {
-                          array_push($categories, $row['month']);
-                          array_push($data, $row['total']);
-                      }
-                  }                
-                  ?>
-
-                <div class="card-body">
-                  <h5 class="card-title">Confiscated Items <span>| By month</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="confiscatedChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#confiscatedChart"), {
-                        series: [{
-                          name: 'Profiled',
-                          data: <?php echo json_encode($data); ?>
-                        }],
-                          chart: {
-                          height: 350,
-                          type: 'bar',
-                        },
-                        plotOptions: {
-                          bar: {
-                            borderRadius: 10,
-                            dataLabels: {
-                              position: 'top', // top, center, bottom
-                            },
-                          }
-                        },
-                        dataLabels: {
-                          enabled: true,
-                          formatter: function (val) {
-                            return val;
-                          },
-                          offsetY: -20,
-                          style: {
-                            fontSize: '12px',
-                            colors: ["#304758"]
-                          }
-                        },
-                        
-                        xaxis: {
-                          categories: <?php echo json_encode($categories); ?>,
-                          position: 'top',
-                          axisBorder: {
-                            show: false
-                          },
-                          axisTicks: {
-                            show: false
-                          },
-                          crosshairs: {
-                            fill: {
-                              type: 'gradient',
-                              gradient: {
-                                colorFrom: '#D8E3F0',
-                                colorTo: '#BED1E6',
-                                stops: [0, 100],
-                                opacityFrom: 0.4,
-                                opacityTo: 0.5,
-                              }
-                            }
-                          },
-                          tooltip: {
-                            enabled: true,
-                          }
-                        },
-                        yaxis: {
-                          axisBorder: {
-                            show: false
-                          },
-                          axisTicks: {
-                            show: false,
-                          },
-                          labels: {
-                            show: false,
-                            formatter: function (val) {
-                              return val;
-                            }
-                          }
-                        
-                        },
-                        title: {
-                          text: 'Total profiled this year',
-                          floating: true,
-                          offsetY: 330,
-                          align: 'center',
-                          style: {
-                            color: '#444'
-                          }
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
-
-                </div>
 
               </div>
             </div><!-- End Reports -->
@@ -737,282 +549,60 @@
 
           <!-- Recent Activity -->
           <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
+
 
             <div class="card-body">
-              <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+              <h5 class="card-title">Notification <span>| Today</span></h5>
 
               <div class="activity">
 
-                <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
-                  </div>
-                </div><!-- End activity item-->
+              <?php 
+              include "../assets/php/db_connect.php";
 
-                <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
-                  </div>
-                </div><!-- End activity item-->
+              $query = "SELECT * FROM `podms_notif` WHERE DATE(date) = CURDATE() ORDER BY `id` DESC LIMIT 18";
+              $query_run = mysqli_query($conn, $query);
 
+              if($query_run)
+              {
+                while($row = mysqli_fetch_array($query_run))
+                {
+                  $time = $row['date'];
+              ?>
                 <div class="activity-item d-flex">
-                  <div class="activite-label">2 hrs</div>
+                  <div class="activite-label elapsed-time"></div>
                   <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
+                  <div class="activity-content" data-timestamp="<?= $time ?>">
+                    <?= $row['message']?>
                   </div>
                 </div><!-- End activity item-->
 
-                <div class="activity-item d-flex">
-                  <div class="activite-label">1 day</div>
-                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                  <div class="activity-content">
-                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 days</div>
-                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                  <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">4 weeks</div>
-                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                  <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                  </div>
-                </div><!-- End activity item-->
+                <?php 
+                }
+              }
+              ?>
 
               </div>
 
             </div>
+
+
           </div><!-- End Recent Activity -->
 
-          <!-- Budget Report -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
+          <script>
+            // Update the elapsed time every minute
+            setInterval(function() {
+              $('.activity-content').each(function() {
+               
+                var activityTime = moment($(this).attr('data-timestamp'));
+                $(this).siblings('.elapsed-time').text(activityTime.fromNow());
 
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
+              
+            });
+            }, 3000);
+          </script>
 
-            <div class="card-body pb-0">
-              <h5 class="card-title">Budget Report <span>| This Month</span></h5>
 
-              <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-<!-- 
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                      data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                      // shape: 'circle',
-                      indicator: [{
-                          name: 'Sales',
-                          max: 6500
-                        },
-                        {
-                          name: 'Administration',
-                          max: 16000
-                        },
-                        {
-                          name: 'Information Technology',
-                          max: 30000
-                        },
-                        {
-                          name: 'Customer Support',
-                          max: 38000
-                        },
-                        {
-                          name: 'Development',
-                          max: 52000
-                        },
-                        {
-                          name: 'Marketing',
-                          max: 25000
-                        }
-                      ]
-                    },
-                    series: [{
-                      name: 'Budget vs spending',
-                      type: 'radar',
-                      data: [{
-                          value: [4200, 3000, 20000, 35000, 50000, 18000],
-                          name: 'Allocated Budget'
-                        },
-                        {
-                          value: [5000, 14000, 28000, 26000, 42000, 21000],
-                          name: 'Actual Spending'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script> -->
-
-            </div>
-          </div><!-- End Budget Report -->
-
-          <!-- Website Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-              <!-- <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                      trigger: 'item'
-                    },
-                    legend: {
-                      top: '5%',
-                      left: 'center'
-                    },
-                    series: [{
-                      name: 'Access From',
-                      type: 'pie',
-                      radius: ['40%', '70%'],
-                      avoidLabelOverlap: false,
-                      label: {
-                        show: false,
-                        position: 'center'
-                      },
-                      emphasis: {
-                        label: {
-                          show: true,
-                          fontSize: '18',
-                          fontWeight: 'bold'
-                        }
-                      },
-                      labelLine: {
-                        show: false
-                      },
-                      data: [{
-                          value: 1048,
-                          name: 'Search Engine'
-                        },
-                        {
-                          value: 735,
-                          name: 'Direct'
-                        },
-                        {
-                          value: 580,
-                          name: 'Email'
-                        },
-                        {
-                          value: 484,
-                          name: 'Union Ads'
-                        },
-                        {
-                          value: 300,
-                          name: 'Video Ads'
-                        }
-                      ]
-                    }]
-                  });
-                });
-              </script> -->
-
-            </div>
-          </div><!-- End Website Traffic -->
-
-          <!-- News & Updates Traffic -->
-          <div class="card">
-            <div class="filter">
-              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
-            </div>
-
-            <div class="card-body pb-0">
-              <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-              <div class="news">
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-1.jpg" alt="">
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-2.jpg" alt="">
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-3.jpg" alt="">
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-4.jpg" alt="">
-                  <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                  <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                  <img src="../assets/img/news-5.jpg" alt="">
-                  <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                </div>
-
-              </div><!-- End sidebar recent posts-->
-
-            </div>
-          </div><!-- End News & Updates -->
 
         </div><!-- End Right side columns -->
 

@@ -2,7 +2,7 @@
 session_start();
 if(isset($_POST['type']) && $_POST['type']=='ajax'){
 	if(isset($_SESSION['LAST_ACTIVE_TIME'])){
-		if((time()-$_SESSION['LAST_ACTIVE_TIME']) > 600){
+		if((time()-$_SESSION['LAST_ACTIVE_TIME']) > 1800){
 			$result = 'logout';
 			echo $result;
 			// header("Location: logout.php?refresh=true");
