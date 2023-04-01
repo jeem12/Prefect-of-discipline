@@ -23,7 +23,7 @@
   <script src="../assets/vendor/fullcalendar/lib/main.js"></script>
   <script src="../assets/vendor/fullcalendar/sweetalert2.all.min.js"></script>
   <script src="../assets/vendor/quill/quill.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"></script>
   
@@ -150,6 +150,8 @@ $(document).ready(function() {
         }).then((result) => {
           if (result.isConfirmed) {
             window.location.href = '../assets/php/logout.php';
+          }else{
+            window.location.href = '../assets/php/logout.php';
           }
         });
       }
@@ -157,23 +159,6 @@ $(document).ready(function() {
   });
 
   }, 1000);
-
-
-    //   function check_user() {
-    //   jQuery.ajax({
-    //     url: '../assets/php/user_auth.php',
-    //     type: 'post',
-    //     data: 'type=ajax',
-    //     success: function(result) {
-    //       if (result == 'logout') {
-    //         alert('Session Expired');
-          
-    //         window.location.href = '../assets/php/logout.php';
-    //       }
-    //     }
-    //   });
-    // }
-
 
 
 function updateDateTime() {
