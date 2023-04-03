@@ -17,7 +17,12 @@
 <!-- End Sidebar-->
 
 
-<?php include "../partials/preloader.php"?>
+<div class="preloader-container">
+  <div class="logo-container">
+    <img src="../assets/img/logo300.png" alt="Your Logo">
+  </div>
+  <!-- <div class="preloader-text">Loading...</div> -->
+</div>
 
 
 <main id="main" class="main">
@@ -358,7 +363,7 @@
                   </div>
 
                   <script src="../assets/vendor/chart.js/chart.js"></script>
-                  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+                  <script src="../assets/js/hammer.min.js"></script>
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js" integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
