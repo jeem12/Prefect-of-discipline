@@ -26,7 +26,7 @@
 
         <!-- Start Notification Nav -->
 
-        <li class="dropdown">
+        <li class="dropdown overflow-y: scroll;">
         <a class="dropdown-toggle nav-link nav-icon" href="#" data-bs-toggle="dropdown">
             <i class="bi bi-bell"></i>
             <span class="badge bg-primary badge-number count"></span>

@@ -31,14 +31,7 @@ h.className = "nav-content collapse show";
 
 </script>
 
-<div class="preloader-wrapper">
-  <!-- <img src="assets/img/bcp-olp-logo-mini2.png" alt="Preloader Logo"> -->
-  <div class="text-center">
-<div class="spinner-border text-light" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-</div>
-</div>
+<?php include "../partials/preloader.php"?>
 
 <main id="main" class="main" >
 
@@ -277,7 +270,7 @@ $(function() {
                     render: function(data, type, row, meta) {
                         console.log()
                         if (data.status == 1){
-                        return '<a class="btn btn-sm rounded-2 mb-1 delete_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Claimed</a>';
+                        return '<a class="btn btn-md rounded-4 mb-1 p-2 px-6 delete_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Claim</a>';
                             
                          }else{
                             return '<p></p> '

@@ -83,12 +83,14 @@ $(document).ready(function() {
 
   
   function load_unseen_notification(view = '') {
+
     $.ajax({
         url:"../assets/php/fetchNotif.php",
         method:"POST",
         data:{view:view},
         dataType:"json",
         success:function(data) {
+
             $('.notif-dropdown').html(data.notification);
             if(data.unseen_notification > 0) {
                 $('.count').html(data.unseen_notification);

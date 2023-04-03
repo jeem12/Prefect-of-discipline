@@ -17,14 +17,7 @@
 <!-- End Sidebar-->
 
 
-<div class="preloader-wrapper">
-  <!-- <img src="../../assets/img/logo300.png" alt="Preloader Logo"> -->
-  <div class="text-center">
-<div class="spinner-border text-light" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-</div>
-</div>
+<?php include "../partials/preloader.php"?>
 
 
 <main id="main" class="main">
@@ -331,56 +324,22 @@
               //Attempt select query execution
               include "../assets/php/db_connect.php";
   
-              $query1 = "SELECT MONTHNAME(date) as date, COUNT(id) as total  FROM podms_records WHERE YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date) ORDER BY MONTH(date) ASC;";
+              $query1 = "SELECT dates.date, COUNT(DISTINCT podms_records.id) AS records_count, COUNT(DISTINCT podms_confiscated.id) AS confiscated_count, COUNT(DISTINCT podms_claimed_items.id) AS claimed_items_count FROM ( SELECT date FROM podms_records UNION SELECT date FROM podms_confiscated UNION SELECT date FROM podms_claimed_items ) AS dates LEFT JOIN podms_records ON dates.date = podms_records.date LEFT JOIN podms_confiscated ON dates.date = podms_confiscated.date LEFT JOIN podms_claimed_items ON dates.date = podms_claimed_items.date WHERE YEAR(dates.date) = YEAR(NOW()) GROUP BY date;";
               $query_run1 = mysqli_query($conn, $query1);
               
               $total1 = [];
+              $total2 = [];
+              $total3 = [];
+              $date = [];
 
               if(mysqli_num_rows($query_run1) > 0)
               {
                 
                 while ($row = mysqli_fetch_assoc($query_run1)) {
-                  $total[] = $row['total'];
-                  
-                }
-              
-                
-              } else {
-                echo "No records found!";
-              }
-
-              // 2nd chart
-
-              $query2 = "SELECT MONTHNAME(date) as date, COUNT(id) as total  FROM podms_claimed_items WHERE YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date) ORDER BY MONTH(date) ASC;";
-              $query_run2 = mysqli_query($conn, $query2);
-              
-              $total2 = [];
-
-              if(mysqli_num_rows($query_run2) > 0)
-              {
-                
-                while ($row = mysqli_fetch_assoc($query_run2)) {
-                  $total2[] = $row['total'];
-                  
-                }
-              
-                
-              } else {
-                echo "No records found!";
-              }
-
-              // 3rd chart
-
-              $query3 = "SELECT MONTHNAME(date) as date, COUNT(id) as total  FROM podms_confiscated WHERE YEAR(date) = YEAR(NOW()) GROUP BY MONTH(date) ORDER BY MONTH(date) ASC;";
-              $query_run3 = mysqli_query($conn, $query3);
-              
-              $total3 = [];
-
-              if(mysqli_num_rows($query_run3) > 0)
-              {
-                
-                while ($row = mysqli_fetch_assoc($query_run3)) {
-                  $total3[] = $row['total'];
+                  $total1[] = $row['records_count'];
+                  $total2[] = $row['confiscated_count'];
+                  $total3[] = $row['claimed_items_count'];
+                  $date[] = $row['date'];
                   
                 }
               
@@ -392,52 +351,92 @@
 
 
                 <div class="card-body">
-                  <h5 class="card-title">Chart <span>| by Months</span></h5>
+                  <h5 class="card-title">Chart <span>| Months</span></h5>
 
                   <div class="chart-container">
                     <canvas id="myChart"></canvas>
                   </div>
 
                   <script src="../assets/vendor/chart.js/chart.js"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js" integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
                   <script>
 
-                    const total = <?= json_encode($total)?>;
+                    const total1 = <?= json_encode($total1)?>;
                     const total2 = <?= json_encode($total2)?>;
                     const total3 = <?= json_encode($total3)?>;
 
+                    const date = <?= json_encode($date)?>;
+
+
+                    const label = date.map((day, index) => {
+                      let dayjs = new Date(day);
+                      return dayjs;
+                    })
+
                         const ctx = document.getElementById('myChart');
-                        const labels = ['January', 'February', 'March','Apil', 'May', 'June','July','August','September','October','November','December'];
 
                         new Chart(ctx, {
                           type: 'bar',
                           data: {
-                            labels: labels,
+                            labels: label,
                             datasets: [{
                               label: 'Profiled',
-                              data: total,
-                              borderWidth: 1
-                            },
-                            {
-                              label: 'Claimed Items',
-                              data: total2,
-                              borderWidth: 1
+                              data: total1,
+                              borderWidth: 1,
+                              tension: 0.4,
                             },
                             {
                               label: 'Confiscated Items',
+                              data: total2,
+                              borderWidth: 1,
+                              tension: 0.4,
+                            },
+                            {
+                              label: 'Claimed Items',
                               data: total3,
-                              borderWidth: 1
+                              borderWidth: 1,
+                              tension: 0.4,
                             }]
                           },
                           options: {
+                            transitions: {
+                                zoom: {
+                                  animation: {
+                                    duration: 1000,
+                                    easing: 'easeOutCubic'
+                                  }
+                                }
+                              },
+                            plugins: {
+                                zoom: {
+                                  pan:{
+                                    enabled: true,
+                                    mode: 'x'
+                                  },
+                                  zoom: {
+                                    wheel: {
+                                      enabled: true,
+                                    },
+                                    pinch: {
+                                      enabled: true
+                                    },
+                                    mode: 'x',
+                                  }
+                                }
+                              },
                             maintainAspectRatio: false,
                             scales: {
-                              y: {
-                                beginAtZero: true,
-                                grace: '5%',
-                                ticks: {
-                                  stepSize: 1
+                              x: {
+                                type: 'time',
+                                time: {
+                                  unit: 'day'
                                 }
+                              },
+                              y: {
+                                beginAtZero: true
                               }
                             }
                           }
@@ -563,7 +562,7 @@
               $query = "SELECT * FROM `podms_notif` WHERE DATE(date) = CURDATE() ORDER BY `id` DESC LIMIT 18";
               $query_run = mysqli_query($conn, $query);
 
-              if($query_run)
+              if(mysqli_num_rows($query_run) > 0)
               {
                 while($row = mysqli_fetch_array($query_run))
                 {
@@ -579,6 +578,14 @@
 
                 <?php 
                 }
+              }else{
+                ?>
+                  <div class="text-center">
+                  <div class="activity-content text-center">
+                    No Notification for today.
+                  </div>
+                </div><!-- End activity item-->
+                <?php
               }
               ?>
 

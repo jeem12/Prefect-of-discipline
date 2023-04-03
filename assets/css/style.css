@@ -37,6 +37,7 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
+
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
@@ -1284,29 +1285,93 @@ div#reportsTable_length {
 }
 
 tr.text-center.action {
-  padding-top: -11px;
-  display: none;
+  display: none !important;
+}
+
+td.text-center.action.d-block.sorting_1, td.text-center.action.d-block {
+  display: table-cell !important;
+}
+
+p.badge.text-bg-success.text-wrap.text-center{
+  margin: 2px;
+  font-size: 22px;
+}
+
+p.badge.text-bg-danger.text-wrap.text-center, p.badge.text-bg-warning.text-wrap.text-center  {
+  margin: 2px;
+  font-size: 18px;
+}
+
+td.text-center,tr.text-center{
+  font-size: 20px !important;
+}
+
+.scrollable-list{
+  overflow-y: scroll;
 }
 
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
 
-.preloader-wrapper {
+/* Preloader container */
+.preloader-container {
   position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #479dff;
+  z-index: 100000;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Logo container */
+.logo-container {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+@media (max-width: 500px) {
+  .logo-container {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+}
+
+/* Logo image */
+.logo-container img {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #479dff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .4 ease;
-  transition-delay: .5s;
-  z-index: 100000;
-  overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  animation: breathe 3s infinite;
+}
+
+
+
+/* Breathing animation */
+@keyframes breathe {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .fade-out-animation {
@@ -1481,4 +1546,21 @@ th.style10 { vertical-align:bottom; text-align:center; border-bottom:none #00000
 
 hr{
   background-color: #000000;
+}
+
+
+
+
+
+
+/*--------------------------------------------------------------
+# datetime
+--------------------------------------------------------------*/
+
+
+@media (max-width: 500px) {
+  p#datetime {
+    font-size: 7px;
+}
+  
 }
