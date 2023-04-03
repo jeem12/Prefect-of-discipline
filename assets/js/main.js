@@ -12,11 +12,11 @@
    * preloader
    */
 
- const preloeaderWrapper = document.querySelector('.preloader-container');
+    const preloeaderWrapper = document.querySelector('.preloader-wrapper');
 
- window.addEventListener('load', function() {
-   preloeaderWrapper.classList.add('fade-out-animation');
- });
+    window.addEventListener('load', function() {
+      preloeaderWrapper.classList.add('fade-out-animation');
+    });
 
   /**
    * Easy selector helper function

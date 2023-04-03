@@ -1315,7 +1315,7 @@ td.text-center,tr.text-center{
 --------------------------------------------------------------*/
 
 /* Preloader container */
-.preloader-container {
+.preloader-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -1377,6 +1377,7 @@ td.text-center,tr.text-center{
 .fade-out-animation {
   opacity: 0;
   visibility: hidden;
+  transition: 1s all linear;
 }
 
 /*--------------------------------------------------------------
