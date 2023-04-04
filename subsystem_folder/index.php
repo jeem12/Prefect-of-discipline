@@ -436,7 +436,11 @@
                                 }
                               },
                               y: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                grace: '5%',
+                                ticks: {
+                                  stepSize: 1
+                                }
                               }
                             }
                           }

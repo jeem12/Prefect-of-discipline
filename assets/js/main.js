@@ -12,7 +12,7 @@
    * preloader
    */
 
-    const preloeaderWrapper = document.querySelector('.preloader-wrapper');
+    const preloeaderWrapper = document.querySelector('.page-preloader');
 
     window.addEventListener('load', function() {
       preloeaderWrapper.classList.add('fade-out-animation');

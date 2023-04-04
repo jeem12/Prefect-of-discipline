@@ -46,7 +46,7 @@ if ($_SESSION['user_name'] != true ){
 
   <!-- Vendor CSS Files -->
 
-  <!-- <link href="../assets/vendor/fullcalendar/lib/main.css" rel="stylesheet"> -->
+  <link href="../assets/vendor/fullcalendar/lib/main.css" rel="stylesheet">
 
 
   
