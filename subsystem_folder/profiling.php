@@ -134,6 +134,44 @@ h.className = "nav-content collapse show";
               
 <!-- /ADD MODAL-->
 
+<!-- Attempt MODAL -->
+
+            <div class="modal fade" id="attemptModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+              <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Investigation Attempt Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div id="errorMessage" class="alert alert-warning d-none"></div>
+                  <div class="modal-body">
+                      <div class="container-fluid">
+                      <form id="attemptData" >
+
+                      <input type="hidden" name="id" id="id">
+
+                  <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                <textarea class="form-control" placeholder="Investigation Description" id="floatingName" name="inv_desc" cols="30" rows="10"></textarea>
+                  <!-- <input type="text" name="idNum" class="form-control" id="floatingName" placeholder="Description" required> -->
+                  <label for="floatingName">Investigation Description</label>
+                </div>
+              </div>
+                  </div>
+            </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+              </div>
+                  </form>
+                </div>
+              </div>
+
+                </div>
+              
+<!-- /ADD MODAL-->
+
 
     <!-- SANCTION MODAL START -->
 
@@ -408,16 +446,6 @@ $(function() {
                     className: 'text-center',
                     defaultContent: 'No Data Available'
                 },
-                // {
-                //     data: 'complainant_middle_name',
-                //     className: 'text-center',
-                //     defaultContent: 'No Data Available'
-                // },
-                // {
-                //     data: 'complainant_last_name',
-                //     className: 'text-center',
-                //     defaultContent: 'No Data Available'
-                // },
                 {
                     data: 'complainant_section',
                     className: 'text-center',
@@ -438,7 +466,7 @@ $(function() {
                     className: 'text-center action <?= $limitation?>',
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a>';
+                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a><a class="me-2 btn btn-sm rounded-2 mb-1 attempt_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Investigation Attempt</a>';
                     }
                 }
             ],
@@ -487,6 +515,29 @@ $(function() {
                                 $('#sanctionModal').find('input[name="id"]').val(resp.data['id'])
       
                                 $('#sanctionModal').modal('show')
+                            } else {
+                                alert("An error occurred while fetching single data")
+                            }
+                        }
+                    })
+                })
+                $('.attempt_data').click(function() {
+                    $.ajax({
+                        url: '../assets/php/p_getSingle.php',
+                        data: { id: $(this).attr('data-id') },
+                        method: 'POST',
+                        dataType: 'json',
+                        error: err => {
+                            alert("An error occurred while fetching single data")
+                        },
+                        success: function(resp) {
+                            if (!!resp.status) {
+
+                                $('#attemptModal').find('input[name="id"]').val(resp.data['id'])
+
+                                $('#attemptModal').find('textarea[name="inv_desc"]').val(resp.data['inv_description'])
+      
+                                $('#attemptModal').modal('show')
                             } else {
                                 alert("An error occurred while fetching single data")
                             }
@@ -550,6 +601,45 @@ $(function() {
                 }
                 else if(res.status == 500) {
                     alert(res.message);
+                }
+                }
+                });
+
+                });
+
+
+                $('#attemptData').submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append("attemptData", true);
+
+                $.ajax({
+                type: "POST",
+                url: "../assets/php/p_inv_saveData.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                
+                var res = jQuery.parseJSON(response);
+                if(res.status == 200){
+
+                    $('#errorMessage').addClass('d-none');
+                    $('#attemptModal').modal('hide');
+                    $('#attemptData')[0].reset();
+                    
+                    
+                    
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.success(res.message);
+                    
+                    draw_data();
+
+
+                }
+                else if(res.status == 500) {
+                    alertify.set('notifier','position', 'bottom-right');
+                    alertify.error(res.message);
                 }
                 }
                 });

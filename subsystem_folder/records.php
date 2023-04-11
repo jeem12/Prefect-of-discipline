@@ -49,33 +49,28 @@ h.className = "nav-content collapse show";
 
 
 	<!-- MAIN CONTENT -->
-    <br><br><br>
-<!-- VIEW MODAL -->
-
-<div class="modal fade" id="viewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">View</h1>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
+              <!-- Bordered Tabs Justified -->
+              <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true">Profiled Record</button>
+                </li>
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Claimed Items Record</button>
+                </li>
+              </ul>
 
-
-<!-- TABLE -->
+              <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+                <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="col-md-12" style="margin-top: 15px; display: none;" id="reqTable"> </div>
+                <div class="col-md-12" style="margin-top: 15px; display: none;" id="reqMTable"> </div>
+                
+                <br>
+                <!-- TABLE -->
         <div class="container" id="table">
     <div class="row">
     <div class="pagetitle">
-    <h1 >Profiled Record</h1>
 </div>
         <table id="myTable1" class="table table-striped nowrap" style="width:100%">
         <div class="col-lg-auto">
@@ -104,16 +99,17 @@ h.className = "nav-content collapse show";
     </div>
 </div>
 
-<br>
-<hr>
-<br>
-
-
-<!-- Claimed TABLE -->
+                </div>
+                <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="col-md-12" style="margin-top: 15px; display: none;" id="approvedTable"> </div>
+                <div class="col-md-12" style="margin-top: 15px; display: none;" id="approvedMTable"> </div>
+                
+                <br>
+                
+                <!-- Claimed TABLE -->
 <div class="container" id="table">
   <div class="row">
   <div class="pagetitle">
-    <h1 >Claimed Items</h1>
 </div>
       <table id="myTable2" class="table table-striped nowrap" style="width:100%">
       <div class="col-lg-auto">
@@ -135,6 +131,18 @@ h.className = "nav-content collapse show";
 
   </div>
 </div>
+
+                </div>
+              </div><!-- End Bordered Tabs Justified -->
+
+
+
+<br>
+<hr>
+<br>
+
+
+
 
   </main><!-- End #main -->
 

@@ -353,16 +353,26 @@
                 <div class="card-body">
                   <h5 class="card-title">Chart <span>| Months</span></h5>
 
-                  <div class="chart-container">
+                  <div class="chart-container mb-2">
                     <canvas id="myChart"></canvas>
                   </div>
-
+                  <div class="input-group w-25">
+                    <input type="month" class="form-control" onchange="filterM(this)" id="iM" >
+                    <button class="btn btn-outline-primary" type="button" onclick="dlpdf()"><i class="bi bi-download"></i>&nbsp;PDF</button>
+                </div>
+                
                   <script src="../assets/vendor/chart.js/chart.js"></script>
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js" integrity="sha512-qRj8N7fxOHxPkKjnQ9EJgLJ8Ng1OK7seBn1uk8wkqaXpa7OA13LO6txQ7+ajZonyc9Ts4K/ugXljevkFTUGBcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js" integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-
-                  <script>
+                  <!-- PDF -->
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js" integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+                 
+                 
+                 
+                 <script>
 
                     const total1 = <?= json_encode($total1)?>;
                     const total2 = <?= json_encode($total2)?>;
@@ -370,17 +380,22 @@
 
                     const date = <?= json_encode($date)?>;
 
+                    const bgColor = {
+                      id: 'bgColor',
+                      beforeDraw: (chart, options) => {
+                        const { ctx, width, height } = chart;
+                        ctx.fillStyle = 'white';
+                        ctx.fillRect(0, 0, width, height);
+                        ctx.restore();
+                      }
+                    }
 
                     const label = date.map((day, index) => {
                       let dayjs = new Date(day);
                       return dayjs;
                     })
 
-                        const ctx = document.getElementById('myChart');
-
-                        new Chart(ctx, {
-                          type: 'bar',
-                          data: {
+                    const data = {
                             labels: label,
                             datasets: [{
                               label: 'Profiled',
@@ -400,7 +415,11 @@
                               borderWidth: 1,
                               tension: 0.4,
                             }]
-                          },
+                          };
+                          
+                          config = {
+                          type: 'bar',
+                          data,
                           options: {
                             transitions: {
                                 zoom: {
@@ -430,6 +449,8 @@
                             maintainAspectRatio: false,
                             scales: {
                               x: {
+                                min: '2023-01-01',
+                                max: '2023-12-31',
                                 type: 'time',
                                 time: {
                                   unit: 'day'
@@ -443,8 +464,49 @@
                                 }
                               }
                             }
-                          }
-                        });
+                          },
+                          plugins: [bgColor]
+                        };
+
+                            // render init block
+                        const ctx = new Chart(
+                          document.getElementById('myChart'),
+                          config
+                        );
+
+                        function filterM(date){
+                          const iM =document.getElementById("iM")
+
+                          const year = date.value.substring(0, 4);
+                          const month = date.value.substring(5, 7);
+
+                          const lastDay = (y, m) => {
+                            return new Date (y, m, 0).getDate()
+                          };
+
+                          lastDay (year, month)
+
+                          const startDate = `${date.value}-01`;
+                          const endDate = `${date.value}-${lastDay(year, month)}`;
+
+                          ctx.config.options.scales.x.min = startDate;
+                          ctx.config.options.scales.x.max = endDate;
+
+                          ctx.update();
+                          iM.value = "";
+                        }
+
+                        function dlpdf(){
+                          const canvas = document.getElementById('myChart');
+                          const canvasImage = canvas.toDataURL('Image/png', 1.0);
+
+
+                          let pdf = new jsPDF('landscape');
+                          pdf.setFontSize(20);
+                          pdf.text(50, 10, "Prefect of Discipline Report", { align: "center" });
+                          pdf.addImage(canvasImage, 'PNG', 10, 30, 280, 150);
+                          pdf.save('pod_report.pdf');
+                        }
                     </script>
 
                 </div>
