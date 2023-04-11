@@ -179,7 +179,6 @@
                     alertify.set('notifier','position', 'bottom-right');
                     alertify.success(res.message);
                     
-                    draw_data();
 
 
                 }
