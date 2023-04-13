@@ -11,26 +11,59 @@ if (!$conn) {
 
 if (isset($_POST['sanctionData'])) {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
-	$idNum = mysqli_real_escape_string($conn, $_POST['idNum']);
-    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
-    $mname = mysqli_real_escape_string($conn, ($_POST['mname']));
-    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-    $section = mysqli_real_escape_string($conn, $_POST['section']);
-    $course = mysqli_real_escape_string($conn, $_POST['course']); 
-    $viol_level = mysqli_real_escape_string($conn, $_POST['level']);
-    $violation = mysqli_real_escape_string($conn, $_POST['viol']);
-	$sanction = mysqli_real_escape_string($conn, $_POST['sanction']);
-    // $dutyS = mysqli_real_escape_string($conn, ($_POST['duty_timeS']));
-    // $dutyE = mysqli_real_escape_string($conn, $_POST['duty_timeE']);
-    // $duty_loc = mysqli_real_escape_string($conn, $_POST['dutyLoc']);
-	// $duty = implode(', ', $_POST['duties']); // get the selected option value
 
-    
 
-    // CONVERT CHECKBOX ARRAY TO STRING
-    
 
-    # getting image data and store them in var
+	if (!empty($_POST['attempt'])) {
+		$attempt = mysqli_real_escape_string($conn, $_POST['attempt']);
+		$attemptDesc = mysqli_real_escape_string($conn, $_POST['attemptDesc']);
+
+		$sql = "SELECT inv_description FROM podms_profiling WHERE id = $id";
+		$result = mysqli_query($conn, $sql);
+		$row = mysqli_fetch_assoc($result);
+		$existingDesc = $row['inv_description'];
+
+		$newDesc = $existingDesc . " - " . $attemptDesc;
+
+
+		$query = "UPDATE `podms_profiling` SET `inv_attempt` = '$attempt', `inv_description` = '$newDesc' WHERE `id` = '$id'";
+		$query_run = mysqli_query($conn, $query);
+
+		if($query_run){
+			$res = [
+				'status' => 200,
+
+				'message' => 'Data Update Successfully'
+
+			];
+			echo json_encode($res);
+			return;
+		}else{
+			$res = [
+				'status' => 500,
+
+				'message' => 'Data Update Successfully'
+
+			];
+			echo json_encode($res);
+			return;
+
+		}
+	} else {
+
+
+		$idNum = mysqli_real_escape_string($conn, $_POST['idNum']);
+		$fname = mysqli_real_escape_string($conn, $_POST['fname']);
+		$mname = mysqli_real_escape_string($conn, ($_POST['mname']));
+		$lname = mysqli_real_escape_string($conn, $_POST['lname']);
+		$section = mysqli_real_escape_string($conn, $_POST['section']);
+		$course = mysqli_real_escape_string($conn, $_POST['course']);
+		$viol_level = mysqli_real_escape_string($conn, $_POST['level']);
+		$violation = mysqli_real_escape_string($conn, $_POST['viol']);
+		$sanction = mysqli_real_escape_string($conn, $_POST['sanction']);
+
+
+		# getting image data and store them in var
 	$img_name = $_FILES['image']['name'];
 	$img_size = $_FILES['image']['size'];
 	$tmp_name = $_FILES['image']['tmp_name'];
@@ -164,4 +197,5 @@ if (isset($_POST['sanctionData'])) {
 
 
 
+}
 }

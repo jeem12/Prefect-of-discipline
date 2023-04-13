@@ -115,7 +115,7 @@ h.className = "nav-content collapse show";
               </div>
               <div class="col-md-12 mb-2">
                 <div class="form-floating">
-                  <input type="date" name="inci_date" class="form-control" id="floatingName" placeholder="Your Incident Date" required>
+                  <input type="date" name="inci_date" class="form-control" id="floatingName" placeholder="Your Incident Date" max="<?= date('Y-m-d', strtotime(" 0 days 0 months 0 years")); ?>" required>
                   <label for="floatingName">Incident Date</label>
                 </div>
               </div>
@@ -134,45 +134,6 @@ h.className = "nav-content collapse show";
               
 <!-- /ADD MODAL-->
 
-<!-- Attempt MODAL -->
-
-            <div class="modal fade" id="attemptModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-              <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Investigation Attempt Report</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div id="errorMessage" class="alert alert-warning d-none"></div>
-                  <div class="modal-body">
-                      <div class="container-fluid">
-                      <form id="attemptData" >
-
-                      <input type="hidden" name="id" id="id">
-
-                  <div class="col-md-12 mb-2">
-                <div class="form-floating">
-                <textarea class="form-control" placeholder="Investigation Description" id="floatingName" name="inv_desc" cols="30" rows="10"></textarea>
-                  <!-- <input type="text" name="idNum" class="form-control" id="floatingName" placeholder="Description" required> -->
-                  <label for="floatingName">Investigation Description</label>
-                </div>
-              </div>
-                  </div>
-            </div>
-
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary me-2">Submit</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-              </div>
-                  </form>
-                </div>
-              </div>
-
-                </div>
-              
-<!-- /ADD MODAL-->
-
-
     <!-- SANCTION MODAL START -->
 
         <div class="modal fade" id="sanctionModal" data-bs-backdrop="static">
@@ -187,42 +148,71 @@ h.className = "nav-content collapse show";
                     <form method="POST" id="sanctionData" enctype="multipart/form-data">
                     <div class="container-fluid">
                             <input type="hidden" name="id" id="id">
+                            
 
+                            <div class="col-md-12 mb-2">
+                            <div class="form-floating">
+                                 <select class="form-select" name="attempt" id="attempt" aria-label="Default select example">
+                                <option value="" selected>Click to appear choices.</option>
+                                <option value="1">1st Investigation</option>
+                                <option value="2">2nd Investigation</option>
+                                <option value="3">3rd Investigation</option>
+                                <option value="4">4th Investigation</option>
+                                <option value="5">5th Investigation</option>
+                                <option value="6">6th Investigation</option>
+                                <option value="7">7th Investigation</option>
+                                </select>
+                            <label for="floatingName">Investigation Attempt</label>
+                            <small><strong>Leave blank for final attempt </strong><span style="color: red;">*</span> </small><br>
+                            </div>
+                            </div>
+                            <br>
+
+                            <div class="col-md-12 mb-2" id="attemptDescField" style="display: none;">
+                            <div class="form-floating">
+                            <input type="text" name="attemptDesc" class="form-control" id="floatingName" placeholder="attemptDesc" >
+                            <label for="floatingName">Investigation Description</label>
+                            </div>
+                            </div>
+
+                            <br>
+
+                            <div class="final-attempt" id="final-attempt" >
                             <h1 class="fs-5 text-center">Complained Profiling</h1>
 
                             <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="number" name="idNum" class="form-control" id="floatingName" placeholder="ID Number" required>
+                            <input type="number" name="idNum" class="form-control" id="floatingName" placeholder="ID Number" >
                             <label for="floatingName">Complained ID Number</label>
                             </div>
                         </div>
                         <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="fname" class="form-control" id="floatingName" placeholder="Your First Name" required>
+                            <input type="text" name="fname" class="form-control" id="floatingName" placeholder="Your First Name" >
                             <label for="floatingName">Complained First Name</label>
                             </div>
                         </div>
                         <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="mname" class="form-control" id="floatingName" placeholder="Your Middle Name" required>
+                            <input type="text" name="mname" class="form-control" id="floatingName" placeholder="Your Middle Name" >
                             <label for="floatingName">Complained Middle Name</label>
                             </div>
                         </div>
                         <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="lname" class="form-control" id="floatingName" placeholder="Your Last Name" required>
+                            <input type="text" name="lname" class="form-control" id="floatingName" placeholder="Your Last Name" >
                             <label for="floatingName">Complained Last Name</label>
                             </div>
                         </div>
                         <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="section" class="form-control" id="floatingName" placeholder="Your Section" required>
+                            <input type="text" name="section" class="form-control" id="floatingName" placeholder="Your Section" >
                             <label for="floatingName">Complained Section</label>
                             </div>
                         </div>
                         <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="course" class="form-control" id="floatingName" placeholder="Your Course" required>
+                            <input type="text" name="course" class="form-control" id="floatingName" placeholder="Your Course" >
                             <label for="floatingName">Complained Course</label>
                             </div>
                         </div>
@@ -275,26 +265,13 @@ h.className = "nav-content collapse show";
 
                             <div class="col-md-12 mb-2">
                             <div class="form-floating">
-                            <input type="text" name="sanction" class="form-control" id="floatingName" placeholder="Your Course" required>
+                            <input type="text" name="sanction" class="form-control" id="floatingName" placeholder="Your Course" >
                             <label for="floatingName">Sanction</label>
                             </div>
                         </div>
                             
                             <hr>
 
-                            <!-- <div class="row mb-3">
-                            <label class="col-sm-2 col-form-label">Investigation Attempt </label>
-                            <div class="col-sm-10">
-                                <select title="Leave blank if you want to end investigation" class="form-select" name="attempt" id="attempt" aria-label="Default select example">
-                                <option value="" selected disabled>Open this select menu</option>
-                                <option value="1">1st Investigation</option>
-                                <option value="2">2nd Investigation</option>
-                                <option value="3">3rd Investigation</option>
-                                </select>
-                            </div>
-                            </div> -->
-
-                            <hr>
                             
 
                             <h1 class="fs-5 text-center">Evidence</h1>
@@ -307,6 +284,7 @@ h.className = "nav-content collapse show";
                                     <input type="file" name="image" class="form-control" id = "image" accept=".jpg, .jpeg, .png" placeholder="Enter Name" id="upload_file" onchange="getImagePreview(event)">
                                     <i class = "bi bi-camera-fill"></i>
                                     </div>
+                                </div>
                                 </div>
                                 </div>
                     </div>
@@ -341,8 +319,9 @@ h.className = "nav-content collapse show";
               <th>MIDDLE NAME</th> -->
               <th>SECTION</th>
               <th>COURSE</th>
-              <th>STATUS</th>
-              <th data-priority="1" class="action">ACTION</th>
+              <th>Investigation Description</th>
+              <th data-priority="1">STATUS</th>
+              <th data-priority="1">ACTION</th>
           </tr>
       </thead>
       
@@ -366,7 +345,31 @@ h.className = "nav-content collapse show";
 <?php include ('../partials/footer.php'); ?>
 
 <!-- End Footer -->
+<script>
+// jQuery code to show/hide the "Description" input field
+$(document).ready(function() {
+  // Hide the "Description" input field by default
+  $('#attemptDescField').hide();
+  $('#final-attempt').show();
+  
+  // Add an event listener to the "Investigation Attempt" input field
+  $('#attempt').on('input', function() {
+    if ($(this).val()) {
+      // If the input field has a value, show the "Description" input field
+      $('#attemptDescField').show();
+      $('#final-attempt').hide();
+    } else {
+      // If the input field is empty, hide the "Description" input field
+      $('#attemptDescField').hide();
+      $('#final-attempt').show();
+    }
+  });
 
+  
+});
+
+
+</script>
 
 <!-- DATATABLE SCRIPTS -->
 <script>
@@ -457,6 +460,11 @@ $(function() {
                     defaultContent: 'No Data Available'
                 },
                 {
+                    data: 'inv_description',
+                    className: 'text-center',
+                    defaultContent: 'No Data Available'
+                },
+                {
                     data: 'status',
                     className: 'text-center'
                 },
@@ -466,7 +474,7 @@ $(function() {
                     className: 'text-center action <?= $limitation?>',
                     render: function(data, type, row, meta) {
                         console.log()
-                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-danger" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a><a class="me-2 btn btn-sm rounded-2 mb-1 attempt_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Investigation Attempt</a>';
+                        return '<a class="me-2 btn btn-sm rounded-2 mb-1 edit_data btn-primary" href="javascript:void(0)" data-id="' + (row.id) + '">Sanction</a>';
                     }
                 }
             ],
@@ -485,14 +493,25 @@ $(function() {
                 },
             columnDefs: [
                         {
-                            targets: 5,
+                            targets: 6,
                             render: function(data, type, row, meta) {
-                                if (data == 1) {
-                                    return '<p class="badge text-bg-danger text-wrap text-center"> For Investigation</p>';
-                                } else if (data == 2) {
-                                    return '<p class="badge text-bg-info text-wrap text-center">On duty</p>';
-                                } else if (data == 3) {
-                                    return '<p class="badge text-bg-success text-wrap text-center">Cleared</p>';
+
+                                if (data == 1 && row.inv_attempt == null) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">For Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 1) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'st Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 2) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'nd Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 3) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'rd Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 4) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'th Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 5) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'th Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 6) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'th Investigation</p>';
+                                } else if (data == 1 && row.inv_attempt == 7) {
+                                    return '<p class="badge text-bg-danger text-wrap text-center">'+row.inv_attempt+'th Investigation</p>';
                                 } else {
                                     return '<p class="badge text-bg-warning text-wrap text-center">Undefined Status</p>';
                                 }
@@ -515,29 +534,6 @@ $(function() {
                                 $('#sanctionModal').find('input[name="id"]').val(resp.data['id'])
       
                                 $('#sanctionModal').modal('show')
-                            } else {
-                                alert("An error occurred while fetching single data")
-                            }
-                        }
-                    })
-                })
-                $('.attempt_data').click(function() {
-                    $.ajax({
-                        url: '../assets/php/p_getSingle.php',
-                        data: { id: $(this).attr('data-id') },
-                        method: 'POST',
-                        dataType: 'json',
-                        error: err => {
-                            alert("An error occurred while fetching single data")
-                        },
-                        success: function(resp) {
-                            if (!!resp.status) {
-
-                                $('#attemptModal').find('input[name="id"]').val(resp.data['id'])
-
-                                $('#attemptModal').find('textarea[name="inv_desc"]').val(resp.data['inv_description'])
-      
-                                $('#attemptModal').modal('show')
                             } else {
                                 alert("An error occurred while fetching single data")
                             }
@@ -681,6 +677,9 @@ $.ajax({
           $('#img-div img').attr('src', defaultImageURL);
           $('#sanctionModal button').attr('disabled', false)
           $('#sanctionModal button[id="sancUp"]').text("Submit")
+
+          $('#attemptDescField').hide();
+
 
           draw_data();
 
