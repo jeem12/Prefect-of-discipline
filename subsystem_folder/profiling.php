@@ -123,7 +123,7 @@ h.className = "nav-content collapse show";
                   </div>
 
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary me-2">Submit</button>
+                <button type="submit" class="btn btn-primary me-2">Add</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
               </div>
                   </form>
@@ -590,6 +590,9 @@ $(function() {
                     
                     alertify.set('notifier','position', 'bottom-right');
                     alertify.success(res.message);
+
+                    $('#addModal button').attr('disabled', false)
+                    $('#addModal button[form="addData"]').text("Add")
                     
                     draw_data();
 
