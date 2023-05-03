@@ -14,6 +14,7 @@ if(!empty($search)){
     $search_where .= " OR complainant_course LIKE '%{$search['value']}%' ";
     $search_where .= " OR status LIKE '%{$search['value']}%' ";
     $search_where .= " OR date LIKE '%{$search['value']}%' ";
+
 }
 $columns_arr = array(
                      "date",

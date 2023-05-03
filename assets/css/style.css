@@ -2153,6 +2153,21 @@ hr{
   
 }
 
-/*--------------------------------------------------------------
-# icon for filtermonth
---------------------------------------------------------------*/
+
+.card-button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  color: #333;
+  font-size: 20px;
+  padding: 35px 80px;
+  transition: all 0.3s ease;
+  width: 100%;
+
+}
+
+.card-button:hover {
+  background-color: #eee;
+  cursor: pointer;
+}

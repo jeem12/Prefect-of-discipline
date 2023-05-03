@@ -6,7 +6,7 @@
 
 
 <div class="page-preloader">
-    <img class="preloader-logo" src="../assets/img/logo300.png" width="128">
+    <img class="preloader-logo" src="../assets/img/POD.png" width="128">
     <div class="preloader-preview-area">
         <div class="ball-pulse">
             <div></div>
