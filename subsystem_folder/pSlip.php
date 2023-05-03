@@ -350,7 +350,7 @@ $time = date('h:s A', strtotime($_POST['f6-time']));
             background-repeat: no-repeat;
             width: 100%;
             height: 100%;
-            opacity: .1;
+            opacity: .2;
             z-index: 2;
         }
 
