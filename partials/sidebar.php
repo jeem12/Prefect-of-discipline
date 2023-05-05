@@ -38,26 +38,6 @@
             </li>
             
             
-          <!-- <li class="nav-heading">Notification</li> -->
-
-
-                  <li class="nav-item">
-              <a id="pod2" class="nav-link " data-bs-target="#forms" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-receipt"></i><span>Forms & Slips</span><i class="bi bi-chevron-down ms-auto"></i>
-              </a>
-              <ul id="forms" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                <li>
-                  <a id="mod6" href="slips.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Slips</span>
-                  </a>
-                </li>
-                  <a id="mod6" href="profiling.php" class="inactive">
-                    <i class="bi bi-circle"></i><span>Forms</span>
-                  </a>
-                </li>
-                  </ul>
-                  </li>
 
       <li class="nav-item">
         <a class="nav-link stud_list" href="list.php">
