@@ -42,7 +42,7 @@
     <li class="nav-item">
         <a class="nav-link stud_list" href="list">
             <i class="bi bi-person-lines-fill"></i>
-            <span>Student List</span>
+            <span>Student List & Status</span>
             <!-- <span class="visually-hidden">New alerts</span> -->
         </a>
     </li>
