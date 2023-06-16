@@ -12,7 +12,7 @@ if ($_SESSION['login_attempts'] >= 3) {
     $time_elapsed = time() - $_SESSION['last_login_attempt'];
     if ($time_elapsed < 63) {
         $wait_time = 63 - $time_elapsed;
-        header("Location: ../../index.php?error=exceeded_attempts&wait_time=$wait_time");
+        header("Location: ../../index?error=exceeded_attempts&wait_time=$wait_time");
         exit();
     } else {
         unset($_SESSION['login_attempts']);
@@ -36,10 +36,10 @@ if ($_SESSION['login_attempts'] >= 3) {
             $decryption = openssl_encrypt($pass, $ciphering, $decryption_key, $option, $decryption_iv);
         
             if (empty($uname)) {
-                header("Location: ../../index.php?error=User Name is required");
+                header("Location: ../../index?error=User Name is required");
                 exit();
             } else if (empty($pass)){
-                header("Location: ../../index.php?error=Password is required");
+                header("Location: ../../index?error=Password is required");
                 exit();
             } else {
                 $sql = "SELECT * FROM podms_users WHERE username='$uname' AND password='$decryption'";
@@ -56,22 +56,22 @@ if ($_SESSION['login_attempts'] >= 3) {
                         $_SESSION['id'] = $row['id'];
                         unset($_SESSION['login_attempts']);
                         unset($_SESSION['last_login_attempt']);
-                        header("Location: ../../subsystem_folder/index.php");
+                        header("Location: ../../subsystem_folder/index");
                         exit();
                     } else {
                         $_SESSION['last_login_attempt'] = time();
-                        header("Location: ../../index.php?error=Incorrect User name or password");
+                        header("Location: ../../index?error=Incorrect User name or password");
                         exit();
                     }
                 } else {
                     $_SESSION['last_login_attempt'] = time();
-                    header("Location: ../../index.php?error=Incorrect User name or password");
+                    header("Location: ../../index?error=Incorrect User name or password");
                     exit();
                 }
             }
             
         } else {
-            header("Location: ../../index.php");
+            header("Location: ../../index");
             exit();
         }
     }
@@ -96,10 +96,10 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
     $decryption = openssl_encrypt($pass, $ciphering, $decryption_key, $option, $decryption_iv);
 
     if (empty($uname)) {
-        header("Location: ../../index.php?error=User Name is required");
+        header("Location: ../../index?error=User Name is required");
         exit();
     } else if (empty($pass)){
-        header("Location: ../../index.php?error=Password is required");
+        header("Location: ../../index?error=Password is required");
         exit();
     } else {
         $sql = "SELECT * FROM podms_users WHERE username='$uname' AND password='$decryption'";
@@ -116,22 +116,22 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
                 $_SESSION['id'] = $row['id'];
                 unset($_SESSION['login_attempts']);
                 unset($_SESSION['last_login_attempt']);
-                header("Location: ../../subsystem_folder/index.php");
+                header("Location: ../../subsystem_folder/index");
                 exit();
             } else {
                 $_SESSION['last_login_attempt'] = time();
-                header("Location: ../../index.php?error=Incorrect User name or password");
+                header("Location: ../../index?error=Incorrect User name or password");
                 exit();
             }
         } else {
             $_SESSION['last_login_attempt'] = time();
-            header("Location: ../../index.php?error=Incorrect User name or password");
+            header("Location: ../../index?error=Incorrect User name or password");
             exit();
         }
     }
     
 } else {
-    header("Location: ../../index.php");
+    header("Location: ../../index");
     exit();
 }
 
